@@ -1,0 +1,272 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+const currentLang = 'te';
+---
+
+<Layout 
+  title={`${t('river.indus', currentLang)} - Nadi Stuti`} 
+  description={`Discover the sacred ${t('river.indus', currentLang)} river`}
+  lang={currentLang}
+>
+  <Header />
+  
+    
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-4 py-4">
+        <a 
+          href={getLocalizedPath("/", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("ui.home", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a 
+          href={getLocalizedPath("/rivers", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("nav.rivers", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-gray-900 font-medium">
+          {t(`river.indus`, currentLang)}
+        </span>
+      </div>
+    </div>
+  </nav><main>
+        
+    <!-- Hero Section -->
+    <section class="relative h-96 overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="/images/indus-ladakh.jpg" 
+          alt="Indus in Ladakh" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-center text-white text-center">
+        <div>
+          <h1 class="text-5xl font-bold mb-4 text-multilang">
+            <span class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit">
+              सिन्धु
+            </span>
+            {t('river.indus', currentLang)}
+          </h1>
+          <p class="text-xl text-gray-200 text-multilang">The River That Named India - Cradle of Civilization</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      
+      <!-- {t('river.geographical.title', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.geographical.title', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-slate-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.basic.info', currentLang)}</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.source', currentLang)}</dt>
+                <dd class="text-gray-900">{t('indus.source.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.length', currentLang)}</dt>
+                <dd class="text-gray-900">{t('indus.length.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Basin Area:</dt>
+                <dd class="text-gray-900">1,165,000 km²</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Mouth:</dt>
+                <dd class="text-gray-900">Arabian Sea</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Countries:</dt>
+                <dd class="text-gray-900">China, India, Pakistan</dd>
+              </div>
+            </dl>
+          </div>
+          
+          <div class="bg-gray-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Historical Geography</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• <strong>Leh:</strong> Ancient trading center in Ladakh</li>
+              <li>• <strong>Skardu:</strong> Important valley town</li>
+              <li>• <strong>Harappa:</strong> Ancient Indus Valley city</li>
+              <li>• <strong>Mohenjo-daro:</strong> Major archaeological site</li>
+              <li>• <strong>Sukkur:</strong> Historic city on the banks</li>
+              <li>• <strong>Karachi:</strong> Near the delta region</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Historical and Cultural Significance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">Historical & Cultural Significance</h2>
+        <div class="prose prose-lg max-w-none">
+          <div class="bg-gradient-to-r from-slate-50 to-gray-50 p-8 rounded-lg mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Cradle of Civilization</h3>
+            <p class="text-gray-700 leading-relaxed">
+              The Indus River is historically significant as it gave birth to one of the world's earliest civilizations - 
+              the Indus Valley Civilization (3300-1300 BCE). The river's name "Sindhu" in Sanskrit became "Hindu" in Persian, 
+              and eventually "India" - thus the river literally gave its name to the entire subcontinent. The river has been 
+              mentioned in the Rig Veda as one of the most important rivers, and continues to hold deep spiritual significance.
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-slate-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Ancient Civilization</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Harappan Cities:</strong> Advanced urban planning</li>
+                <li>• <strong>Trade Networks:</strong> Extensive commercial routes</li>
+                <li>• <strong>Agriculture:</strong> Sophisticated irrigation systems</li>
+                <li>• <strong>Script:</strong> Undeciphered Indus script</li>
+              </ul>
+            </div>
+            
+            <div class="bg-gray-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Vedic References</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Rig Veda:</strong> Praised as mighty river</li>
+                <li>• <strong>Sapta Sindhu:</strong> Land of seven rivers</li>
+                <li>• <strong>{t('river.sacred.geography', currentLang)}:</strong> Spiritual significance</li>
+                <li>• <strong>Cultural Identity:</strong> Foundation of Indian civilization</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.major.tributaries', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.major.tributaries', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.left.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-slate-500">
+                <strong class="text-gray-900">Kabul:</strong>
+                <span class="text-gray-600"> Flows through Afghanistan and Pakistan</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-slate-500">
+                <strong class="text-gray-900">Kurram:</strong>
+                <span class="text-gray-600"> Border river between Afghanistan and Pakistan</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-slate-500">
+                <strong class="text-gray-900">Tochi:</strong>
+                <span class="text-gray-600"> Flows through Waziristan</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.right.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-gray-500">
+                <strong class="text-gray-900">Jhelum:</strong>
+                <span class="text-gray-600"> One of the five rivers of Punjab</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-gray-500">
+                <strong class="text-gray-900">Chenab:</strong>
+                <span class="text-gray-600"> Major tributary from Himalayas</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-gray-500">
+                <strong class="text-gray-900">Ravi:</strong>
+                <span class="text-gray-600"> Sacred river mentioned in Vedas</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-gray-500">
+                <strong class="text-gray-900">Sutlej:</strong>
+                <span class="text-gray-600"> Longest of the five Punjab rivers</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.scriptural.references', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.scriptural.references', currentLang)}</h2>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-slate-100 to-gray-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Rig Veda 10.75</h3>
+            <blockquote class="text-gray-800 italic mb-3 font-sanskrit text-lg">
+              "प्र सु व॑ आपो महि॒मान॑मुत्त॒मं का॒रुर्वो॑चाति॒ सद॑ने वि॒वस्व॑तः । प्र स॒प्तस॑प्त त्रे॒धा हि च॑क्र॒मुः प्र सृत्व॑रीणा॒मति॒ सिन्धु॒रोज॑सा ॥ (1)"
+            </blockquote>
+            <p class="text-gray-700">
+              "Listen to this my praise, O Ganga, Yamuna, Saraswati, Shutudri (Sutlej), and Parushni (Ravi). 
+              O Asikni (Chenab), Marudvridha, Vitasta (Jhelum), Arjikiya, and Sushoma, hear my call."
+            </p>
+          </div>
+          
+          <div class="bg-slate-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Rig Veda 1.32.12</h3>
+            <p class="text-gray-700">
+              "The mighty Sindhu (Indus) flows with roaring sound, like a bull bellowing, 
+              rushing down from the mountains to the sea."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download PDF -->
+      <section class="text-center">
+        <div class="bg-gradient-to-r from-slate-600 to-gray-600 text-white p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Complete Indus Information</h3>
+          <p class="text-slate-100 mb-6">
+            Download a comprehensive PDF with detailed information about Indus, including ancient civilization, maps, and historical significance.
+          </p>
+          <a 
+            href="/data/river report/Sindhu-report.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-slate-600 px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-all transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download Indus PDF
+          </a>
+        </div>
+      </section>
+    </div>
+    <!-- Back to Rivers Button -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
+      <a 
+        href={getLocalizedPath("/rivers", currentLang)}
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+      >
+        <svg 
+          class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {t("ui.back_to_rivers", currentLang)}
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+</style>
+

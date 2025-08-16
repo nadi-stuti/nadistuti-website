@@ -1,0 +1,389 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title="Handbooks - Study Hub" 
+  description="Quick reference handbooks and cheat-sheets for sacred rivers"
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/ml" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">Home</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/ml/study-hub" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Study Hub</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">കൈപുസ്തകം</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-indigo-500 to-purple-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold">കൈപുസ്തകം</h1>
+            <p class="text-xl text-indigo-100 mt-2">Quick reference guides and cheat-sheets for sacred rivers</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">6</div>
+            <div class="text-indigo-100">Available Handbooks</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">Easy</div>
+            <div class="text-indigo-100">Quick Reading</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">PDF</div>
+            <div class="text-indigo-100">Download Format</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4">
+          <div class="w-full">
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search handbooks..." 
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base"
+              >
+              <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base">
+              <option>All Rivers</option>
+              <option>Ganga</option>
+              <option>Yamuna</option>
+              <option>Saraswati</option>
+              <option>Narmada</option>
+              <option>Godavari</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base">
+              <option>All Categories</option>
+              <option>Historical Events</option>
+              <option>Literature</option>
+              <option>Scriptures</option>
+              <option>Holy Sites</option>
+              <option>Reference Guides</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-base">
+              <option>Sort by Title</option>
+              <option>Sort by Date Added</option>
+              <option>Sort by Downloads</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Handbooks Grid -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Handbook 1 -->
+          <a href="/data/river handbooks/HistoricalEvents.pdf"  target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-1 rounded-full">Historical</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Major Historical Events in Tabular Form</h3>
+            <p class="text-sm text-gray-600 mb-4">Comprehensive timeline of major historical events along sacred rivers presented in easy-to-read tabular format.</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 12 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Quick Reference</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">2,134 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>189 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+
+<!-- Handbook 2 -->
+          <a href="/data/river handbooks/DevotionalLiterature.pdf" target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Literature</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Devotional Literature of Indian Rivers: A Comprehensive Catalog</h3>
+            <p class="text-sm text-gray-600 mb-4">Complete catalog of devotional literature, hymns, and spiritual writings dedicated to India's sacred rivers.</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 18 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Comprehensive Guide</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">1,892 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>267 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+
+          <!-- Handbook 3 -->
+          <a href="/data/river handbooks/Holy Rivers in Hindu Scriptures.pdf" target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Scriptures</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Holy Rivers in Hindu Scriptures: An Exhaustive Scholarly Documentation</h3>
+            <p class="text-sm text-gray-600 mb-4">Scholarly documentation of references to sacred rivers in Hindu scriptures, Vedas, Puranas, and ancient texts.</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 24 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Scholarly Research</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">3,456 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>423 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+
+          <!-- Handbook 4 -->
+          <a href="/data/river handbooks/holy-sites.pdf" target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Holy Sites</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Major Hindu Holy Sites on India's Sacred Rivers and their Tributaries. In Tabular Form</h3>
+            <p class="text-sm text-gray-600 mb-4">Comprehensive tabular listing of major Hindu pilgrimage sites located along sacred rivers and their tributaries.</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 16 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Pilgrimage Guide</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">2,789 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>356 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+
+          <!-- Handbook 5 -->
+          <a href="/data/river handbooks/origins.pdf" target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded-full">Reference</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">India's Major Holy Rivers Origin: Comprehensive Reference Guide</h3>
+            <p class="text-sm text-gray-600 mb-4">Complete reference guide covering all major holy rivers origin and its flow direction</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 20 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Complete Guide</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">4,123 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>512 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+
+          <!-- Handbook 6 -->
+          <a href="/data/river handbooks/tributaries.pdf" target="_blank" class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Legends</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Major Holy Indian Rivers: Tributaries, Legends, and Significance</h3>
+            <p class="text-sm text-gray-600 mb-4">Detailed handbook covering tributaries, associated legends, and spiritual significance of India's major holy rivers.</p>
+            
+            <div class="flex items-center text-xs text-gray-500 mb-4">
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+              </svg>
+              <span class="mr-4">PDF • 22 pages</span>
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <span>Cultural Guide</span>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                <span class="mr-4">3,567 downloads</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span>445 likes</span>
+              </div>
+              <p class="text-indigo-600 hover:text-indigo-700 font-medium text-sm">Download PDF</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

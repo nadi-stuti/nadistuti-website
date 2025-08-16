@@ -1,0 +1,47 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import EventDetailPage from '../../../components/events/EventDetailPage';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+import eventsData from '../../../data/events.json';
+
+export async function getStaticPaths() {
+  // Generate paths for all events (upcoming, recent, featured, user events)
+  const allEvents = [
+    ...eventsData.upcomingEvents,
+    ...eventsData.recentEvents,
+    ...eventsData.featuredEvents,
+    ...eventsData.userEvents
+  ];
+
+  return allEvents.map((event) => ({
+    params: { eventId: event.id },
+    props: { event }
+  }));
+}
+
+const { event } = Astro.props;
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+
+// SEO meta data
+const title = `${event.title} | ${t('events.title', currentLang)}`;
+const description = event.description || t('events.description', currentLang);
+---
+
+<Layout 
+  title={title}
+  description={description}
+  lang={currentLang}
+>
+  <Header />
+  
+  <EventDetailPage 
+    event={event}
+    currentLang={currentLang}
+    client:load
+  />
+
+  <Footer />
+</Layout>

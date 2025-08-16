@@ -1,0 +1,518 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import { getLanguageFromURL, getLocalizedPath } from "../../../i18n";
+import { t } from "../../../i18n/translations";
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+
+// Extended seller data with more comprehensive information
+const sellers = [
+  {
+    id: 1,
+    name: "Radha Mistry",
+    city: "Kutch",
+    state: "Gujarat",
+    speciality: "Bandhani Sarees",
+    category: "clothing",
+    experience: 25,
+    rating: 4.8,
+    reviewCount: 156,
+    productCount: 89,
+    description: "Master artisan specializing in traditional Bandhani tie-dye technique passed down through four generations. Known for intricate patterns and vibrant colors.",
+    avatar: "RM",
+    avatarColor: "from-orange-400 to-red-500",
+    featuredProduct: {
+      name: "Traditional Bandhani Saree",
+      price: 2499,
+      originalPrice: 3999,
+      image: "/images/sellers/radha-bandhani.jpg"
+    },
+    achievements: ["Master Craftsperson Award 2022", "Gujarat State Handicraft Excellence"],
+    joinedYear: 2019
+  },
+  {
+    id: 2,
+    name: "Arjun Sharma",
+    city: "Jaipur",
+    state: "Rajasthan",
+    speciality: "Blue Pottery",
+    category: "home",
+    experience: 18,
+    rating: 4.9,
+    reviewCount: 203,
+    productCount: 67,
+    description: "Third-generation blue pottery artisan creating stunning decorative pieces using traditional Persian-influenced techniques unique to Jaipur.",
+    avatar: "AS",
+    avatarColor: "from-blue-400 to-indigo-500",
+    featuredProduct: {
+      name: "Handcrafted Blue Pottery Vase",
+      price: 899,
+      originalPrice: 1299,
+      image: "/images/sellers/arjun-pottery.jpg"
+    },
+    achievements: ["Rajasthan Craft Excellence Award", "Featured in National Geographic"],
+    joinedYear: 2020
+  },
+  {
+    id: 3,
+    name: "Priya Devi",
+    city: "Varanasi",
+    state: "Uttar Pradesh",
+    speciality: "Brass Idols",
+    category: "idols",
+    experience: 22,
+    rating: 5.0,
+    reviewCount: 89,
+    productCount: 134,
+    description: "Renowned brass sculptor creating sacred idols and religious artifacts using ancient lost-wax casting techniques from the holy city of Varanasi.",
+    avatar: "PD",
+    avatarColor: "from-green-400 to-emerald-500",
+    featuredProduct: {
+      name: "Handcrafted Brass Ganesha",
+      price: 1599,
+      originalPrice: 2299,
+      image: "/images/sellers/priya-brass.jpg"
+    },
+    achievements: ["UP State Artisan Award", "Temple Commission Artist"],
+    joinedYear: 2018
+  },
+  {
+    id: 4,
+    name: "Lakshmi Nair",
+    city: "Kochi",
+    state: "Kerala",
+    speciality: "Kathakali Masks",
+    category: "home",
+    experience: 30,
+    rating: 4.7,
+    reviewCount: 142,
+    productCount: 78,
+    description: "Master mask maker preserving the ancient art of Kathakali mask creation, each piece hand-carved and painted with natural pigments.",
+    avatar: "LN",
+    avatarColor: "from-purple-400 to-pink-500",
+    featuredProduct: {
+      name: "Traditional Kathakali Mask",
+      price: 3499,
+      originalPrice: 4999,
+      image: "/images/sellers/lakshmi-mask.jpg"
+    },
+    achievements: ["Kerala State Cultural Award", "UNESCO Recognition"],
+    joinedYear: 2017
+  },
+  {
+    id: 5,
+    name: "Ravi Kumar",
+    city: "Mysore",
+    state: "Karnataka",
+    speciality: "Sandalwood Carvings",
+    category: "idols",
+    experience: 35,
+    rating: 4.9,
+    reviewCount: 267,
+    productCount: 156,
+    description: "Fifth-generation sandalwood carver creating exquisite religious sculptures and decorative items using aromatic Mysore sandalwood.",
+    avatar: "RK",
+    avatarColor: "from-yellow-400 to-orange-500",
+    featuredProduct: {
+      name: "Sandalwood Ganesha Sculpture",
+      price: 5999,
+      originalPrice: 8499,
+      image: "/images/sellers/ravi-sandalwood.jpg"
+    },
+    achievements: ["Karnataka Craft Master", "International Craft Fair Winner"],
+    joinedYear: 2016
+  },
+  {
+    id: 6,
+    name: "Meera Patel",
+    city: "Ahmedabad",
+    state: "Gujarat",
+    speciality: "Mirror Work Textiles",
+    category: "clothing",
+    experience: 20,
+    rating: 4.6,
+    reviewCount: 198,
+    productCount: 112,
+    description: "Expert in traditional Gujarati mirror work embroidery, creating stunning garments and home decor with intricate shisha work.",
+    avatar: "MP",
+    avatarColor: "from-teal-400 to-cyan-500",
+    featuredProduct: {
+      name: "Mirror Work Dupatta",
+      price: 1899,
+      originalPrice: 2799,
+      image: "/images/sellers/meera-mirror.jpg"
+    },
+    achievements: ["Gujarat Handicraft Board Recognition", "Export Excellence Award"],
+    joinedYear: 2019
+  },
+  {
+    id: 7,
+    name: "Suresh Babu",
+    city: "Thanjavur",
+    state: "Tamil Nadu",
+    speciality: "Tanjore Paintings",
+    category: "home",
+    experience: 28,
+    rating: 4.8,
+    reviewCount: 174,
+    productCount: 93,
+    description: "Traditional Tanjore painting artist creating gold-leafed religious artwork using classical South Indian techniques dating back centuries.",
+    avatar: "SB",
+    avatarColor: "from-amber-400 to-yellow-500",
+    featuredProduct: {
+      name: "Tanjore Krishna Painting",
+      price: 4299,
+      originalPrice: 6499,
+      image: "/images/sellers/suresh-tanjore.jpg"
+    },
+    achievements: ["Tamil Nadu State Award", "Classical Art Preservation Honor"],
+    joinedYear: 2018
+  },
+  {
+    id: 8,
+    name: "Kamala Devi",
+    city: "Bhubaneswar",
+    state: "Odisha",
+    speciality: "Pattachitra Paintings",
+    category: "home",
+    experience: 26,
+    rating: 4.7,
+    reviewCount: 129,
+    productCount: 87,
+    description: "Master Pattachitra artist creating traditional cloth-based scroll paintings depicting mythological stories with natural colors.",
+    avatar: "KD",
+    avatarColor: "from-rose-400 to-red-500",
+    featuredProduct: {
+      name: "Jagannath Pattachitra",
+      price: 2799,
+      originalPrice: 3999,
+      image: "/images/sellers/kamala-patta.jpg"
+    },
+    achievements: ["Odisha State Craft Award", "National Handicraft Fair Gold Medal"],
+    joinedYear: 2020
+  }
+];
+
+// Get unique categories and cities for filters
+const categories = [...new Set(sellers.map(s => s.category))];
+const cities = [...new Set(sellers.map(s => s.city))];
+---
+
+<Layout title={t("shop.sellersPage.title", currentLang)} description={t("shop.sellersPage.subtitle", currentLang)}>
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-r from-orange-600 to-amber-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+          {t("shop.sellersPage.title", currentLang)}
+        </h1>
+        <p class="text-xl md:text-2xl font-light mb-4 opacity-90">
+          {t("shop.sellersPage.subtitle", currentLang)}
+        </p>
+        <div class="flex justify-center items-center space-x-8 mt-8">
+          <div class="text-center">
+            <div class="text-3xl font-bold">{sellers.length}+</div>
+            <div class="text-sm opacity-80">Verified Artisans</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold">15+</div>
+            <div class="text-sm opacity-80">States Covered</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold">1000+</div>
+            <div class="text-sm opacity-80">Unique Products</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <!-- Search Bar -->
+          <div class="flex-1 max-w-md">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="sellerSearch"
+                placeholder={t("shop.sellersPage.searchPlaceholder", currentLang)}
+                class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="flex flex-wrap gap-4">
+            <!-- Category Filter -->
+            <select id="categoryFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+              <option value="">{t("shop.sellersPage.allCategories", currentLang)}</option>
+              <option value="clothing">Traditional Clothing</option>
+              <option value="home">Home Decor</option>
+              <option value="idols">Idols & Sculptures</option>
+            </select>
+
+            <!-- City Filter -->
+            <select id="cityFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+              <option value="">{t("shop.sellersPage.allCities", currentLang)}</option>
+              {cities.map(city => (
+                <option value={city}>{city}</option>
+              ))}
+            </select>
+
+            <!-- Sort Filter -->
+            <select id="sortFilter" class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500">
+              <option value="rating">{t("shop.sellersPage.sortByRating", currentLang)}</option>
+              <option value="experience">Experience</option>
+              <option value="products">Product Count</option>
+              <option value="reviews">Review Count</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="mt-4">
+          <p class="text-gray-600" id="resultsCount">
+            <span id="sellerCount">{sellers.length}</span> {t("shop.sellersPage.sellersFound", currentLang)}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sellers Grid -->
+    <section class="py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="sellersGrid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {sellers.map(seller => (
+            <div class="seller-card bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2" 
+                 data-category={seller.category} 
+                 data-city={seller.city}
+                 data-rating={seller.rating}
+                 data-experience={seller.experience}
+                 data-products={seller.productCount}
+                 data-reviews={seller.reviewCount}>
+              
+              <!-- Seller Header -->
+              <div class="p-6 border-b border-gray-100">
+                <div class="flex items-center space-x-4">
+                  <!-- Avatar -->
+                  <div class={`w-16 h-16 rounded-full bg-gradient-to-br ${seller.avatarColor} flex items-center justify-center text-white font-bold text-lg`}>
+                    {seller.avatar}
+                  </div>
+                  
+                  <!-- Basic Info -->
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold text-gray-900">{seller.name}</h3>
+                    <p class="text-gray-600">{seller.city}, {seller.state}</p>
+                    <div class="flex items-center mt-1">
+                      <span class="text-sm bg-orange-100 text-orange-800 px-2 py-1 rounded-full">
+                        {seller.speciality}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Rating and Stats -->
+                <div class="mt-4 flex items-center justify-between">
+                  <div class="flex items-center space-x-1">
+                    {Array.from({length: 5}, (_, i) => (
+                      <svg class={`w-4 h-4 ${i < Math.floor(seller.rating) ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                      </svg>
+                    ))}
+                    <span class="text-sm text-gray-600 ml-1">{seller.rating} ({seller.reviewCount})</span>
+                  </div>
+                  <div class="text-sm text-gray-500">
+                    {seller.experience} {t("shop.sellersPage.yearsExperience", currentLang)}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <div class="p-6 border-b border-gray-100">
+                <p class="text-gray-700 text-sm leading-relaxed">{seller.description}</p>
+                
+                <!-- Achievements -->
+                <div class="mt-4">
+                  <h4 class="text-sm font-semibold text-gray-900 mb-2">Achievements:</h4>
+                  <div class="space-y-1">
+                    {seller.achievements.map(achievement => (
+                      <div class="text-xs text-green-700 bg-green-50 px-2 py-1 rounded">
+                        🏆 {achievement}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Featured Product -->
+              <div class="p-6 border-b border-gray-100">
+                <h4 class="text-sm font-semibold text-gray-900 mb-3">Featured Product:</h4>
+                <div class="bg-gray-50 rounded-lg p-4">
+                  <div class="flex items-center justify-between mb-2">
+                    <h5 class="font-medium text-gray-900 text-sm">{seller.featuredProduct.name}</h5>
+                  </div>
+                  <div class="flex items-center space-x-2">
+                    <span class="text-lg font-bold text-orange-600">₹{seller.featuredProduct.price.toLocaleString()}</span>
+                    <span class="text-sm text-gray-500 line-through">₹{seller.featuredProduct.originalPrice.toLocaleString()}</span>
+                    <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                      {Math.round((1 - seller.featuredProduct.price / seller.featuredProduct.originalPrice) * 100)}% OFF
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Stats and Actions -->
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-4">
+                  <div class="text-center">
+                    <div class="text-lg font-bold text-gray-900">{seller.productCount}</div>
+                    <div class="text-xs text-gray-500">{t("shop.sellersPage.products", currentLang)}</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-bold text-gray-900">{seller.joinedYear}</div>
+                    <div class="text-xs text-gray-500">Joined</div>
+                  </div>
+                  <div class="text-center">
+                    <div class="text-lg font-bold text-gray-900">{seller.reviewCount}</div>
+                    <div class="text-xs text-gray-500">Reviews</div>
+                  </div>
+                </div>
+
+                <button class="w-full bg-gradient-to-r from-orange-500 to-amber-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-orange-600 hover:to-amber-600 transition-all duration-200 transform hover:scale-105">
+                  {t("shop.sellersPage.viewProfile", currentLang)}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action for New Sellers -->
+    <section class="py-16 bg-gradient-to-r from-orange-600 to-amber-600 text-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          {t("shop.sellersPage.joinPlatform", currentLang)}
+        </h2>
+        <p class="text-xl mb-8 opacity-90">
+          {t("shop.sellersPage.joinDescription", currentLang)}
+        </p>
+        
+        <!-- Benefits Grid -->
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Nationwide Reach</h3>
+            <p class="text-sm opacity-80">Connect with customers across India</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Fair Pricing</h3>
+            <p class="text-sm opacity-80">Keep more of what you earn</p>
+          </div>
+          
+          <div class="text-center">
+            <div class="w-16 h-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Full Support</h3>
+            <p class="text-sm opacity-80">We handle logistics and marketing</p>
+          </div>
+        </div>
+
+        <button class="bg-white text-orange-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors duration-200 transform hover:scale-105">
+          {t("shop.sellersPage.becomeSellerBtn", currentLang)}
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <!-- JavaScript for Search and Filter Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('sellerSearch');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const cityFilter = document.getElementById('cityFilter');
+      const sortFilter = document.getElementById('sortFilter');
+      const sellersGrid = document.getElementById('sellersGrid');
+      const sellerCount = document.getElementById('sellerCount');
+      
+      let allSellers = Array.from(document.querySelectorAll('.seller-card'));
+      
+      function filterAndSort() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+        const selectedCity = cityFilter.value;
+        const sortBy = sortFilter.value;
+        
+        // Filter sellers
+        let filteredSellers = allSellers.filter(seller => {
+          const name = seller.querySelector('h3').textContent.toLowerCase();
+          const city = seller.dataset.city.toLowerCase();
+          const speciality = seller.querySelector('.bg-orange-100').textContent.toLowerCase();
+          
+          const matchesSearch = name.includes(searchTerm) || 
+                               city.includes(searchTerm) || 
+                               speciality.includes(searchTerm);
+          const matchesCategory = !selectedCategory || seller.dataset.category === selectedCategory;
+          const matchesCity = !selectedCity || seller.dataset.city === selectedCity;
+          
+          return matchesSearch && matchesCategory && matchesCity;
+        });
+        
+        // Sort sellers
+        filteredSellers.sort((a, b) => {
+          const aValue = parseFloat(a.dataset[sortBy]);
+          const bValue = parseFloat(b.dataset[sortBy]);
+          return bValue - aValue; // Descending order
+        });
+        
+        // Update display
+        sellersGrid.innerHTML = '';
+        filteredSellers.forEach(seller => {
+          sellersGrid.appendChild(seller);
+        });
+        
+        // Update count
+        sellerCount.textContent = filteredSellers.length;
+        
+        // Hide sellers not in filtered results
+        allSellers.forEach(seller => {
+          seller.style.display = filteredSellers.includes(seller) ? 'block' : 'none';
+        });
+      }
+      
+      // Event listeners
+      searchInput.addEventListener('input', filterAndSort);
+      categoryFilter.addEventListener('change', filterAndSort);
+      cityFilter.addEventListener('change', filterAndSort);
+      sortFilter.addEventListener('change', filterAndSort);
+      
+      // Initial sort by rating
+      filterAndSort();
+    });
+  </script>
+</Layout>

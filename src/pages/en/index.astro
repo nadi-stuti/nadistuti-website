@@ -1,0 +1,1220 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import AudioPlayer from "../../components/AudioPlayer";
+import {
+  getLanguageFromURL,
+  getLocalizedPath,
+  type Language,
+} from "../../i18n";
+import { t } from "../../i18n/translations";
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout
+  title={t("home.title", currentLang)}
+  description={t("home.subtitle", currentLang)}
+  lang={currentLang}
+>
+  <Header />
+
+  <main class="">
+    <!-- Hero Section -->
+    <section
+      class="relative min-h-screen flex items-center justify-center overflow-hidden selection:bg-amber-700"
+    >
+      <!-- Background Image -->
+      <div class="absolute inset-0 z-0">
+        <img
+          src="/images/ganga-sunrise.jpg"
+          alt="Sacred Ganga at sunrise"
+          class="w-full h-full object-cover"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-black/40"></div>
+      </div>
+
+      <!-- Content -->
+      <div
+        class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
+      >
+        <h1
+          class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-multilang"
+        >
+          <span
+            class="block text-2xl md:text-3xl font-normal mb-2 text-orange-200 font-sanskrit"
+            >नदीस्तुति</span
+          >
+          {t("home.name", currentLang)}
+        </h1>
+        <p
+          class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto text-multilang"
+        >
+          {t("home.subtitle", currentLang)}
+        </p>
+
+        <!-- Mission Statement -->
+        <div
+          class="bg-white/10 backdrop-blur-md rounded-lg p-6 mb-8 max-w-3xl mx-auto"
+        >
+          <p class="text-lg text-gray-100 text-multilang">
+            "{t("home.mission", currentLang)}"
+          </p>
+        </div>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#hymn"
+            class="bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+          >
+            {t("home.read_hymn", currentLang)}
+          </a>
+          <a
+            href={getLocalizedPath("/rivers", currentLang)}
+            class="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-8 py-3 rounded-lg font-semibold transition-all border border-white/30"
+          >
+            {t("home.explore_rivers", currentLang)}
+          </a>
+        </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <svg
+          class="w-6 h-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Rig Veda Hymn Section -->
+    <section id="hymn" class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+          >
+            {t("hymn.title", currentLang)}
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto text-multilang">
+            {t("hymn.description", currentLang)}
+          </p>
+        </div>
+
+        <!-- Audio Player -->
+        <div class="mb-12">
+          <AudioPlayer client:load />
+        </div>
+
+        <!-- Sanskrit Text and Translation -->
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+          <!-- Sanskrit Text -->
+          <div
+            class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-lg"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">
+              Sanskrit Text
+            </h3>
+            <div
+              class="space-y-4 text-lg leading-relaxed font-sanskrit text-indic"
+            >
+              <p class="text-center text-gray-800">
+                प्र सु व॑ आपो महि॒मान॑मुत्त॒मं का॒रुर्वो॑चाति॒ सद॑ने वि॒वस्व॑तः
+                ।<br />
+                प्र स॒प्तस॑प्त त्रे॒धा हि च॑क्र॒मुः प्र सृत्व॑रीणा॒मति॒ सिन्धु॒रोज॑सा
+                ॥ (1)
+              </p>
+              <p class="text-center text-gray-800">
+                प्र ते॑ऽरद॒द्वरु॑णो॒ यात॑वे प॒थः सिन्धो॒ यद्वाजाँ॑
+                अ॒भ्यद्र॑व॒स्त्वम्<br />
+                भूम्या॒ अधि॑ प्र॒वता॑ यासि॒ सानु॑ना॒ यदे॑षा॒मग्रं॒ जग॑तामिर॒ज्यसि॑
+                ॥ (2)
+              </p>
+              <p class="text-center text-gray-800">
+                दि॒वि स्व॒नो य॑तते॒ भूम्यो॒पर्य॑न॒न्तं शुष्म॒मुदि॑यर्ति भा॒नुना॑
+                ।<br />
+                अ॒भ्रादि॑व॒ प्र स्त॑नयन्ति वृ॒ष्टय॒: सिन्धु॒र्यदेति॑ वृष॒भो न रोरु॑वत्
+                ॥ (3)
+              </p>
+            </div>
+          </div>
+
+          <!-- Translation -->
+          <div
+            class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg"
+          >
+            <h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">
+              {
+                currentLang === "en"
+                  ? "English Translation"
+                  : currentLang === "hi"
+                    ? "हिन्दी अनुवाद"
+                    : currentLang === "ta"
+                      ? "தமிழ் மொழிபெயர்ப்பு"
+                      : currentLang === "te"
+                        ? "తెలుగు అనువాదం"
+                        : currentLang === "kn"
+                          ? "ಕನ್ನಡ ಅನುವಾದ"
+                          : currentLang === "ml"
+                            ? "മലയാളം വിവർത്തനം"
+                            : currentLang === "bn"
+                              ? "বাংলা অনুবাদ"
+                              : currentLang === "gu"
+                                ? "ગુજરાતી અનુવાદ"
+                                : currentLang === "mr"
+                                  ? "मराठी भाषांतर"
+                                  : currentLang === "pa"
+                                    ? "ਪੰਜਾਬੀ ਅਨੁਵਾਦ"
+                                    : currentLang === "or"
+                                      ? "ଓଡ଼ିଆ ଅନୁବାଦ"
+                                      : currentLang === "as"
+                                        ? "অসমীয়া অনুবাদ"
+                                        : "Translation"
+              }
+            </h3>
+            <div class="space-y-4 text-gray-700 leading-relaxed text-multilang">
+              {
+                currentLang === "en" && (
+                  <>
+                    <p>
+                      “Waters, the worshipper addresses to you excellent praise
+                      in the dwelling of the instrumental tutor of the rite;they
+                      flowed by sevens through the three (worlds); but the
+                      Sindhu surpasses (all) the (other) streams in strength.”
+                      (1)
+                    </p>
+                    <p>
+                      “For your course, Sindhu, Varuṇa tore open a path, since
+                      you hastened towards food; you go by alofty road down upon
+                      the earth, by which (road) you reign in the sight of all
+                      worlds.” (2)
+                    </p>
+                    <p>
+                      “The sound goes forth in heaven above the earth; (Sindhu)
+                      with shining wave animates his endlessspeed; as rains
+                      issue thundering from the cloud, so Sindhu (thunders) when
+                      he advances roaring like a bull.” (3)
+                    </p>
+                  </>
+                )
+              }
+              {
+                currentLang === "hi" && (
+                  <>
+                    <p>
+                      "हे गंगा, यमुना, सरस्वती, शुतुद्रि और परुष्णी, असिक्नी,
+                      मरुद्वृधा, वितस्ता, आर्जीकीया और सुषोमा के साथ, मेरी इस
+                      स्तुति को सुनो।"
+                    </p>
+                    <p>
+                      "पहले त्रिष्टामा के साथ, फिर सुसर्तवा, रसया और श्वेत्या के
+                      साथ, हे सिंधु, कुभा, गोमती, क्रुमु और मेहत्नु के साथ तुम
+                      बहती हो।"
+                    </p>
+                    <p>
+                      "जो जल बहते हैं, जो नदियां गायों की तरह चलती हैं, जिनके
+                      बीच राजा वरुण विचरता है, लोगों के सत्य और असत्य को देखता
+                      है।"
+                    </p>
+                  </>
+                )
+              }
+              {
+                currentLang === "ta" && (
+                  <>
+                    <p>
+                      "கங்கை, யமுனை, சரஸ்வதி, சுதுத்ரி மற்றும் பருஷ்ணி, அசிக்னி,
+                      மருத்வ்ருதா, விதஸ்தா, ஆர்ஜீகியா மற்றும் சுஷோமாவுடன்
+                      சேர்ந்து, என் இந்த துதியைக் கேளுங்கள்."
+                    </p>
+                    <p>
+                      "முதலில் திரிஷ்டாமாவுடன், பின்னர் சுசர்தவா, ரசயா மற்றும்
+                      ஸ்வேத்யாவுடன், சிந்து, குபா, கோமதி, க்ருமு மற்றும்
+                      மேஹத்னுவுடன் நீங்கள் ஒன்றாக பாய்கிறீர்கள்."
+                    </p>
+                    <p>
+                      "பாயும் நீர், பசுக்களைப் போல நகரும் நதிகள், அவற்றின்
+                      நடுவில் அரசன் வருணன் மக்களின் உண்மையையும் பொய்யையும்
+                      கவனித்துக்கொண்டு நடமாடுகிறான்."
+                    </p>
+                  </>
+                )
+              }
+              {/* Add more language translations as needed */}
+              {
+                !["en", "hi", "ta"].includes(currentLang) && (
+                  <p class="text-gray-500 italic">
+                    Translation in {currentLang} is being prepared. Please check
+                    back soon or help us translate!
+                  </p>
+                )
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- Download PDF Button -->
+        <div class="text-center">
+          <a
+            href="/data/stuti/rigved/nadi-stuti-hindi.pdf"
+            target="_blank"
+            class="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+          >
+            <svg
+              class="w-5 h-5 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              ></path>
+            </svg>
+            {t("ui.download_pdf", currentLang)}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rivers Overview Section -->
+    <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+          >
+            {t("rivers.title", currentLang)}
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto text-multilang">
+            {t("rivers.description", currentLang)}
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+          {
+            [
+              { name: "Ganga", sanskrit: "गङ्गा", href: "/rivers/ganga" },
+              { name: "Yamuna", sanskrit: "यमुना", href: "/rivers/yamuna" },
+              {
+                name: "Saraswati",
+                sanskrit: "सरस्वती",
+                href: "/rivers/saraswati",
+              },
+              { name: "Krishna", sanskrit: "कृष्णा", href: "/rivers/krishna" },
+              { name: "Kaveri", sanskrit: "कावेरी", href: "/rivers/kaveri" },
+              {
+                name: "Godavari",
+                sanskrit: "गोदावरी",
+                href: "/rivers/godavari",
+              },
+              {
+                name: "Brahmaputra",
+                sanskrit: "ब्रह्मपुत्र",
+                href: "/rivers/brahmaputra",
+              },
+              { name: "Narmada", sanskrit: "नर्मदा", href: "/rivers/narmada" },
+              { name: "Indus", sanskrit: "सिन्धु", href: "/rivers/indus" },
+              {
+                name: "Mahanadi",
+                sanskrit: "महानदी",
+                href: "/rivers/mahanadi",
+              },
+            ].map((river) => (
+              <a
+                href={getLocalizedPath(river.href, currentLang)}
+                class="group bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+              >
+                <div class="text-center">
+                  <div class="text-2xl font-sanskrit text-blue-600 mb-2 text-indic">
+                    {river.sanskrit}
+                  </div>
+                  <div class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    {t(
+                      `river.${river.name.toLowerCase()}` as keyof typeof import("../../i18n/translations").translations,
+                      currentLang,
+                    ) || river.name}
+                  </div>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+
+        <div class="text-center mt-12">
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={getLocalizedPath("/rivers#map", currentLang)}
+              class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4M9 7l6 3m0 0l6-3"
+                ></path>
+              </svg>
+              {t("ui.view_map", currentLang)}
+            </a>
+            <a
+              href={getLocalizedPath("/rivers#calendar", currentLang)}
+              class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+            >
+              <svg
+                class="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                ></path>
+              </svg>
+              {t("ui.view_calendar", currentLang)}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Mission Section -->
+    <section
+      class="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-multilang"
+          >
+            {t("mission.title", currentLang)}
+          </h2>
+          <p
+            class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed text-multilang"
+          >
+            {t("mission.description", currentLang)}
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 mb-16">
+          <!-- Left Column -->
+          <div class="space-y-8">
+            <!-- App Developers Platform -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.appDevelopers.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.appDevelopers.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Knowledge Consolidation -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-emerald-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.knowledge.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.knowledge.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content Creators Support -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.creators.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.creators.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-8">
+            <!-- Artisan Empowerment -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.artisan.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.artisan.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- River Conservation -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.conservation.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.conservation.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Community Building -->
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-indigo-100"
+            >
+              <div class="flex items-start space-x-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3
+                    class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                  >
+                    {t("mission.community.title", currentLang)}
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed text-multilang">
+                    {t("mission.community.description", currentLang)}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div
+          class="text-center bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white"
+        >
+          <h3 class="text-3xl font-bold mb-4 text-multilang">
+            {t("mission.cta.title", currentLang)}
+          </h3>
+          <p
+            class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto text-multilang"
+          >
+            {t("mission.cta.description", currentLang)}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={getLocalizedPath("/community", currentLang)}
+              class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-all transform hover:scale-105 text-multilang"
+            >
+              {t("mission.cta.joinCommunity", currentLang)}
+            </a>
+            <a
+              href={getLocalizedPath("/contribute", currentLang)}
+              class="bg-indigo-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-900 transition-all border border-indigo-400 text-multilang"
+            >
+              {t("mission.cta.startContributing", currentLang)}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Overview Section -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+          >
+            {t("home.services.title", currentLang)}
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto text-multilang">
+            {t("home.services.description", currentLang)}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Apps Service -->
+          <div
+            class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-purple-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {t("home.services.apps.title", currentLang)}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {t("home.services.apps.description", currentLang)}
+            </p>
+            <div
+              class="bg-white rounded-lg p-4 mb-6 border-l-4 border-purple-500"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-purple-700">Featured App</h4>
+                  <p class="text-sm text-gray-600">Ganga Aarti Timer</p>
+                </div>
+                <div class="text-purple-600">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath("/apps#ganga-aarti-timer", currentLang)}
+                class="block w-full bg-purple-100 text-purple-700 px-6 py-2 rounded-lg font-medium hover:bg-purple-200 transition-colors text-center"
+              >
+                Try Ganga Aarti Timer
+              </a>
+              <a
+                href={getLocalizedPath("/apps", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+              >
+                Download Apps
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Study Hub Service -->
+          <div
+            class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {t("studyhub.title", currentLang)}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {t("studyhub.description", currentLang)}
+            </p>
+            <div
+              class="bg-white rounded-lg p-4 mb-6 border-l-4 border-green-500"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-green-700">Featured Course</h4>
+                  <p class="text-sm text-gray-600">Sanskrit River Hymns</p>
+                </div>
+                <div class="text-green-600">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath(
+                  "/study-hub#sanskrit-river-hymns",
+                  currentLang,
+                )}
+                class="block w-full bg-green-100 text-green-700 px-6 py-2 rounded-lg font-medium hover:bg-green-200 transition-colors text-center"
+              >
+                Start Sanskrit Course
+              </a>
+              <a
+                href={getLocalizedPath("/study-hub", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+              >
+                Explore Learning
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Watch Service -->
+          <div
+            class="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-red-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {t("home.services.watch.title", currentLang)}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {t("home.services.watch.description", currentLang)}
+            </p>
+            <div class="bg-white rounded-lg p-4 mb-6 border-l-4 border-red-500">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-red-700">Featured Video</h4>
+                  <p class="text-sm text-gray-600">
+                    Ganga: Journey Through Time
+                  </p>
+                </div>
+                <div class="text-red-600">
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath(
+                  "/watch#ganga-journey-time",
+                  currentLang,
+                )}
+                class="block w-full bg-red-100 text-red-700 px-6 py-2 rounded-lg font-medium hover:bg-red-200 transition-colors text-center"
+              >
+                Watch Featured Video
+              </a>
+              <a
+                href={getLocalizedPath("/watch", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+              >
+                Watch Videos
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Shop Service -->
+          <div
+            class="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-orange-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {t("shop.title", currentLang)}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {t("shop.description", currentLang)}
+            </p>
+            <div
+              class="bg-white rounded-lg p-4 mb-6 border-l-4 border-orange-500"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-orange-700">
+                    Featured Product
+                  </h4>
+                  <p class="text-sm text-gray-600">Sacred River Prayer Book</p>
+                </div>
+                <div class="text-orange-600">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath("/shop#prayer-book", currentLang)}
+                class="block w-full bg-orange-100 text-orange-700 px-6 py-2 rounded-lg font-medium hover:bg-orange-200 transition-colors text-center"
+              >
+                View Prayer Book
+              </a>
+              <a
+                href={getLocalizedPath("/shop", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-orange-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+              >
+                Browse Shop
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v4a2 2 0 01-2 2H9a2 2 0 01-2-2v-4m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Events Service -->
+          <div
+            class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              River Events
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              Conservation activities, spiritual gatherings, educational camps,
+              and tourism experiences along sacred rivers
+            </p>
+            <div
+              class="bg-white rounded-lg p-4 mb-6 border-l-4 border-blue-500"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-blue-700">Featured Event</h4>
+                  <p class="text-sm text-gray-600">Ganga Cleaning Drive</p>
+                </div>
+                <div class="text-blue-600">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath(
+                  "/events#ganga-cleaning-drive",
+                  currentLang,
+                )}
+                class="block w-full bg-blue-100 text-blue-700 px-6 py-2 rounded-lg font-medium hover:bg-blue-200 transition-colors text-center"
+              >
+                Join Cleaning Drive
+              </a>
+              <a
+                href={getLocalizedPath("/events", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+              >
+                Join Events
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Community Service -->
+          <div
+            class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 bg-teal-600 rounded-full mb-6 mx-auto"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">
+              {t("community.title", currentLang)}
+            </h3>
+            <p class="text-gray-600 mb-6 text-center">
+              {t("community.description", currentLang)}
+            </p>
+            <div
+              class="bg-white rounded-lg p-4 mb-6 border-l-4 border-teal-500"
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <h4 class="font-semibold text-teal-700">Active Community</h4>
+                  <p class="text-sm text-gray-600">25,000+ Members</p>
+                </div>
+                <div class="text-teal-600">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <a
+                href={getLocalizedPath("/community#members", currentLang)}
+                class="block w-full bg-teal-100 text-teal-700 px-6 py-2 rounded-lg font-medium hover:bg-teal-200 transition-colors text-center"
+              >
+                Meet Members
+              </a>
+              <a
+                href={getLocalizedPath("/community", currentLang)}
+                class="inline-flex items-center justify-center w-full bg-teal-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-teal-700 transition-colors"
+              >
+                Join Community
+                <svg
+                  class="w-4 h-4 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="text-center mt-16">
+          <div
+            class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white"
+          >
+            <h3 class="text-2xl font-bold mb-4">
+              {t("home.services.cta.title", currentLang)}
+            </h3>
+            <p class="text-lg mb-6 text-blue-100">
+              {t("home.services.cta.description", currentLang)}
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={getLocalizedPath("/rivers", currentLang)}
+                class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all"
+              >
+                Explore All Rivers
+              </a>
+              <a
+                href={getLocalizedPath("/community", currentLang)}
+                class="bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-all border border-blue-400"
+              >
+                Join Our Mission
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,320 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title="ನಕ್ಷೆಗಳು ಮತ್ತು ಭೂಗೋಳ - ಅಧ್ಯಯನ ಕೇಂದ್ರ" 
+  description="Historical maps, geographical surveys, and topographical studies of river systems"
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/kn" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">ಮುಖಪುಟ</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/kn/study-hub" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">ಅಧ್ಯಯನ ಕೇಂದ್ರ</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">ನಕ್ಷೆಗಳು ಮತ್ತು ಭೂಗೋಳ</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-blue-500 to-cyan-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold">ನಕ್ಷೆಗಳು ಮತ್ತು ಭೂಗೋಳ</h1>
+            <p class="text-xl text-blue-100 mt-2">Historical maps, geographical surveys, and topographical studies of river systems</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">85+</div>
+            <div class="text-blue-100">Historical Maps</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">120+</div>
+            <div class="text-blue-100">Survey Reports</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">45+</div>
+            <div class="text-blue-100">Satellite Images</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4">
+          <!-- Search Bar -->
+          <div class="w-full">
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search maps and geographical resources..." 
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+              >
+              <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Filter Dropdowns -->
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+              <option>All Types</option>
+              <option>Historical Maps</option>
+              <option>Topographical</option>
+              <option>Satellite Images</option>
+              <option>Survey Reports</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+              <option>All Periods</option>
+              <option>Ancient</option>
+              <option>Medieval</option>
+              <option>Colonial</option>
+              <option>Modern</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base">
+              <option>Sort by Date</option>
+              <option>Sort by Relevance</option>
+              <option>Sort by Scale</option>
+              <option>Sort by Title</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Maps Grid -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Map 1 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+            <div class="relative h-48 bg-gradient-to-br from-blue-100 to-blue-200">
+              <img src="/api/placeholder/400/200" alt="Ancient Ganga Course Map" class="w-full h-full object-cover">
+              <div class="absolute top-4 right-4">
+                <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">High Resolution</span>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+                  </svg>
+                </div>
+                <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Ancient Period</span>
+              </div>
+              
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Ancient Course of River Ganga</h3>
+              <p class="text-sm text-gray-600 mb-4">Historical map showing the ancient course of river Ganga and its tributaries during the Vedic period.</p>
+              
+              <div class="flex items-center text-xs text-gray-500 mb-4">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="mr-4">Scale: 1:500,000</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>1500 BCE</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  <span class="mr-4">1,456 views</span>
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V8"></path>
+                  </svg>
+                  <span>234 downloads</span>
+                </div>
+                <button class="text-blue-600 hover:text-blue-700 font-medium text-sm">View Map</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map 2 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+            <div class="relative h-48 bg-gradient-to-br from-green-100 to-green-200">
+              <img src="/api/placeholder/400/200" alt="British Survey Map" class="w-full h-full object-cover">
+              <div class="absolute top-4 right-4">
+                <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">Digitized</span>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+                  </svg>
+                </div>
+                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Colonial Period</span>
+              </div>
+              
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">British Survey of India - River Systems</h3>
+              <p class="text-sm text-gray-600 mb-4">Detailed topographical survey map of Indian river systems conducted by the British Survey of India.</p>
+              
+              <div class="flex items-center text-xs text-gray-500 mb-4">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="mr-4">Scale: 1:250,000</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>1875 CE</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  <span class="mr-4">2,134 views</span>
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V8"></path>
+                  </svg>
+                  <span>456 downloads</span>
+                </div>
+                <button class="text-blue-600 hover:text-blue-700 font-medium text-sm">View Map</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map 3 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+            <div class="relative h-48 bg-gradient-to-br from-purple-100 to-purple-200">
+              <img src="/api/placeholder/400/200" alt="Satellite Image" class="w-full h-full object-cover">
+              <div class="absolute top-4 right-4">
+                <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-xs">Satellite</span>
+              </div>
+            </div>
+            
+            <div class="p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+                  </svg>
+                </div>
+                <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Modern</span>
+              </div>
+              
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Satellite Imagery - Yamuna Basin</h3>
+              <p class="text-sm text-gray-600 mb-4">High-resolution satellite imagery showing the current state of Yamuna river basin and surrounding areas.</p>
+              
+              <div class="flex items-center text-xs text-gray-500 mb-4">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="mr-4">Resolution: 10m</span>
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>2023</span>
+              </div>
+              
+              <div class="flex items-center justify-between">
+                <div class="flex items-center text-xs text-gray-500">
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                  </svg>
+                  <span class="mr-4">987 views</span>
+                  <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V8"></path>
+                  </svg>
+                  <span>123 downloads</span>
+                </div>
+                <button class="text-blue-600 hover:text-blue-700 font-medium text-sm">View Image</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Continue with more maps... -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12 flex items-center justify-between">
+          <div class="text-sm text-gray-700">
+            Showing <span class="font-medium">1</span> to <span class="font-medium">3</span> of <span class="font-medium">85</span> results
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Previous
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">
+              1
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              2
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              3
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

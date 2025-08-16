@@ -1,0 +1,257 @@
+---
+import { languages } from '../i18n/index';
+---
+
+<div id="language-selector-overlay" class="language-selector-overlay hidden">
+  <div class="language-selector-modal">
+    <div class="language-selector-header">
+      <h2>Choose Your Language</h2>
+      <p>Select your preferred language to continue</p>
+      <div id="browser-suggestion" class="browser-suggestion hidden">
+        <span>Suggested: </span>
+        <span id="suggested-language"></span>
+      </div>
+    </div>
+    <div class="language-selector-grid">
+      {Object.entries(languages).map(([code, lang]) => (
+        <button 
+          class="language-option" 
+          data-lang={code}
+          data-native-name={lang.nativeName}
+        >
+          <span class="language-native">{lang.nativeName}</span>
+          <span class="language-english">{lang.name}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .language-selector-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    backdrop-filter: blur(5px);
+  }
+
+  .language-selector-overlay.hidden {
+    display: none;
+  }
+
+  .language-selector-modal {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .language-selector-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .language-selector-header h2 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.5rem;
+  }
+
+  .language-selector-header p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .browser-suggestion {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: #f0f8ff;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #0066cc;
+  }
+
+  .browser-suggestion.hidden {
+    display: none;
+  }
+
+  .language-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .language-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .language-option:hover {
+    border-color: #007acc;
+    background: #f8f9ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 122, 204, 0.15);
+  }
+
+  .language-native {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+  }
+
+  .language-english {
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  @media (max-width: 640px) {
+    .language-selector-modal {
+      padding: 1.5rem;
+      margin: 1rem;
+    }
+
+    .language-selector-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Language selector functionality
+  function initLanguageSelector() {
+    const overlay = document.getElementById('language-selector-overlay');
+    const languageOptions = document.querySelectorAll('.language-option');
+    const browserSuggestion = document.getElementById('browser-suggestion');
+    const suggestedLanguageSpan = document.getElementById('suggested-language');
+
+    // Available languages
+    const languages: Record<string, string> = {
+      en: 'English',
+      hi: 'हिन्दी',
+      ta: 'தமிழ்',
+      te: 'తెలుగు',
+      kn: 'ಕನ್ನಡ',
+      ml: 'മലയാളം',
+      bn: 'বাংলা',
+      gu: 'ગુજરાતી',
+      mr: 'मराठी',
+      pa: 'ਪੰਜਾਬੀ',
+      or: 'ଓଡ଼ିଆ',
+      as: 'অসমীয়া',
+      sa: 'संस्कृतम्'
+    };
+
+    // Get browser language preference
+    function getBrowserLanguagePreference() {
+      const browserLangs = navigator.languages || [navigator.language];
+      
+      for (const browserLang of browserLangs) {
+        const langCode = browserLang.split('-')[0].toLowerCase();
+        if (langCode in languages) {
+          return langCode;
+        }
+      }
+      return 'en';
+    }
+
+    // Check if user has already selected a language
+    const savedLanguage = localStorage.getItem('preferred-language');
+    
+    if (!savedLanguage) {
+      // Show the language selector for first-time visitors
+      overlay?.classList.remove('hidden');
+      
+      // Show browser language suggestion
+      const suggestedLang = getBrowserLanguagePreference();
+      if (suggestedLang !== 'en' && suggestedLanguageSpan) {
+        suggestedLanguageSpan.textContent = languages[suggestedLang];
+        browserSuggestion?.classList.remove('hidden');
+        
+        // Highlight the suggested language option
+        const suggestedOption = document.querySelector(`[data-lang="${suggestedLang}"]`) as HTMLElement;
+        if (suggestedOption) {
+          suggestedOption.style.border = '2px solid #007acc';
+          suggestedOption.style.background = '#f8f9ff';
+        }
+      }
+    } else {
+      // Redirect to saved language if we're on the root page
+      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        window.location.href = `/${savedLanguage}/`;
+      }
+    }
+
+    // Handle language selection
+    languageOptions.forEach(option => {
+      option.addEventListener('click', (e) => {
+        const selectedLang = (e.currentTarget as HTMLElement).dataset.lang;
+        if (selectedLang) {
+          // Save the selected language
+          localStorage.setItem('preferred-language', selectedLang);
+          
+          // Show loading state
+          if (overlay) {
+            overlay.style.opacity = '0.7';
+          }
+          (e.currentTarget as HTMLElement).style.background = '#007acc';
+          (e.currentTarget as HTMLElement).style.color = 'white';
+          
+          // Redirect to the selected language home page
+          setTimeout(() => {
+            window.location.href = `/${selectedLang}/`;
+          }, 300);
+        }
+      });
+    });
+
+    // Prevent closing the modal - force user to select a language
+    overlay?.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        // Shake animation to indicate they need to select
+        overlay.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => {
+          overlay.style.animation = '';
+        }, 500);
+      }
+    });
+  }
+
+  // Add shake animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageSelector);
+  } else {
+    initLanguageSelector();
+  }
+</script>

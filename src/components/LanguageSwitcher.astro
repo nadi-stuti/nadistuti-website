@@ -1,0 +1,140 @@
+---
+import { languages, getLanguageFromURL } from '../i18n/index';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+const currentPath = Astro.url.pathname.replace(/^\/[a-z]{2}/, '') || '/';
+---
+
+<div class="language-switcher">
+  <button class="language-switcher-button" aria-label="Change language">
+    <span class="current-language">{languages[currentLang].nativeName}</span>
+    <svg class="chevron" width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+      <path d="M6 8L2 4h8L6 8z"/>
+    </svg>
+  </button>
+  
+  <div class="language-dropdown">
+    {Object.entries(languages).map(([code, lang]) => (
+      code !== currentLang && (
+        <button 
+          class="language-option"
+          data-lang={code}
+          onclick={`window.languageHandler?.switchLanguage('${code}')`}
+        >
+          <span class="language-native">{lang.nativeName}</span>
+          <span class="language-english">{lang.name}</span>
+        </button>
+      )
+    ))}
+  </div>
+</div>
+
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .language-switcher-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .language-switcher-button:hover {
+    border-color: #007acc;
+    box-shadow: 0 2px 4px rgba(0, 122, 204, 0.1);
+  }
+
+  .current-language {
+    font-weight: 500;
+    color: #333;
+  }
+
+  .chevron {
+    transition: transform 0.2s ease;
+    color: #666;
+  }
+
+  .language-switcher:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .language-switcher:hover .language-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .language-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .language-option:last-child {
+    border-bottom: none;
+  }
+
+  .language-option:hover {
+    background: #f8f9ff;
+  }
+
+  .language-native {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+  }
+
+  .language-english {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.1rem;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .language-dropdown {
+      position: fixed;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: 12px 12px 0 0;
+      max-height: 50vh;
+    }
+  }
+</style>

@@ -1,0 +1,477 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title="Rituals - Study Hub" 
+  description="Detailed information on rituals to perform on sacred rivers for spiritual benefits"
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/te" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">Home</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/te/study-hub" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Study Hub</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">ఆచారాలు</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-orange-500 to-red-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold">పవిత్ర ఆచారాలు</h1>
+            <p class="text-xl text-orange-100 mt-2">Detailed guidance on rituals to perform on sacred rivers for spiritual benefits</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">50+</div>
+            <div class="text-orange-100">Ritual Guides</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">12</div>
+            <div class="text-orange-100">Sacred Rivers</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">365</div>
+            <div class="text-orange-100">Auspicious Dates</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4">
+          <div class="w-full">
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search rituals by purpose, date, or river..." 
+                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
+              >
+              <svg class="absolute left-3 top-3.5 h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base">
+              <option>All Rivers</option>
+              <option>Ganga</option>
+              <option>Yamuna</option>
+              <option>Saraswati</option>
+              <option>Narmada</option>
+              <option>Godavari</option>
+              <option>Krishna</option>
+              <option>Kaveri</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base">
+              <option>All Purposes</option>
+              <option>Purification</option>
+              <option>Prosperity</option>
+              <option>Health & Healing</option>
+              <option>Spiritual Growth</option>
+              <option>Family Welfare</option>
+              <option>Career Success</option>
+              <option>Peace & Harmony</option>
+            </select>
+            
+            <select class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base">
+              <option>All Seasons</option>
+              <option>Spring (Vasant)</option>
+              <option>Summer (Grishma)</option>
+              <option>Monsoon (Varsha)</option>
+              <option>Autumn (Sharad)</option>
+              <option>Winter (Shishir)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ritual Categories -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Ritual Categories</h2>
+          <p class="text-lg text-gray-600">Browse rituals by their spiritual purpose and benefits</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Daily Rituals -->
+          <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Daily Rituals</h3>
+            <p class="text-sm text-gray-600 mb-4">Morning and evening prayers, ablutions, and daily offerings</p>
+            <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">15 Rituals</span>
+          </div>
+
+          <!-- Festival Rituals -->
+          <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Festival Rituals</h3>
+            <p class="text-sm text-gray-600 mb-4">Special ceremonies for Kumbh Mela, Ganga Aarti, and other festivals</p>
+            <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">12 Rituals</span>
+          </div>
+
+          <!-- Healing Rituals -->
+          <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Healing Rituals</h3>
+            <p class="text-sm text-gray-600 mb-4">Therapeutic rituals for physical, mental, and spiritual healing</p>
+            <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">10 Rituals</span>
+          </div>
+
+          <!-- Prosperity Rituals -->
+          <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
+            <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Prosperity Rituals</h3>
+            <p class="text-sm text-gray-600 mb-4">Rituals for wealth, success, and material abundance</p>
+            <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">13 Rituals</span>
+          </div>
+        </div>
+
+        <!-- Featured Rituals -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Ritual 1 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Ganga</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Ganga Aarti (Evening Prayer)</h3>
+            <p class="text-sm text-gray-600 mb-4">Traditional evening prayer ceremony performed at Ganga ghats for spiritual purification and divine blessings.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> Sunset (6:00-7:00 PM)
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 30-45 minutes
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Purification, Peace, Blessings
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-green-600 font-medium">Daily Ritual</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Ritual 2 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Yamuna</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Chhath Puja Ritual</h3>
+            <p class="text-sm text-gray-600 mb-4">Four-day festival ritual dedicated to Sun God and Chhathi Maiya, performed in Yamuna and other rivers.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> Kartik Shukla Chaturthi-Saptami
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 4 days
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Health, Prosperity, Family Welfare
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-purple-600 font-medium">Annual Festival</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Ritual 3 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Narmada</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Narmada Parikrama Ritual</h3>
+            <p class="text-sm text-gray-600 mb-4">Sacred circumambulation of Narmada river for spiritual purification and liberation from sins.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> Any auspicious month
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 3 years, 3 months, 13 days
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Moksha, Sin Removal, Spiritual Growth
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-green-600 font-medium">Pilgrimage Ritual</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Ritual 4 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Godavari</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Godavari Pushkaram Ritual</h3>
+            <p class="text-sm text-gray-600 mb-4">Sacred bathing ritual performed during Godavari Pushkaram festival for prosperity and spiritual merit.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> When Jupiter enters Simha Rashi
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 12 days
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Wealth, Success, Divine Grace
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-yellow-600 font-medium">12-Year Cycle</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Ritual 5 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-teal-100 text-teal-800 px-2 py-1 rounded-full">Krishna</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Krishna Janmashtami River Ritual</h3>
+            <p class="text-sm text-gray-600 mb-4">Special bathing and prayer ritual performed in Krishna river during Janmashtami for devotion and blessings.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> Krishna Janmashtami (Midnight)
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 2-3 hours
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Devotion, Love, Divine Connection
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-teal-600 font-medium">Annual Festival</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Ritual 6 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+              </div>
+              <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Kaveri</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Kaveri Sankramana Ritual</h3>
+            <p class="text-sm text-gray-600 mb-4">Sacred ritual performed during Tula Sankramana when sun enters Libra, celebrated at Kaveri river.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                </svg>
+                <span class="font-medium">Best Time:</span> Tula Sankramana (October)
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span class="font-medium">Duration:</span> 1 day
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                <span class="font-medium">Benefits:</span> Purification, Prosperity, Good Health
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-pink-600 font-medium">Annual Ritual</span>
+              <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-12 flex items-center justify-between">
+          <div class="text-sm text-gray-700">
+            Showing <span class="font-medium">1</span> to <span class="font-medium">6</span> of <span class="font-medium">50</span> results
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Previous
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-white bg-orange-600 border border-transparent rounded-md hover:bg-orange-700">
+              1
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              2
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              3
+            </button>
+            <button class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,630 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getLanguageFromURL } from '../../i18n';
+import { t } from '../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title={t('studyhub.title', currentLang)} 
+  description={t('studyhub.description', currentLang)}
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Page Header -->
+    <section class="py-16 bg-gradient-to-r from-teal-500 to-blue-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 text-multilang">
+            अभ्यास केंद्र
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-4xl mx-auto text-multilang">
+            पवित्र नद्यांसाठी तुमचा व्यापक ज्ञान आधार - ऐतिहासिक घटना, शास्त्रे, संशोधन पत्रे आणि विद्वत्तापूर्ण संसाधने
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#resources" class="bg-white text-sky-600 px-8 py-3 rounded-lg font-semibold hover:bg-sky-50 transition-all transform hover:scale-105">
+              संसाधने ब्राउझ करा
+            </a>
+            <a href="#contribute" class="bg-sky-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-sky-900 transition-all border border-sky-500">
+              ज्ञान योगदान द्या
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div>
+            <div class="text-3xl font-bold text-blue-600 mb-2">150+</div>
+            <div class="text-gray-600">Research Papers</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-green-600 mb-2">75+</div>
+            <div class="text-gray-600">Historical Documents</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-orange-600 mb-2">50+</div>
+            <div class="text-gray-600">पवित्र विधी</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold text-purple-600 mb-2">6</div>
+            <div class="text-gray-600">Quick Handbooks</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="py-16 bg-gradient-to-br from-teal-500 to-blue-600">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Search Knowledge Base</h2>
+        <p class="text-xl text-teal-100 mb-8">Find study materials, research papers, and resources about sacred rivers</p>
+        
+        <div class="relative max-w-2xl mx-auto">
+          <input 
+            type="text" 
+            placeholder="Search for rivers, topics, or keywords..." 
+            class="w-full px-6 py-4 pr-12 text-lg rounded-lg border-0 focus:ring-4 focus:ring-white/30 focus:outline-none shadow-lg"
+          >
+          <button class="absolute right-2 top-2 bg-teal-500 text-white p-2 rounded-lg hover:bg-teal-600 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </button>
+        </div>
+        
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+          <span class="text-teal-100 text-sm">Popular topics:</span>
+          <a href="/mr/study-hub/historical" class="bg-white/20 text-white px-3 py-1 rounded-full text-sm hover:bg-white/30 transition-colors">Historical Events</a>
+          <a href="/mr/study-hub/scriptures" class="bg-white/20 text-white px-3 py-1 rounded-full text-sm hover:bg-white/30 transition-colors">Sacred Texts</a>
+          <a href="/mr/study-hub/research" class="bg-white/20 text-white px-3 py-1 rounded-full text-sm hover:bg-white/30 transition-colors">Research Papers</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Study Categories -->
+    <section id="resources" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ज्ञान श्रेणी</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            श्रेणीनुसार आमच्या संघटित अभ्यास सामग्रीचा संग्रह ब्राउझ करा
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          <!-- Historical Events -->
+          <a href="/mr/study-hub/historical" class="group bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-amber-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+                  <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-amber-700 transition-colors">Historical Events</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Documented historical events, battles, and civilizations along rivers</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">75+ Documents</span>
+                  <span>Last updated: 2 days ago</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-amber-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Sacred Scriptures -->
+          <a href="/mr/study-hub/scriptures" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-purple-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                  <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-purple-700 transition-colors">Sacred Scriptures</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Ancient texts, hymns, and writings by saints about sacred rivers</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">200+ References</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Research Papers -->
+          <a href="/mr/study-hub/research" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-green-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-200 transition-colors">
+                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-green-700 transition-colors">Research Papers</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Scholarly papers, research studies, and academic publications</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">150+ Papers</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-green-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Interactive Slideshows -->
+          <a href="/mr/study-hub/slideshows" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-pink-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center group-hover:bg-pink-200 transition-colors">
+                  <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011-1h2a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1a1 1 0 011-1h2a1 1 0 011 1v3m0 0h8m-8 0V4a1 1 0 011-1h6a1 1 0 011 1v0"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-pink-700 transition-colors">Interactive Slideshows</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Visual presentations, photo galleries, and educational content</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">50+ Presentations</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-pink-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Maps & Geography -->
+          <a href="/mr/study-hub/geography" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-blue-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">Maps & Geography</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Historical maps, surveys, and topographical studies</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">85+ Maps</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Multimedia Resources -->
+          <a href="/mr/study-hub/multimedia" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-red-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center group-hover:bg-red-200 transition-colors">
+                  <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-red-700 transition-colors">Multimedia Resources</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">Documentaries, audio recordings, and educational videos</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">120+ Files</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-red-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Handbooks -->
+          <a href="/mr/study-hub/handbooks" class="group bg-white rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-indigo-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
+                  <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors">हॅन्डबुक</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">पवित्र नद्यांसाठी द्रुत संदर्भ मार्गदर्शक आणि चीट-शीट</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">6 Handbooks</span>
+                  <span>Last updated: 1 day ago</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-indigo-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Rituals -->
+          <a href="/mr/study-hub/rituals" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-orange-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                  <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-orange-700 transition-colors">पवित्र विधी</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">पवित्र नद्यांवर आध्यात्मिक फायद्यांसाठी विधींवर तपशीलवार मार्गदर्शन</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">50+ Rituals</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-orange-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+
+          <!-- Holy Calendar -->
+          <a href="/mr/study-hub/holy-calendar" class="group bg-gray-100 rounded-lg border border-gray-200 p-6 hover:shadow-lg hover:border-emerald-300 transition-all duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center group-hover:bg-emerald-200 transition-colors">
+                  <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors">पवित्र दिनदर्शिका</h3>
+                <p class="text-sm text-gray-600 mt-1 mb-3">पवित्र तारखा आणि कार्यक्रम दिनदर्शिका - भूतकाळातील आणि आगामी उत्सव</p>
+                <div class="flex items-center text-xs text-gray-500">
+                  <span class="bg-gray-100 px-2 py-1 rounded mr-2">365+ Events</span>
+                  <span class="text-red-500">coming soon</span>
+                </div>
+              </div>
+              <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-400 group-hover:text-emerald-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Resources -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Featured Resources</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Recently added and most popular study materials
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Featured Resource 1 -->
+          <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-6 border border-blue-200">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Ganga: Historical Timeline</h3>
+                <p class="text-sm text-gray-600">PDF • 45 pages • Historical</p>
+              </div>
+            </div>
+            <p class="text-gray-700 text-sm mb-4">
+              Comprehensive timeline of major historical events along the Ganga river from ancient times to modern era.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-500">Added 2 days ago</span>
+              <a href="/data/events/Ganga_ Historical Timeline.pdf" target="_blank" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Download PDF</a>
+            </div>
+          </div>
+
+          <!-- Featured Resource 2 -->
+          <div class="bg-gradient-to-br from-purple-50 to-indigo-100 rounded-lg p-6 border border-purple-200">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Yamuna Stotras Collection</h3>
+                <p class="text-sm text-gray-600">PDF • 28 pages • Scripture</p>
+              </div>
+            </div>
+            <p class="text-gray-700 text-sm mb-4">
+              Collection of sacred hymns and stotras dedicated to Yamuna river by various saints and scholars.
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-500">Added 1 week ago</span>
+              <a href="/data/scriptures report/Yamuna Stotras Collection.pdf" target="_blank" class="text-purple-600 hover:text-purple-700 text-sm font-medium">Download PDF</a>
+            </div>
+          </div>
+
+          <!-- Featured Resource 3 -->
+          <div class="bg-gradient-to-br from-green-50 to-teal-100 rounded-lg p-6 border border-green-200">
+            <div class="flex items-center mb-4">
+              <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mr-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m0 0V1a1 1 0 011-1h2a1 1 0 011 1v18a1 1 0 01-1 1H4a1 1 0 01-1-1V1a1 1 0 011-1h2a1 1 0 011 1v3m0 0h8m-8 0V4a1 1 0 011-1h6a1 1 0 011 1v0"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Holy river maps</h3>
+                <p class="text-sm text-gray-600">PDF • 22 pages • Maps</p>
+              </div>
+            </div>
+            <p class="text-gray-700 text-sm mb-4">
+              Comprehensive maps of our 10 holy rivers
+            </p>
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-500">Added 3 days ago</span>
+              <a href="/data/map/Holy River maps.pdf" target="_blank" class="text-green-600 hover:text-green-700 text-sm font-medium">View Map</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contribute Section -->
+    <section id="contribute" class="py-16 bg-gradient-to-br from-orange-50 to-red-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contribute to Our Knowledge Base</h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Help us build the world's most comprehensive repository of river knowledge. Share your research, documents, and expertise with the community.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">How You Can Contribute</h3>
+            <div class="space-y-6">
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Submit Research Papers</h4>
+                  <p class="text-gray-600">Share your academic research, thesis, or scholarly articles about rivers</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Upload Historical Documents</h4>
+                  <p class="text-gray-600">Contribute rare manuscripts, historical records, or family documents</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Share Multimedia Content</h4>
+                  <p class="text-gray-600">Photos, videos, audio recordings, or interactive presentations</p>
+                </div>
+              </div>
+              
+              <div class="flex items-start">
+                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-4 mt-1">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-2">Translate Content</h4>
+                  <p class="text-gray-600">Help make resources accessible in multiple Indian languages</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">Submit Your Contribution</h3>
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="Enter your full name">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="your.email@example.com">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Contribution Type</label>
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                  <option>Research Paper</option>
+                  <option>Historical Document</option>
+                  <option>Scripture/Religious Text</option>
+                  <option>Photo/Image Collection</option>
+                  <option>Video/Audio Content</option>
+                  <option>Translation</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">River(s) Related</label>
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="e.g., Ganga, Yamuna, Saraswati">
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="Describe your contribution and its significance"></textarea>
+              </div>
+              
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Upload Files</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                  <svg class="w-8 h-8 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                  </svg>
+                  <p class="text-gray-600">Drop files here or click to browse</p>
+                  <p class="text-xs text-gray-500 mt-1">PDF, DOC, PPT, JPG, PNG, MP4, MP3 (Max 50MB)</p>
+                </div>
+              </div>
+              
+              <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-orange-600 hover:to-red-600 transition-all">
+                Submit Contribution
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Guidelines -->
+    <section class="py-16 bg-white">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Contribution Guidelines</h2>
+          <p class="text-lg text-gray-600">
+            Please follow these guidelines to ensure quality and authenticity of our knowledge base
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-green-50 p-6 rounded-lg border border-green-200">
+            <h3 class="text-lg font-semibold text-green-800 mb-4 flex items-center">
+              <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+              </svg>
+              What We Accept
+            </h3>
+            <ul class="space-y-2 text-green-700 text-sm">
+              <li>• Original research and scholarly articles</li>
+              <li>• Authentic historical documents and manuscripts</li>
+              <li>• High-quality photographs and multimedia</li>
+              <li>• Verified scriptural references and translations</li>
+              <li>• Educational presentations and slideshows</li>
+              <li>• Properly attributed and sourced content</li>
+            </ul>
+          </div>
+
+          <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+            <h3 class="text-lg font-semibold text-red-800 mb-4 flex items-center">
+              <svg class="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+              What We Don't Accept
+            </h3>
+            <ul class="space-y-2 text-red-700 text-sm">
+              <li>• Copyrighted material without permission</li>
+              <li>• Unverified or speculative content</li>
+              <li>• Low-quality or blurry images</li>
+              <li>• Content promoting specific political views</li>
+              <li>• Commercial or promotional material</li>
+              <li>• Plagiarized or improperly attributed work</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="mt-8 bg-blue-50 p-6 rounded-lg border border-blue-200">
+          <h3 class="text-lg font-semibold text-blue-800 mb-4">Review Process</h3>
+          <div class="grid md:grid-cols-4 gap-4 text-sm">
+            <div class="text-center">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <span class="text-white font-bold text-xs">1</span>
+              </div>
+              <p class="text-blue-700">Submission received and acknowledged</p>
+            </div>
+            <div class="text-center">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <span class="text-white font-bold text-xs">2</span>
+              </div>
+              <p class="text-blue-700">Expert review and verification</p>
+            </div>
+            <div class="text-center">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <span class="text-white font-bold text-xs">3</span>
+              </div>
+              <p class="text-blue-700">Formatting and categorization</p>
+            </div>
+            <div class="text-center">
+              <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                <span class="text-white font-bold text-xs">4</span>
+              </div>
+              <p class="text-blue-700">Publication in knowledge base</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

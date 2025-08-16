@@ -1,0 +1,124 @@
+---
+import { getLanguageFromURL, getLocalizedPath, type Language } from '../i18n';
+import { t } from '../i18n/translations';
+import LanguageSwitcher from './LanguageSwitcher';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+const currentPath = Astro.url.pathname.replace(`/${currentLang}`, '') || '/';
+---
+
+<header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href={getLocalizedPath('/', currentLang)} class="flex items-center space-x-2">
+          <img 
+              src="/favicon.png" 
+              alt="Brahmaputra in Assam" 
+              class="w-12"
+            />
+          <span class="text-xl font-bold text-gray-900">Nadi Stuti</span>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <div class="hidden md:flex items-center space-x-4">
+        <div class="flex items-baseline space-x-4">
+          <a href={getLocalizedPath('/', currentLang)} class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.home', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/rivers', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.rivers', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/apps', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.apps', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/study-hub', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.studyhub', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/watch', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.watch', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/shop', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.shop', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/events', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.events', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/community', currentLang)} class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+            {t('nav.community', currentLang)}
+          </a>
+          <a href={getLocalizedPath('/donate', currentLang)} class="bg-gradient-to-r from-blue-600 to-orange-500 text-white px-4 py-2 rounded-md text-sm font-medium hover:from-blue-700 hover:to-orange-600 transition-all">
+            {t('nav.donate', currentLang)}
+          </a>
+        </div>
+        
+        <!-- Language Switcher -->
+        <div class="ml-4">
+          <LanguageSwitcher currentLang={currentLang} currentPath={currentPath} client:load />
+        </div>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center space-x-2">
+        <!-- Mobile Language Switcher -->
+        <LanguageSwitcher currentLang={currentLang} currentPath={currentPath} client:load />
+        
+        <button type="button" class="bg-gray-200 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500" aria-controls="mobile-menu" aria-expanded="false" id="mobile-menu-button">
+          <span class="sr-only">Open main menu</span>
+          <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href={getLocalizedPath('/', currentLang)} class="text-gray-900 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.home', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/rivers', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.rivers', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/apps', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.apps', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/study-hub', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.studyhub', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/watch', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.watch', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/shop', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.shop', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/events', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.events', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/community', currentLang)} class="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.community', currentLang)}
+        </a>
+        <a href={getLocalizedPath('/donate', currentLang)} class="bg-gradient-to-r from-blue-600 to-orange-500 text-white block px-3 py-2 rounded-md text-base font-medium">
+          {t('nav.donate', currentLang)}
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    
+    if (button && menu) {
+      button.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

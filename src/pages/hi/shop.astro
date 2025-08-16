@@ -1,0 +1,880 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getLanguageFromURL, getLocalizedPath } from "../../i18n";
+import { t } from "../../i18n/translations";
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+
+const products = [
+  {
+    id: "1",
+    name: "Bhagavad Gita - Sanskrit & Hindi",
+    description: "Complete edition with commentary by Swami Prabhupada",
+    price: 299,
+    originalPrice: 499,
+    category: "books",
+    badge: "Bestseller",
+    rating: 5,
+    reviewCount: 248,
+  },
+  {
+    id: "2",
+    name: "Handcrafted Brass Diya Set",
+    description:
+      "Set of 5 traditional brass diyas for festivals and daily pooja",
+    price: 599,
+    originalPrice: 899,
+    category: "pooja",
+    rating: 4,
+    reviewCount: 156,
+  },
+  {
+    id: "3",
+    name: "Marble Ganesha Idol",
+    description: "Beautiful handcrafted marble Ganesha statue, 6 inches height",
+    price: 1299,
+    originalPrice: 1899,
+    category: "idols",
+    badge: "Handmade",
+    rating: 5,
+    reviewCount: 89,
+  },
+  {
+    id: "4",
+    name: "Rudraksha Mala 108 Beads",
+    description: "Authentic 5-mukhi Rudraksha mala for meditation and prayers",
+    price: 899,
+    originalPrice: 1299,
+    category: "jewelry",
+    badge: "Authentic",
+    rating: 4.5,
+    reviewCount: 134,
+  },
+  {
+    id: "5",
+    name: "Silk Dhoti Kurta Set",
+    description:
+      "Traditional white silk dhoti kurta set for religious ceremonies",
+    price: 2499,
+    originalPrice: 3499,
+    category: "clothing",
+    rating: 4,
+    reviewCount: 67,
+  },
+  {
+    id: "6",
+    name: "Wooden Temple for Home",
+    description:
+      "Handcrafted wooden mandir with intricate carvings, perfect for home worship",
+    price: 4999,
+    originalPrice: 6999,
+    category: "home",
+    badge: "Premium",
+    rating: 5,
+    reviewCount: 45,
+  },
+];
+
+const categories = [
+  {
+    id: "books",
+    name: t("shop.categories.books", currentLang),
+    description: t("shop.categories.booksDesc", currentLang),
+    color: "from-blue-100 to-blue-200",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: "pooja",
+    name: t("shop.categories.pooja", currentLang),
+    description: t("shop.categories.poojaDesc", currentLang),
+    color: "from-orange-100 to-orange-200",
+    iconColor: "text-orange-600",
+  },
+  {
+    id: "idols",
+    name: t("shop.categories.idols", currentLang),
+    description: t("shop.categories.idolsDesc", currentLang),
+    color: "from-purple-100 to-purple-200",
+    iconColor: "text-purple-600",
+  },
+  {
+    id: "jewelry",
+    name: t("shop.categories.jewelry", currentLang),
+    description: t("shop.categories.jewelryDesc", currentLang),
+    color: "from-yellow-100 to-yellow-200",
+    iconColor: "text-yellow-600",
+  },
+  {
+    id: "clothing",
+    name: t("shop.categories.clothing", currentLang),
+    description: t("shop.categories.clothingDesc", currentLang),
+    color: "from-green-100 to-green-200",
+    iconColor: "text-green-600",
+  },
+  {
+    id: "home",
+    name: t("shop.categories.home", currentLang),
+    description: t("shop.categories.homeDesc", currentLang),
+    color: "from-red-100 to-red-200",
+    iconColor: "text-red-600",
+  },
+];
+---
+
+<Layout
+  title={t("shop.title", currentLang)}
+  description={t("shop.description", currentLang)}
+  lang={currentLang}
+>
+  <Header />
+
+  <main class="min-h-screen bg-orange-500">
+    <!-- Hero Section -->
+    <section
+      class="py-16 bg-gradient-to-r from-orange-600 to-red-700 text-white"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div
+              class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            {t("shop.hero.title", currentLang)}
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-orange-100 max-w-4xl mx-auto">
+            {t("shop.hero.subtitle", currentLang)}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#products"
+              class="bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-all transform hover:scale-105"
+            >
+              {t("shop.hero.browseProducts", currentLang)}
+            </a>
+            <a
+              href="#stores"
+              class="bg-orange-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-900 transition-all border border-orange-500"
+            >
+              {t("shop.hero.findStores", currentLang)}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white border-b sticky top-16 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col lg:flex-row gap-4 items-center justify-between"
+        >
+          <div class="flex-1 max-w-2xl">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder={t("shop.search.placeholder", currentLang)}
+                class="w-full px-6 py-4 pr-12 text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent shadow-sm"
+              />
+              <button
+                class="absolute right-3 top-3 text-gray-400 hover:text-orange-500"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex gap-4 flex-wrap">
+            <select
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            >
+              <option value="all">{t("shop.categories.allCategories", currentLang)}</option>
+              <option value="books">{t("shop.categories.books", currentLang)}</option>
+              <option value="pooja">{t("shop.categories.pooja", currentLang)}</option>
+              <option value="idols">{t("shop.categories.idols", currentLang)}</option>
+              <option value="jewelry">{t("shop.categories.jewelry", currentLang)}</option>
+              <option value="clothing">{t("shop.categories.clothing", currentLang)}</option>
+              <option value="home">{t("shop.categories.home", currentLang)}</option>
+            </select>
+
+            <select
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            >
+              <option value="all">All Prices</option>
+              <option value="0-500">Under ₹500</option>
+              <option value="500-1000">₹500 - ₹1000</option>
+              <option value="1000-2500">₹1000 - ₹2500</option>
+              <option value="2500+">Above ₹2500</option>
+            </select>
+
+            <select
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            >
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Categories -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Shop by Category
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Explore our carefully curated collection of authentic religious and
+            spiritual products
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {
+            categories.map((category) => (
+              <a href={`/${currentLang}/shop/${category.id}`} class="group cursor-pointer">
+                <div
+                  class={`bg-gradient-to-br ${category.color} rounded-xl p-6 text-center hover:shadow-lg transition-all group-hover:scale-105`}
+                >
+                  <div
+                    class={`w-12 h-12 ${category.iconColor} rounded-full flex items-center justify-center mx-auto mb-4 bg-white/20`}
+                  >
+                    {category.id === 'books' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                      </svg>
+                    )}
+                    {category.id === 'pooja' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 716.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path>
+                      </svg>
+                    )}
+                    {category.id === 'idols' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                      </svg>
+                    )}
+                    {category.id === 'jewelry' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                    )}
+                    {category.id === 'clothing' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                      </svg>
+                    )}
+                    {category.id === 'home' && (
+                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                      </svg>
+                    )}
+                  </div>
+                  <h3 class="font-semibold text-gray-900 mb-1">
+                    {category.name}
+                  </h3>
+                  <p class="text-sm text-gray-600">{category.description}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section id="products" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Featured Products
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Handpicked spiritual products from trusted artisans and authentic
+            sources
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {
+            products.map((product) => (
+              <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                <div class="relative">
+                  <div class="aspect-square bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center">
+                    <div class="text-center text-orange-600">
+                      <div class="w-16 h-16 mx-auto mb-2 flex items-center justify-center">
+                        <svg
+                          class="w-12 h-12"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                          />
+                        </svg>
+                      </div>
+                      <p class="text-sm font-medium">{product.category}</p>
+                    </div>
+                  </div>
+
+                  {product.badge && (
+                    <div
+                      class={`absolute top-4 left-4 px-2 py-1 rounded text-sm font-medium text-white ${
+                        product.badge === "Bestseller"
+                          ? "bg-orange-600"
+                          : product.badge === "Handmade"
+                            ? "bg-purple-600"
+                            : product.badge === "Premium"
+                              ? "bg-blue-600"
+                              : "bg-green-600"
+                      }`}
+                    >
+                      {product.badge}
+                    </div>
+                  )}
+
+                  <button class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <svg
+                      class="w-5 h-5 text-gray-600 hover:text-red-500 cursor-pointer"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                <div class="p-6">
+                  {product.rating && (
+                    <div class="flex items-center mb-2">
+                      <div class="flex text-yellow-400">
+                        {[...Array(5)].map((_, i) => (
+                          <svg
+                            class={`w-4 h-4 ${i < Math.floor(product.rating) ? "fill-current" : "text-gray-300 fill-current"}`}
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <span class="text-sm text-gray-600 ml-2">
+                        ({product.reviewCount} reviews)
+                      </span>
+                    </div>
+                  )}
+
+                  <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                    {product.name}
+                  </h3>
+                  <p class="text-gray-600 text-sm mb-4">
+                    {product.description}
+                  </p>
+
+                  <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center space-x-2">
+                      <span class="text-2xl font-bold text-orange-600">
+                        ₹{product.price}
+                      </span>
+                      {product.originalPrice && (
+                        <>
+                          <span class="text-lg text-gray-500 line-through">
+                            ₹{product.originalPrice}
+                          </span>
+                          <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+                            {Math.round(
+                              ((product.originalPrice - product.price) /
+                                product.originalPrice) *
+                                100,
+                            )}
+                            % off
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+
+                  <button class="w-full bg-orange-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-orange-700 transition-colors">
+                    {t("shop.addToCart", currentLang)}
+                  </button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Featured Sellers Section -->
+    <section id="sellers" class="py-16 bg-gradient-to-br from-orange-50 to-amber-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {t("shop.featuredSellers.title", currentLang)}
+          </h2>
+          <p class="text-xl text-orange-600 font-semibold mb-6">
+            {t("shop.featuredSellers.subtitle", currentLang)}
+          </p>
+          <p class="text-lg text-gray-600 max-w-4xl mx-auto">
+            {t("shop.featuredSellers.description", currentLang)}
+          </p>
+        </div>
+
+        <!-- Featured Sellers Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <!-- Seller 1 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                  RM
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Radha Mistry</h3>
+                  <p class="text-gray-600">{t("shop.featuredSellers.from", currentLang)} Kutch, Gujarat</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <span class="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-medium">
+                  {t("shop.featuredSellers.speciality", currentLang)}: Bandhani Sarees
+                </span>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <img src="/images/sellers/bandhani-saree.jpg" alt="Bandhani Saree" class="w-full h-32 object-cover rounded-lg mb-3" />
+                <h4 class="font-semibold text-gray-900 mb-1">Traditional Bandhani Saree</h4>
+                <p class="text-sm text-gray-600 mb-2">Authentic tie-dye technique passed down through generations</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-orange-600">₹2,499</span>
+                  <span class="text-sm text-gray-500 line-through">₹3,999</span>
+                </div>
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+                <span class="font-medium">4.8</span>
+                <span class="mx-1">•</span>
+                <span>156 reviews</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seller 2 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                  AS
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Arjun Sharma</h3>
+                  <p class="text-gray-600">{t("shop.featuredSellers.from", currentLang)} Jaipur, Rajasthan</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                  {t("shop.featuredSellers.speciality", currentLang)}: Blue Pottery
+                </span>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <img src="/images/sellers/blue-pottery.jpg" alt="Blue Pottery" class="w-full h-32 object-cover rounded-lg mb-3" />
+                <h4 class="font-semibold text-gray-900 mb-1">Handcrafted Blue Pottery Vase</h4>
+                <p class="text-sm text-gray-600 mb-2">Traditional Jaipur blue pottery with intricate floral designs</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-blue-600">₹899</span>
+                  <span class="text-sm text-gray-500 line-through">₹1,299</span>
+                </div>
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+                <span class="font-medium">4.9</span>
+                <span class="mx-1">•</span>
+                <span>203 reviews</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Seller 3 -->
+          <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+            <div class="p-6">
+              <div class="flex items-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">
+                  PD
+                </div>
+                <div>
+                  <h3 class="text-xl font-bold text-gray-900">Priya Devi</h3>
+                  <p class="text-gray-600">{t("shop.featuredSellers.from", currentLang)} Varanasi, UP</p>
+                </div>
+              </div>
+              <div class="mb-4">
+                <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                  {t("shop.featuredSellers.speciality", currentLang)}: Brass Idols
+                </span>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                <img src="/images/sellers/brass-ganesha.jpg" alt="Brass Ganesha" class="w-full h-32 object-cover rounded-lg mb-3" />
+                <h4 class="font-semibold text-gray-900 mb-1">Handcrafted Brass Ganesha</h4>
+                <p class="text-sm text-gray-600 mb-2">Sacred brass idol crafted with traditional Varanasi techniques</p>
+                <div class="flex items-center justify-between">
+                  <span class="text-lg font-bold text-green-600">₹1,599</span>
+                  <span class="text-sm text-gray-500 line-through">₹2,299</span>
+                </div>
+              </div>
+              <div class="flex items-center text-sm text-gray-600">
+                <svg class="w-4 h-4 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+                <span class="font-medium">5.0</span>
+                <span class="mx-1">•</span>
+                <span>89 reviews</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View All Sellers Button -->
+        <div class="text-center">
+          <a
+            href={getLocalizedPath("/shop/sellers", currentLang)}
+            class="inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+            {t("shop.featuredSellers.viewAll", currentLang)}
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Locator Section -->
+    <section id="stores" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {t("shop.storeLocator.title", currentLang)}
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            {t("shop.storeLocator.description", currentLang)}
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12">
+          <!-- Store Locator Form -->
+          <div class="bg-gray-50 rounded-xl p-8">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Store Locator</h3>
+            <form class="space-y-6">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  {t("shop.storeLocator.enterLocation", currentLang)}
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    placeholder={t("shop.storeLocator.locationPlaceholder", currentLang)}
+                    class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    class="absolute right-3 top-3 text-gray-400 hover:text-orange-500"
+                  >
+                    <svg
+                      class="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                      ></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  {t("shop.storeLocator.searchRadius", currentLang)}
+                </label>
+                <select
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                >
+                  <option value="5">Within 5 km</option>
+                  <option value="10">Within 10 km</option>
+                  <option value="25">Within 25 km</option>
+                  <option value="50">Within 50 km</option>
+                </select>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-orange-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-orange-700 transition-colors"
+              >
+                {t("shop.storeLocator.findStores", currentLang)}
+              </button>
+            </form>
+          </div>
+
+          <!-- Sample Store Results -->
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Nearby Stores</h3>
+            <div class="space-y-4">
+              <!-- Store 1 -->
+              <div
+                class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+              >
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                      Shri Krishna Religious Store
+                    </h4>
+                    <p class="text-gray-600 text-sm mb-2">
+                      Complete range of pooja items, books, and idols
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <svg
+                        class="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        ></path>
+                      </svg>
+                      <span>2.3 km away • Connaught Place, Delhi</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                      <div class="flex text-yellow-400 mr-2">
+                        {
+                          [...Array(4)].map((_, i) => (
+                            <svg
+                              class="w-4 h-4 fill-current"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                            </svg>
+                          ))
+                        }
+                        <svg
+                          class="w-4 h-4 text-gray-300 fill-current"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"
+                          ></path>
+                        </svg>
+                      </div>
+                      <span class="text-sm text-gray-600"
+                        >4.2 (156 reviews)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex flex-col space-y-2 ml-4">
+                    <button
+                      class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors"
+                    >
+                      Visit Store
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      Call Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Store 2 -->
+              <div
+                class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow"
+              >
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h4 class="text-lg font-semibold text-gray-900 mb-2">
+                      Ganga Spiritual Center
+                    </h4>
+                    <p class="text-gray-600 text-sm mb-2">
+                      Authentic spiritual books, rudraksha, and meditation items
+                    </p>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <svg
+                        class="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        ></path>
+                      </svg>
+                      <span>3.7 km away • Karol Bagh, Delhi</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                      <div class="flex text-yellow-400 mr-2">
+                        {
+                          [...Array(5)].map((_, i) => (
+                            <svg
+                              class="w-4 h-4 fill-current"
+                              viewBox="0 0 20 20"
+                            >
+                              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                            </svg>
+                          ))
+                        }
+                      </div>
+                      <span class="text-sm text-gray-600"
+                        >4.8 (203 reviews)</span
+                      >
+                    </div>
+                  </div>
+                  <div class="flex flex-col space-y-2 ml-4">
+                    <button
+                      class="bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-orange-700 transition-colors"
+                    >
+                      Visit Store
+                    </button>
+                    <button
+                      class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors"
+                    >
+                      Call Now
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Find More Stores Button - Centered at bottom -->
+        <div class="text-center mt-12">
+          <a
+            href={`/${currentLang}/shop/stores`}
+            class="bg-orange-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors inline-block shadow-lg hover:shadow-xl transform hover:scale-105"
+          >
+            Find More Stores
+          </a>
+        </div
+        </div>
+      </div>
+    </section>
+
+    <!-- Partner With Us Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            {t("shop.partner.title", currentLang)}
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            {t("shop.partner.description", currentLang)}
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Sell Your Handicrafts -->
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {t("shop.partner.sellHandicraft.title", currentLang)}
+              </h3>
+              <p class="text-gray-600 mb-6">
+                {t("shop.partner.sellHandicraft.description", currentLang)}
+              </p>
+              <button class="bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-700 transition-colors">
+                {t("shop.partner.contactUs", currentLang)}
+              </button>
+            </div>
+          </div>
+
+          <!-- List Your Store -->
+          <div class="bg-white rounded-xl p-8 shadow-lg">
+            <div class="text-center mb-6">
+              <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                {t("shop.partner.listStore.title", currentLang)}
+              </h3>
+              <p class="text-gray-600 mb-6">
+                {t("shop.partner.listStore.description", currentLang)}
+              </p>
+              <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                {t("shop.partner.contactUs", currentLang)}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+

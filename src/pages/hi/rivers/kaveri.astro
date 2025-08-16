@@ -1,0 +1,268 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+const currentLang = 'hi';
+---
+
+<Layout 
+  title={`${t('river.kaveri', currentLang)} - Nadi Stuti`} 
+  description={`Discover the sacred ${t('river.kaveri', currentLang)} river`}
+  lang={currentLang}
+>
+  <Header />
+  
+    
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-4 py-4">
+        <a 
+          href={getLocalizedPath("/", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("ui.home", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a 
+          href={getLocalizedPath("/rivers", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("nav.rivers", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-gray-900 font-medium">
+          {t(`river.kaveri`, currentLang)}
+        </span>
+      </div>
+    </div>
+  </nav><main>
+        
+    <!-- Hero Section -->
+    <section class="relative h-96 overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="/images/kaveri-falls.jpg" 
+          alt="Kaveri River Falls" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-center text-white text-center">
+        <div>
+          <h1 class="text-5xl font-bold mb-4 text-multilang">
+            <span class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit">
+              {/* Sanskrit name will be added based on language */}
+            </span>
+            {t('river.kaveri', currentLang)}
+          </h1>
+          <p class="text-xl text-gray-200 text-multilang">The Ganga of South India</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      
+      <!-- {t('river.geographical.title', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.geographical.title', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-emerald-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.basic.info', currentLang)}</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.source', currentLang)}</dt>
+                <dd class="text-gray-900">{t('kaveri.source.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.length', currentLang)}</dt>
+                <dd class="text-gray-900">{t('kaveri.length.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Basin Area:</dt>
+                <dd class="text-gray-900">81,155 km²</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Mouth:</dt>
+                <dd class="text-gray-900">Bay of Bengal</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">States:</dt>
+                <dd class="text-gray-900">Karnataka, Tamil Nadu, Kerala, Puducherry</dd>
+              </div>
+            </dl>
+          </div>
+          
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.sacred.geography', currentLang)}</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• <strong>Talakaveri:</strong> Sacred source in Western Ghats</li>
+              <li>• <strong>Srirangapatna:</strong> Island town, Tipu Sultan's capital</li>
+              <li>• <strong>Mysore:</strong> Royal city on the banks</li>
+              <li>• <strong>Srirangam:</strong> Largest functioning Hindu temple</li>
+              <li>• <strong>Thanjavur:</strong> Cultural capital of Tamil Nadu</li>
+              <li>• <strong>Poompuhar:</strong> Ancient port at the mouth</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cultural and Religious Significance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.cultural.significance', currentLang)}</h2>
+        <div class="prose prose-lg max-w-none">
+          <div class="bg-gradient-to-r from-emerald-50 to-green-50 p-8 rounded-lg mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Ganga of the South</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Kaveri is revered as the "Ganga of the South" and is considered one of the most sacred rivers in South India. 
+              According to legend, the river was created when Sage Agastya's kamandalu (water pot) was overturned by Lord Ganesha 
+              in the form of a crow. The river is personified as Goddess Kaveri and is worshipped throughout South India. 
+              The river has been the lifeline of ancient Tamil and Kannada civilizations and continues to be central to 
+              the cultural identity of the region.
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-emerald-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">{t('river.sacred.festivals', currentLang)}</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Kaveri Sankramana:</strong> Birth of the river celebration</li>
+                <li>• <strong>Tula Sankramana:</strong> Sacred bathing festival</li>
+                <li>• <strong>Adi Perukku:</strong> Tamil monsoon festival</li>
+                <li>• <strong>Makar Sankranti:</strong> Harvest festival</li>
+              </ul>
+            </div>
+            
+            <div class="bg-green-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Temple Complexes</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Srirangam:</strong> Largest Vishnu temple complex</li>
+                <li>• <strong>Talakaveri:</strong> Source temple in Coorg</li>
+                <li>• <strong>Srirangapatna:</strong> Historic temple town</li>
+                <li>• <strong>Kumbakonam:</strong> Temple city on the banks</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.major.tributaries', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.major.tributaries', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.left.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-emerald-500">
+                <strong class="text-gray-900">Harangi:</strong>
+                <span class="text-gray-600"> Major tributary in Karnataka</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-emerald-500">
+                <strong class="text-gray-900">Hemavati:</strong>
+                <span class="text-gray-600"> Important tributary with dam</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-emerald-500">
+                <strong class="text-gray-900">Shimsha:</strong>
+                <span class="text-gray-600"> Flows through Karnataka</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.right.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Arkavathi:</strong>
+                <span class="text-gray-600"> Flows near Bangalore</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Bhavani:</strong>
+                <span class="text-gray-600"> Major tributary in Tamil Nadu</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Noyyal:</strong>
+                <span class="text-gray-600"> Flows through Coimbatore</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.scriptural.references', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.scriptural.references', currentLang)}</h2>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-emerald-100 to-green-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Skanda Purana</h3>
+            <p class="text-gray-700">
+              "Among all rivers of the South, Kaveri is the most sacred. She grants prosperity, removes sins, 
+              and blesses devotees with spiritual liberation."
+            </p>
+          </div>
+          
+          <div class="bg-emerald-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Tamil Literature</h3>
+            <p class="text-gray-700">
+              "Kaveri is praised in ancient Tamil literature as 'Ponni' (the golden one) and is considered 
+              the mother of Tamil civilization and culture."
+            </p>
+          </div>
+          
+          <div class="bg-green-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Kannada Literature</h3>
+            <p class="text-gray-700">
+              "In Kannada tradition, Kaveri is revered as 'Cauvery Amma' (Mother Kaveri) and is central 
+              to the cultural and spiritual identity of Karnataka."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download PDF -->
+      <section class="text-center">
+        <div class="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Complete Kaveri Information</h3>
+          <p class="text-emerald-100 mb-6">
+            Download a comprehensive PDF with detailed information about Kaveri, including temples, cultural significance, and water disputes.
+          </p>
+          <a 
+            href="/data/river report/Kaveri-report.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-all transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download Kaveri PDF
+          </a>
+        </div>
+      </section>
+    </div>
+    <!-- Back to Rivers Button -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
+      <a 
+        href={getLocalizedPath("/rivers", currentLang)}
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+      >
+        <svg 
+          class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {t("ui.back_to_rivers", currentLang)}
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+

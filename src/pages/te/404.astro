@@ -1,0 +1,184 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { t } from '../../i18n/translations';
+
+const currentLang = 'te';
+---
+
+<Layout 
+  title={`${t('404.title', currentLang)} - Nadi Stuti`}
+  description={t('404.description', currentLang)}
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Sacred River Wave Animation -->
+      <div class="mb-8 relative">
+        <div class="w-32 h-32 mx-auto mb-6 relative">
+          <!-- Animated water ripples -->
+          <div class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 opacity-20 animate-ping"></div>
+          <div class="absolute inset-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-700 opacity-30 animate-ping animation-delay-200"></div>
+          <div class="absolute inset-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-800 opacity-40 animate-ping animation-delay-400"></div>
+          
+          <!-- Sacred Om symbol in center -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+              <span class="text-white font-bold text-2xl font-sanskrit">ॐ</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Flowing river SVG -->
+        <div class="absolute top-20 left-1/2 transform -translate-x-1/2 w-96 h-24 opacity-30">
+          <svg viewBox="0 0 400 100" class="w-full h-full">
+            <path d="M0,50 Q100,20 200,50 T400,50" stroke="url(#riverGradient)" stroke-width="3" fill="none" class="animate-pulse">
+              <animate attributeName="d" 
+                values="M0,50 Q100,20 200,50 T400,50;M0,50 Q100,80 200,50 T400,50;M0,50 Q100,20 200,50 T400,50" 
+                dur="4s" 
+                repeatCount="indefinite"/>
+            </path>
+            <defs>
+              <linearGradient id="riverGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+                <stop offset="50%" style="stop-color:#06B6D4;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Error Message -->
+      <div class="mb-8">
+        <h1 class="text-6xl font-bold text-gray-900 mb-4">404</h1>
+        <h2 class="text-3xl font-bold gradient-text mb-4 text-multilang">
+          {t('404.heading', currentLang)}
+        </h2>
+        <p class="text-xl text-gray-600 mb-6 max-w-2xl mx-auto text-multilang">
+          {t('404.message', currentLang)}
+        </p>
+        
+        <!-- Sacred verse -->
+        <div class="bg-white/60 backdrop-blur-sm rounded-lg p-6 mb-8 border border-blue-100 max-w-2xl mx-auto">
+          <p class="text-lg font-sanskrit text-gray-800 mb-2">
+            "सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः"
+          </p>
+          <p class="text-sm text-gray-600 italic">
+            {t('404.blessing', currentLang)}
+          </p>
+        </div>
+      </div>
+
+      <!-- Navigation Options -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <!-- Go Home -->
+        <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('404.goHome', currentLang)}</h3>
+          <p class="text-gray-600 mb-4 text-sm">{t('404.homeDescription', currentLang)}</p>
+          <a href="/te/" class="btn-primary inline-block">
+            {t('404.homeButton', currentLang)}
+          </a>
+        </div>
+
+        <!-- Explore Rivers -->
+        <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="w-12 h-12 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('404.exploreRivers', currentLang)}</h3>
+          <p class="text-gray-600 mb-4 text-sm">{t('404.riversDescription', currentLang)}</p>
+          <a href="/te/rivers" class="btn-primary inline-block">
+            {t('404.riversButton', currentLang)}
+          </a>
+        </div>
+
+        <!-- Community -->
+        <div class="card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('404.joinCommunity', currentLang)}</h3>
+          <p class="text-gray-600 mb-4 text-sm">{t('404.communityDescription', currentLang)}</p>
+          <a href="/te/community" class="btn-primary inline-block">
+            {t('404.communityButton', currentLang)}
+          </a>
+        </div>
+      </div>
+
+      <!-- Go Back Button -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button 
+          onclick="history.back()" 
+          class="btn-secondary flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-800 border-gray-300"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+          </svg>
+          <span>{t('404.goBack', currentLang)}</span>
+        </button>
+        
+        <span class="text-gray-400 hidden sm:inline">|</span>
+        
+        <a href="/te/rivers" class="text-blue-600 hover:text-blue-800 font-medium">
+          {t('404.browseRivers', currentLang)}
+        </a>
+      </div>
+
+      <!-- Sacred Rivers Quick Links -->
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">{t('404.quickAccess', currentLang)}</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/te/rivers/ganga" class="px-4 py-2 bg-blue-100 hover:bg-blue-200 text-blue-800 rounded-full text-sm font-medium transition-colors">
+            {t('river.ganga', currentLang)}
+          </a>
+          <a href="/te/rivers/yamuna" class="px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-full text-sm font-medium transition-colors">
+            {t('river.yamuna', currentLang)}
+          </a>
+          <a href="/te/rivers/saraswati" class="px-4 py-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-800 rounded-full text-sm font-medium transition-colors">
+            {t('river.saraswati', currentLang)}
+          </a>
+          <a href="/te/rivers/krishna" class="px-4 py-2 bg-green-100 hover:bg-green-200 text-green-800 rounded-full text-sm font-medium transition-colors">
+            {t('river.krishna', currentLang)}
+          </a>
+          <a href="/te/rivers/kaveri" class="px-4 py-2 bg-orange-100 hover:bg-orange-200 text-orange-800 rounded-full text-sm font-medium transition-colors">
+            {t('river.kaveri', currentLang)}
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .animation-delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .card:hover {
+    animation: float 2s ease-in-out infinite;
+  }
+</style>

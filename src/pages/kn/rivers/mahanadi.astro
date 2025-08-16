@@ -1,0 +1,273 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+const currentLang = 'kn';
+---
+
+<Layout 
+  title={`${t('river.mahanadi', currentLang)} - Nadi Stuti`} 
+  description={`Discover the sacred ${t('river.mahanadi', currentLang)} river`}
+  lang={currentLang}
+>
+  <Header />
+  
+    
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-4 py-4">
+        <a 
+          href={getLocalizedPath("/", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("ui.home", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a 
+          href={getLocalizedPath("/rivers", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("nav.rivers", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-gray-900 font-medium">
+          {t(`river.mahanadi`, currentLang)}
+        </span>
+      </div>
+    </div>
+  </nav><main>
+        
+    <!-- Hero Section -->
+    <section class="relative h-96 overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="/images/mahanadi-cuttack.jpg" 
+          alt="Mahanadi at Cuttack" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-center text-white text-center">
+        <div>
+          <h1 class="text-5xl font-bold mb-4 text-multilang">
+            <span class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit">
+              महानदी
+            </span>
+            {t('river.mahanadi', currentLang)}
+          </h1>
+          <p class="text-xl text-gray-200 text-multilang">The Great River - Lifeline of Odisha</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      
+      <!-- {t('river.geographical.title', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.geographical.title', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-amber-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.basic.info', currentLang)}</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.source', currentLang)}</dt>
+                <dd class="text-gray-900">{t('mahanadi.source.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.length', currentLang)}</dt>
+                <dd class="text-gray-900">{t('mahanadi.length.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Basin Area:</dt>
+                <dd class="text-gray-900">141,589 km²</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Mouth:</dt>
+                <dd class="text-gray-900">Bay of Bengal</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">States:</dt>
+                <dd class="text-gray-900">Chhattisgarh, Odisha, Jharkhand</dd>
+              </div>
+            </dl>
+          </div>
+          
+          <div class="bg-yellow-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.sacred.geography', currentLang)}</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• <strong>Sihawa:</strong> Sacred source in Chhattisgarh</li>
+              <li>• <strong>Sambalpur:</strong> Cultural center with Hirakud Dam</li>
+              <li>• <strong>Cuttack:</strong> Silver City on the delta</li>
+              <li>• <strong>Puri:</strong> Holy city near the mouth</li>
+              <li>• <strong>Konark:</strong> Sun Temple near the coast</li>
+              <li>• <strong>Paradip:</strong> Major port at the mouth</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cultural and Religious Significance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.cultural.significance', currentLang)}</h2>
+        <div class="prose prose-lg max-w-none">
+          <div class="bg-gradient-to-r from-amber-50 to-yellow-50 p-8 rounded-lg mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">The Great River</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Mahanadi, literally meaning "Great River," is the lifeline of Odisha and holds immense cultural and religious 
+              significance. The river is considered sacred and is worshipped as a goddess. It has been central to the 
+              development of Odishan civilization and culture. The river's delta is one of the most fertile regions in India, 
+              supporting millions of people. The river is mentioned in ancient texts and has numerous temples along its banks.
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-amber-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">{t('river.sacred.festivals', currentLang)}</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Makar Sankranti:</strong> Sacred bathing festival</li>
+                <li>• <strong>Kartik Purnima:</strong> Boita Bandana festival</li>
+                <li>• <strong>Ganga Aarti:</strong> Evening prayers at ghats</li>
+                <li>• <strong>Raja Festival:</strong> Celebration of earth goddess</li>
+              </ul>
+            </div>
+            
+            <div class="bg-yellow-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Cultural Heritage</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Jagannath Culture:</strong> Connected to Puri temple</li>
+                <li>• <strong>Odissi Dance:</strong> Classical dance form of the region</li>
+                <li>• <strong>Pattachitra:</strong> Traditional scroll painting</li>
+                <li>• <strong>Maritime Trade:</strong> Ancient trading traditions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.major.tributaries', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.major.tributaries', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.left.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+                <strong class="text-gray-900">Seonath:</strong>
+                <span class="text-gray-600"> Major tributary in Chhattisgarh</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+                <strong class="text-gray-900">Hasdo:</strong>
+                <span class="text-gray-600"> Important tributary with coal mines</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-amber-500">
+                <strong class="text-gray-900">Mand:</strong>
+                <span class="text-gray-600"> Flows through Chhattisgarh</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.right.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                <strong class="text-gray-900">Ib:</strong>
+                <span class="text-gray-600"> Major tributary in Odisha</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                <strong class="text-gray-900">Brahmani:</strong>
+                <span class="text-gray-600"> Important river in Odisha</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-yellow-500">
+                <strong class="text-gray-900">Tel:</strong>
+                <span class="text-gray-600"> Tributary in Odisha</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Economic Importance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">Economic Importance</h2>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-amber-100 to-yellow-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Agriculture</h3>
+            <p class="text-gray-700">
+              The Mahanadi delta is one of India's most fertile regions, supporting extensive rice cultivation. 
+              The river provides irrigation to millions of acres of farmland.
+            </p>
+          </div>
+          
+          <div class="bg-amber-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Industry</h3>
+            <p class="text-gray-700">
+              The river basin is rich in mineral resources including coal, iron ore, and bauxite. 
+              Major industrial centers have developed along the river.
+            </p>
+          </div>
+          
+          <div class="bg-yellow-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Hydroelectric Power</h3>
+            <p class="text-gray-700">
+              The Hirakud Dam on Mahanadi is one of India's longest dams and generates significant hydroelectric power 
+              for the region.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download PDF -->
+      <section class="text-center">
+        <div class="bg-gradient-to-r from-amber-600 to-yellow-600 text-white p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Complete Mahanadi Information</h3>
+          <p class="text-amber-100 mb-6">
+            Download a comprehensive PDF with detailed information about Mahanadi, including delta system, cultural significance, and economic importance.
+          </p>
+          <a 
+            href="/data/river report/Mahanadi-report.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-all transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download Mahanadi PDF
+          </a>
+        </div>
+      </section>
+    </div>
+    <!-- Back to Rivers Button -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
+      <a 
+        href={getLocalizedPath("/rivers", currentLang)}
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+      >
+        <svg 
+          class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {t("ui.back_to_rivers", currentLang)}
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+</style>
+

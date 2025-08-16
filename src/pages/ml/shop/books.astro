@@ -1,0 +1,215 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title={`${t('shop.categories.books', currentLang)} - ${t('siteName', currentLang)}`} 
+  description={t('shop.categoryDescriptions.books', currentLang)}
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/ml" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">Home</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/ml/shop" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Shop</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">{t('shop.categories.books', currentLang)}</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+              <span class="text-4xl">📚</span>
+            </div>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">
+            {t('shop.categories.books', currentLang)}
+          </h1>
+          <p class="text-lg text-white/90 max-w-2xl mx-auto">
+            {t('shop.categoryDescriptions.books', currentLang)}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="py-8 bg-white border-b sticky top-16 z-40">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+          <div class="flex-1 max-w-2xl">
+            <div class="relative">
+              <input
+                type="text"
+                placeholder={`${t('shop.searchPlaceholder', currentLang)}...`}
+                class="w-full px-6 py-4 pr-12 text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm"
+              />
+              <button class="absolute right-3 top-3 text-gray-400 hover:text-blue-500">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex gap-4 flex-wrap">
+            <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>Book Type</option>
+              <option>Vedas</option>
+              <option>Puranas</option>
+              <option>Upanishads</option>
+              <option>Bhagavad Gita</option>
+              <option>Ramayana</option>
+              <option>Mahabharata</option>
+            </select>
+            <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>{t('shop.filters.priceRange', currentLang)}</option>
+              <option>₹0 - ₹500</option>
+              <option>₹500 - ₹1000</option>
+              <option>₹1000 - ₹2000</option>
+              <option>₹2000+</option>
+            </select>
+            <select class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <option>{t('shop.filters.sortBy', currentLang)}</option>
+              <option>{t('shop.filters.popularity', currentLang)}</option>
+              <option>{t('shop.filters.priceLowHigh', currentLang)}</option>
+              <option>{t('shop.filters.priceHighLow', currentLang)}</option>
+              <option>{t('shop.filters.newest', currentLang)}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Filter Bar -->
+        <div class="flex flex-col sm:flex-row gap-4 items-center justify-between mb-8">
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600">Showing 12 books</span>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {Array.from({ length: 12 }, (_, i) => (
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+              <div class="relative">
+                <div class="aspect-[3/4] bg-gradient-to-br from-blue-100 to-indigo-200 flex items-center justify-center">
+                  <span class="text-6xl opacity-50">📚</span>
+                </div>
+                
+                {i < 3 && (
+                  <div class="absolute top-4 left-4 px-2 py-1 rounded text-sm font-medium text-white bg-orange-600">
+                    Bestseller
+                  </div>
+                )}
+                
+                <button class="absolute top-4 right-4 bg-white/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <svg class="w-5 h-5 text-gray-600 hover:text-red-500 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
+                </button>
+              </div>
+              
+              <div class="p-6">
+                <div class="flex items-center mb-2">
+                  <div class="flex text-yellow-400">
+                    {[...Array(5)].map((_, j) => (
+                      <svg class={`w-4 h-4 ${j < 4 ? 'fill-current' : 'text-gray-300 fill-current'}`} viewBox="0 0 20 20">
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <span class="text-sm text-gray-600 ml-2">({`${(i + 1) * 15}`} reviews)</span>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                  Sacred Text {`${i + 1}`}
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">
+                  Ancient wisdom and spiritual guidance for modern seekers
+                </p>
+                
+                <div class="flex items-center justify-between mb-4">
+                  <div class="flex items-center space-x-2">
+                    <span class="text-2xl font-bold text-blue-600">₹{`${(i + 1) * 199}`}</span>
+                    <span class="text-lg text-gray-500 line-through">₹{`${(i + 1) * 299}`}</span>
+                    <span class="text-sm bg-green-100 text-green-800 px-2 py-1 rounded">
+                      33% off
+                    </span>
+                  </div>
+                </div>
+                
+                <button class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  {t('shop.addToCart', currentLang)}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Load More -->
+        <div class="text-center mt-12">
+          <button class="bg-white border border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+            {t('shop.loadMore', currentLang)}
+          </button>
+        </div>
+
+        <!-- Back to Shop -->
+        <div class="text-center mt-8">
+          <a
+            href="/ml/shop"
+            class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Back to Shop
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

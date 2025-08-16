@@ -1,0 +1,8 @@
+This directory should contain:
+
+- nadi-stuti-recitation.mp3 - Professional Sanskrit recitation of Rig Veda 10.75
+- ganga-sounds.mp3 - Natural sounds of Ganga flowing
+- temple-bells.mp3 - Temple bells and chants
+- river-meditation.mp3 - Peaceful river sounds for meditation
+
+All audio files should be high-quality, culturally appropriate, and properly licensed.

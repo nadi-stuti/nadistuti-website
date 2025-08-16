@@ -1,0 +1,1860 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getLanguageFromURL } from "../../i18n";
+import { t } from "../../i18n/translations";
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout
+  title="ଦେଖନ୍ତୁ - Sacred Rivers Video Content"
+  description="ଦେଖନ୍ତୁ documentaries, educational videos, and content about sacred rivers from our YouTube channels"
+  lang={currentLang}
+>
+  <Header />
+
+  <main class="min-h-screen bg-gray-50">
+    <!-- Page Header -->
+    <section class="py-16 bg-gradient-to-r from-red-600 to-pink-700 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div
+              class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">ଦେଖନ୍ତୁ</h1>
+          <p class="text-xl md:text-2xl mb-8 text-red-100 max-w-4xl mx-auto">
+            ଆମର ମନୋନୀତ YouTube ଚ୍ୟାନେଲଗୁଡ଼ିକରୁ ପବିତ୍ର ନଦୀଗୁଡ଼ିକ ବିଷୟରେ
+            ଡକ୍ୟୁମେଣ୍ଟାରୀ, ଶିକ୍ଷାମୂଳକ ଭିଡିଓ ଏବଂ ଆଧ୍ୟାତ୍ମିକ ବିଷୟବସ୍ତୁ ଆବିଷ୍କାର
+            କରନ୍ତୁ
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#featured"
+              class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-50 transition-all transform hover:scale-105"
+            >
+              ବିଶେଷ ଭିଡିଓଗୁଡ଼ିକ
+            </a>
+            <a
+              href="#channels"
+              class="bg-red-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-900 transition-all border border-red-500"
+            >
+              ଚ୍ୟାନେଲଗୁଡ଼ିକ ବ୍ରାଉଜ୍ କରନ୍ତୁ
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="py-8 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row gap-4 items-center justify-between"
+        >
+          <div class="flex-1 max-w-2xl">
+            <div class="relative">
+              <input
+                type="text"
+                id="videoSearch"
+                placeholder="Search videos, playlists, and channels..."
+                class="w-full px-6 py-4 pr-12 text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent shadow-sm"
+              />
+              <button
+                class="absolute right-3 top-3 text-gray-400 hover:text-red-500"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <select
+              id="contentFilter"
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            >
+              <option value="all">ସମସ୍ତ ଭିଡିଓ</option>
+              <option value="featured">ବିଶେଷ ଭିଡିଓଗୁଡ଼ିକ</option>
+              <option value="live">Live Videos</option>
+              <option value="playlists">ପ୍ଲେଲିଷ୍ଟଗୁଡ଼ିକ</option>
+              <option value="channels">YouTube Channels</option>
+            </select>
+
+            <select
+              id="sortFilter"
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            >
+              <option value="recent">Most Recent</option>
+              <option value="popular">Most Popular</option>
+              <option value="duration">Duration</option>
+              <option value="alphabetical">A-Z</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ବିଶେଷ ଭିଡିଓଗୁଡ଼ିକ Section -->
+    <section id="featured" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            ବିଶେଷ ଭିଡିଓଗୁଡ଼ିକ
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            ପବିତ୍ର ନଦୀଗୁଡ଼ିକ ବିଷୟରେ ହାତରେ ବାଛିଥିବା ଡକ୍ୟୁମେଣ୍ଟାରୀ ଏବଂ ଶିକ୍ଷାମୂଳକ
+            ବିଷୟବସ୍ତୁ
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Featured Video 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Sacred Ganga Documentary"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                Featured
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                45:32
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                Sacred Ganga: Journey Through Time
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Explore the spiritual and cultural significance of river Ganga
+                through this comprehensive documentary featuring ancient
+                traditions and modern challenges.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    125K views
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    2.3K likes
+                  </span>
+                </div>
+                <span>2 days ago</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-red-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Sacred Rivers Channel</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  ଦେଖନ୍ତୁ Now
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Yamuna Conservation"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                Featured
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                32:18
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                Yamuna Revival: A Conservation Story
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Discover the ongoing efforts to restore and conserve river
+                Yamuna, featuring interviews with environmentalists and local
+                communities.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    89K views
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    1.8K likes
+                  </span>
+                </div>
+                <span>1 week ago</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-green-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >River Conservation</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  ଦେଖନ୍ତୁ Now
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Ancient River Temples"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                Featured
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                28:45
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                Ancient Temples Along Sacred Rivers
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Journey through magnificent ancient temples built along the
+                banks of sacred rivers, exploring their architecture and
+                spiritual significance.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    156K views
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    3.1K likes
+                  </span>
+                </div>
+                <span>3 days ago</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-purple-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Heritage Docs</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  ଦେଖନ୍ତୁ Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ସମସ୍ତ ଭିଡିଓ Section -->
+    <section id="all-videos" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            ସମସ୍ତ ଭିଡିଓ
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            ପବିତ୍ର ନଦୀଗୁଡ଼ିକ ବିଷୟରେ ଆମର ସମ୍ପୂର୍ଣ୍ଣ ଭିଡିଓ ସଂଗ୍ରହ ବ୍ରାଉଜ୍ କରନ୍ତୁ
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Video Grid Items -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-300 to-blue-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="River Meditation"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                15:23
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                River Meditation: Finding Peace by Sacred Waters
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">Spiritual Journeys</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>45K views</span>
+                <span>5 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat similar video cards -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-300 to-green-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="River Ecology"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                22:17
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                River Ecosystems: Biodiversity and Conservation
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">Nature Documentaries</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>78K views</span>
+                <span>1 week ago</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-orange-300 to-orange-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="River Festivals"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                18:42
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                Sacred River Festivals Across India
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">Cultural Heritage</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>92K views</span>
+                <span>2 weeks ago</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-300 to-purple-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="River History"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                35:12
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                Ancient Civilizations Along Rivers
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">Historical Docs</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>134K views</span>
+                <span>3 weeks ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+          <button
+            class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+          >
+            ଅଧିକ ଭିଡିଓ ଲୋଡ୍ କରନ୍ତୁ
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ପ୍ଲେଲିଷ୍ଟଗୁଡ଼ିକ Section -->
+    <section id="playlists" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            ପ୍ଲେଲିଷ୍ଟଗୁଡ଼ିକ
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            ଥିମ୍ ଏବଂ ବିଷୟ ଅନୁସାରେ ସଂଗଠିତ ଭିଡିଓର ସଂଗ୍ରହ
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Playlist 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="Ganga Series"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">12 Videos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                Sacred Ganga Series
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Complete documentary series exploring the spiritual, cultural,
+                and environmental aspects of river Ganga.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>12 videos • 8 hours</span>
+                <span>Updated 1 week ago</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                ଦେଖନ୍ତୁ Playlist
+              </button>
+            </div>
+          </div>
+
+          <!-- Playlist 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-400 to-green-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="River Conservation"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">8 Videos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                River Conservation
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Educational content about river conservation efforts,
+                environmental challenges, and restoration projects.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>8 videos • 4.5 hours</span>
+                <span>Updated 3 days ago</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                ଦେଖନ୍ତୁ Playlist
+              </button>
+            </div>
+          </div>
+
+          <!-- Playlist 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-400 to-purple-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="Spiritual Journeys"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">15 Videos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                Spiritual Journeys
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Explore the spiritual significance of sacred rivers through
+                meditation, rituals, and ancient traditions.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>15 videos • 6 hours</span>
+                <span>Updated 5 days ago</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                ଦେଖନ୍ତୁ Playlist
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Videos Section -->
+    <section id="live" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Live Videos
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Join live streams of sacred river ceremonies, meditation sessions,
+            and educational talks
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Live Video 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Live Ganga Aarti"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center"
+              >
+                <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse">
+                </div>
+                LIVE
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                2:15:32
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                Live Ganga Aarti from Varanasi
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Experience the divine evening aarti ceremony at Dashashwamedh
+                Ghat in Varanasi, streaming live every evening.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    3.2K watching
+                  </span>
+                  <span class="text-red-600 font-medium">Started 2h ago</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-red-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Varanasi Live</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  ଦେଖନ୍ତୁ Live
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Video 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Live Meditation"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 left-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center"
+              >
+                <div class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse">
+                </div>
+                LIVE
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                45:12
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                River Meditation Session
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Join our guided meditation session by the sacred Yamuna river
+                with peaceful chants and nature sounds.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    856 watching
+                  </span>
+                  <span class="text-red-600 font-medium">Started 45m ago</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-blue-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Peaceful Rivers</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  Join Live
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upcoming Live -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="Upcoming Live"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-12 h-12 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <p class="text-sm font-medium">Starts in 2 hours</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium"
+              >
+                UPCOMING
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                Sacred Rivers Documentary Premiere
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                Join us for the premiere of our new documentary about the
+                conservation efforts of river Narmada.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>Scheduled for 8:00 PM IST</span>
+                <span>Expected duration: 1h 30m</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-green-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >Sacred Rivers Channel</span
+                  >
+                </div>
+                <button
+                  class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+                >
+                  Set Reminder
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube Channels Section -->
+    <section id="channels" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            YouTube Channels
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Subscribe to our partner channels for regular updates on sacred
+            rivers content
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Channel 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-red-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Sacred Rivers Channel
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Comprehensive documentaries and educational content about India's
+              sacred rivers and their cultural significance.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>245K subscribers</span>
+              <span>156 videos</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                Subscribe
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                Visit Channel
+              </button>
+            </div>
+          </div>
+
+          <!-- Channel 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-green-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              River Conservation India
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Environmental documentaries focusing on river conservation,
+              pollution control, and restoration efforts across India.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>189K subscribers</span>
+              <span>98 videos</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                Subscribe
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                Visit Channel
+              </button>
+            </div>
+          </div>
+
+          <!-- Channel 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-purple-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Spiritual Heritage
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Explore the spiritual and cultural heritage of sacred rivers
+              through ancient traditions, rituals, and festivals.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>312K subscribers</span>
+              <span>203 videos</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                Subscribe
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                Visit Channel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contribute to ଦେଖନ୍ତୁ Page Section -->
+    <section
+      class="py-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div
+            class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            ଆମର ୱାଚ ପେଜରେ ଅବଦାନ ରଖନ୍ତୁ
+          </h2>
+          <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            ଆମର ଭିଡିଓ ସଂଗ୍ରହ ବୃଦ୍ଧି କରିବାରେ ସାହାଯ୍ୟ କରନ୍ତୁ! ଆପଣଙ୍କର ଭିଡିଓ
+            ଅଂଶୀଦାର କରନ୍ତୁ, ଚ୍ୟାନେଲ ପରାମର୍ଶ ଦିଅନ୍ତୁ, କିମ୍ବା ଆମର ୱାଚ ପେଜକୁ ଆହୁରି
+            ଭଲ କରିବା ପାଇଁ ଅନ୍ୟ ଉପାୟରେ ଅବଦାନ ରଖନ୍ତୁ।
+          </p>
+        </div>
+
+        <!-- New Contribution Cards -->
+        <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Audio Knowledge Sharing -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">
+              ଅଡିଓ ଜ୍ଞାନ ଅଂଶୀଦାର କରନ୍ତୁ
+            </h3>
+            <p class="text-blue-100 text-sm mb-4">
+              ଆମର ହ୍ୱାଟସଆପ ଗ୍ରୁପରେ ନଦୀମାନଙ୍କ ବିଷୟରେ ଆପଣଙ୍କର ଜ୍ଞାନ ଅଡିଓ ଫର୍ମାଟରେ
+              ଅଂଶୀଦାର କରନ୍ତୁ ଏବଂ ଆମେ ଏଥିରୁ ଏକ ୟୁଟ୍ୟୁବ ଭିଡିଓ ତିଆରି କରି ଆମର
+              ଚ୍ୟାନେଲରେ ଅପଲୋଡ କରିବୁ।
+            </p>
+            <a
+              href="https://chat.whatsapp.com/KNCtYWiR6D856Yaup7iRZ9"
+              target="_blank"
+              class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+            >
+              ହ୍ୱାଟସଆପ ଗ୍ରୁପରେ ଯୋଗ ଦିଅନ୍ତୁ
+            </a>
+          </div>
+
+          <!-- Video Creation Support -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">ଭିଡିଓ ନିର୍ମାଣ ସହାୟତା</h3>
+            <p class="text-blue-100 text-sm mb-4">
+              ଯଦି ଆପଣ ଏକ ଭିଡିଓ ତିଆରି କରିବାକୁ ଚାହାଁନ୍ତି ତେବେ ଆପଣ ଆମ ସହିତ ଯୋଗାଯୋଗ
+              କରିପାରିବେ ଏବଂ ଆମେ ଆପଣଙ୍କ ଘର ଦ୍ୱାରରେ ଆସି ଭିଡିଓ ସୁଟ କରିବୁ ଏବଂ
+              ଆପଣଙ୍କର ମୂଲ୍ୟବାନ ଜ୍ଞାନକୁ ଆମର ସମର୍ଥକମାନଙ୍କ ନିକଟରେ ପହଞ୍ଚାଇବୁ।
+            </p>
+            <a
+              href="mailto:support@nadistuti.com"
+              class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              ସହାୟତା ସହିତ ଯୋଗାଯୋଗ କରନ୍ତୁ
+            </a>
+          </div>
+
+          <!-- Technical Video Help -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">ବୈଷୟିକ ଭିଡିଓ ସହାୟତା</h3>
+            <p class="text-blue-100 text-sm mb-4">
+              ଯଦି ଆପଣ ଭିଡିଓ ତିଆରିରେ ବୈଷୟିକ ସହାୟତା ଚାହାଁନ୍ତି ତେବେ ଆମେ ସେଥିରେ ମଧ୍ୟ
+              ସାହାଯ୍ୟ କରିପାରିବା। ଭିଡିଓ ଉତ୍ପାଦନ ସହାୟତା ପାଇଁ ଆମ ସହିତ ଯୋଗାଯୋଗ
+              କରନ୍ତୁ।
+            </p>
+            <a
+              href="mailto:support@nadistuti.com"
+              class="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+            >
+              ବୈଷୟିକ ସହାୟତା ପାଆନ୍ତୁ
+            </a>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Submit Videos -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Submit Your Videos</h3>
+            <p class="text-blue-100 text-sm">
+              Share your own videos about sacred rivers
+            </p>
+          </div>
+
+          <!-- Suggest Channels -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-9 0a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Suggest Channels</h3>
+            <p class="text-blue-100 text-sm">
+              Recommend YouTube channels we should feature
+            </p>
+          </div>
+
+          <!-- Video Suggestions -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Video Ideas</h3>
+            <p class="text-blue-100 text-sm">
+              Suggest topics for new videos we should create
+            </p>
+          </div>
+
+          <!-- Moderate Content -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Help Moderate</h3>
+            <p class="text-blue-100 text-sm">
+              Help us review and organize video content
+            </p>
+          </div>
+        </div>
+
+        <!-- Contribution Forms -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Submit Video Form -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Submit Your Video</h3>
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Your Name *</label
+                >
+                <input
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Email Address *</label
+                >
+                <input
+                  type="email"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Video URL *</label
+                >
+                <input
+                  type="url"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="https://youtube.com/watch?v=..."
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Video Description *</label
+                >
+                <textarea
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Describe your video and its relevance to sacred rivers..."
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Related River(s)</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="e.g., Ganga, Yamuna, Saraswati"
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-white text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
+                Submit Video
+              </button>
+            </form>
+          </div>
+
+          <!-- Suggest Channel Form -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Suggest a Channel</h3>
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Email Address *</label
+                >
+                <input
+                  type="email"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Channel URL *</label
+                >
+                <input
+                  type="url"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="https://youtube.com/channel/..."
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Channel Name *</label
+                >
+                <input
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Channel name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Why should we feature this channel? *</label
+                >
+                <textarea
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Explain why this channel would be valuable for our audience..."
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Content Focus</label
+                >
+                <select
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                >
+                  <option value="">Select content type</option>
+                  <option value="documentary">Documentaries</option>
+                  <option value="spiritual">Spiritual Content</option>
+                  <option value="educational">Educational</option>
+                  <option value="conservation">Conservation</option>
+                  <option value="cultural">Cultural Heritage</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-white text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
+                Suggest Channel
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Additional Contribution Options -->
+        <div class="mt-12 text-center">
+          <h3 class="text-2xl font-bold mb-6">Other Ways to Contribute</h3>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:videos@nadistuti.com"
+              class="bg-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors"
+            >
+              Email Us Ideas
+            </a>
+            <a
+              href="/community"
+              class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            >
+              Join Community
+            </a>
+            <a
+              href="/contribute"
+              class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors border border-blue-500"
+            >
+              More Ways to Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    // Simple filtering functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const contentFilter = document.getElementById("contentFilter");
+      const searchInput = document.getElementById("videoSearch");
+
+      // Show/hide sections based on filter
+      contentFilter.addEventListener("change", function () {
+        const selectedValue = this.value;
+        const sections = {
+          featured: document.getElementById("featured"),
+          live: document.getElementById("live"),
+          all: document.getElementById("all-videos"),
+          playlists: document.getElementById("playlists"),
+          channels: document.getElementById("channels"),
+        };
+
+        // Hide all sections
+        Object.values(sections).forEach((section) => {
+          if (section) section.style.display = "none";
+        });
+
+        // Show selected section or all if 'all' is selected
+        if (selectedValue === "all") {
+          Object.values(sections).forEach((section) => {
+            if (section) section.style.display = "block";
+          });
+        } else if (sections[selectedValue]) {
+          sections[selectedValue].style.display = "block";
+        }
+      });
+
+      // Search functionality (basic implementation)
+      searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        // This would typically filter the video cards based on the search term
+        console.log("Searching for:", searchTerm);
+      });
+    });
+  </script>
+</Layout>

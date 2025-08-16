@@ -1,0 +1,500 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title="Holy Calendar - Study Hub" 
+  description="Sacred dates and events calendar for holy rivers - past and upcoming celebrations"
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/bn" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">Home</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/bn/study-hub" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Study Hub</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">পবিত্র পঞ্জিকা</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-emerald-500 to-teal-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-4xl font-bold">পবিত্র পঞ্জিকা</h1>
+            <p class="text-xl text-emerald-100 mt-2">Sacred dates and events calendar for holy rivers - past and upcoming celebrations</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">365+</div>
+            <div class="text-emerald-100">Sacred Dates</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">50+</div>
+            <div class="text-emerald-100">Major Festivals</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">12</div>
+            <div class="text-emerald-100">Holy Rivers</div>
+          </div>
+          <div class="bg-white/10 rounded-lg p-4">
+            <div class="text-2xl font-bold">Live</div>
+            <div class="text-emerald-100">Event Updates</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calendar Navigation -->
+    <section class="py-8 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col lg:flex-row gap-6 items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <button class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+              Previous Month
+            </button>
+            <div class="text-center">
+              <h2 class="text-2xl font-bold text-gray-900">February 2025</h2>
+              <p class="text-sm text-gray-600">Magha - Phalguna</p>
+            </div>
+            <button class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+              Next Month
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-3">
+            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+              <option>All Rivers</option>
+              <option>Ganga</option>
+              <option>Yamuna</option>
+              <option>Saraswati</option>
+              <option>Narmada</option>
+              <option>Godavari</option>
+            </select>
+            
+            <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+              <option>All Events</option>
+              <option>Festivals</option>
+              <option>আচার-অনুষ্ঠান</option>
+              <option>Government Events</option>
+              <option>Temple Functions</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Events -->
+    <section class="py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Upcoming Sacred Events</h2>
+          <p class="text-gray-600">Don't miss these important dates and celebrations</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          
+          <!-- Upcoming Event 1 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border-l-4 border-emerald-500">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-emerald-600">Feb 26, 2025</div>
+                  <div class="text-xs text-gray-500">Magha Purnima</div>
+                </div>
+              </div>
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Ganga</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Magha Mela - Prayagraj</h3>
+            <p class="text-sm text-gray-600 mb-4">Sacred bathing festival at Triveni Sangam during Magha month. Millions of devotees gather for holy dip.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>Prayagraj, Uttar Pradesh</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>4:00 AM - 8:00 PM</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>Government & Temple Organized</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-green-600 font-medium bg-green-100 px-2 py-1 rounded-full">In 15 days</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Upcoming Event 2 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border-l-4 border-purple-500">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-purple-600">Mar 14, 2025</div>
+                  <div class="text-xs text-gray-500">Holi</div>
+                </div>
+              </div>
+              <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Yamuna</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Holi Celebration - Vrindavan</h3>
+            <p class="text-sm text-gray-600 mb-4">Traditional Holi celebration at Yamuna ghats in Vrindavan with colors, music, and spiritual festivities.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>Vrindavan, Uttar Pradesh</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>6:00 AM - 6:00 PM</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+                <span>Temple & Local Community</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-green-600 font-medium bg-green-100 px-2 py-1 rounded-full">In 31 days</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+
+          <!-- Upcoming Event 3 -->
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border-l-4 border-orange-500">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-orange-600">Apr 13, 2025</div>
+                  <div class="text-xs text-gray-500">Baisakhi</div>
+                </div>
+              </div>
+              <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Narmada</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Narmada Jayanti Celebration</h3>
+            <p class="text-sm text-gray-600 mb-4">Annual celebration of Narmada river's birth anniversary with special prayers and cultural programs.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span>Amarkantak, Madhya Pradesh</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span>5:00 AM - 9:00 PM</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+                <span>Government & Trust Organized</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-green-600 font-medium bg-green-100 px-2 py-1 rounded-full">In 61 days</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Past Events -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-4">Recent Past Events</h2>
+          <p class="text-gray-600">Learn about recent celebrations and their significance</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          
+          <!-- Past Event 1 -->
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400 opacity-75">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-gray-600">Jan 29, 2025</div>
+                  <div class="text-xs text-gray-500">Mauni Amavasya</div>
+                </div>
+              </div>
+              <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Ganga</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Mauni Amavasya - Prayagraj</h3>
+            <p class="text-sm text-gray-600 mb-4">Most auspicious bathing day of Magh Mela. Over 5 crore devotees took holy dip at Triveni Sangam.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>5+ Crore Attendees</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+                <span>Successfully Completed</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-full">13 days ago</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Report</button>
+            </div>
+          </div>
+
+          <!-- Past Event 2 -->
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400 opacity-75">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-gray-600">Jan 13, 2025</div>
+                  <div class="text-xs text-gray-500">Makar Sankranti</div>
+                </div>
+              </div>
+              <span class="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded-full">Godavari</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Makar Sankranti - Nashik</h3>
+            <p class="text-sm text-gray-600 mb-4">Traditional kite flying and holy bathing ceremony at Godavari ghats in Nashik with cultural programs.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>2+ Lakh Attendees</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+                <span>Successfully Completed</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-full">29 days ago</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Report</button>
+            </div>
+          </div>
+
+          <!-- Past Event 3 -->
+          <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400 opacity-75">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"></path>
+                  </svg>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-gray-600">Dec 15, 2024</div>
+                  <div class="text-xs text-gray-500">Gita Jayanti</div>
+                </div>
+              </div>
+              <span class="text-xs bg-pink-100 text-pink-800 px-2 py-1 rounded-full">Kaveri</span>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-2">Gita Jayanti - Srirangapatna</h3>
+            <p class="text-sm text-gray-600 mb-4">Special recitation of Bhagavad Gita and spiritual discourses at Kaveri river banks in Srirangapatna.</p>
+            
+            <div class="space-y-2 mb-4">
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+                <span>50,000+ Attendees</span>
+              </div>
+              <div class="flex items-center text-xs text-gray-500">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                </svg>
+                <span>Successfully Completed</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-full">58 days ago</span>
+              <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">View Report</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Calendar View -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h3 class="text-xl font-bold text-gray-900 mb-6">February 2025 Calendar</h3>
+          
+          <div class="grid grid-cols-7 gap-1 mb-4">
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Sun</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Mon</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Tue</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Wed</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Thu</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Fri</div>
+            <div class="p-3 text-center font-semibold text-gray-700 bg-gray-100">Sat</div>
+          </div>
+          
+          <div class="grid grid-cols-7 gap-1">
+            <!-- Calendar days with events -->
+            <div class="p-3 text-center text-gray-400">26</div>
+            <div class="p-3 text-center text-gray-400">27</div>
+            <div class="p-3 text-center text-gray-400">28</div>
+            <div class="p-3 text-center text-gray-400">29</div>
+            <div class="p-3 text-center text-gray-400">30</div>
+            <div class="p-3 text-center text-gray-400">31</div>
+            <div class="p-3 text-center">1</div>
+            
+            <div class="p-3 text-center">2</div>
+            <div class="p-3 text-center">3</div>
+            <div class="p-3 text-center">4</div>
+            <div class="p-3 text-center">5</div>
+            <div class="p-3 text-center">6</div>
+            <div class="p-3 text-center">7</div>
+            <div class="p-3 text-center">8</div>
+            
+            <div class="p-3 text-center">9</div>
+            <div class="p-3 text-center">10</div>
+            <div class="p-3 text-center bg-red-600 text-white font-bold">11</div>
+            <div class="p-3 text-center">12</div>
+            <div class="p-3 text-center">13</div>
+            <div class="p-3 text-center">14</div>
+            <div class="p-3 text-center">15</div>
+            
+            <div class="p-3 text-center">16</div>
+            <div class="p-3 text-center">17</div>
+            <div class="p-3 text-center">18</div>
+            <div class="p-3 text-center">19</div>
+            <div class="p-3 text-center">20</div>
+            <div class="p-3 text-center">21</div>
+            <div class="p-3 text-center">22</div>
+            
+            <div class="p-3 text-center">23</div>
+            <div class="p-3 text-center">24</div>
+            <div class="p-3 text-center">25</div>
+            <div class="p-3 text-center bg-emerald-600 text-white font-bold">26</div>
+            <div class="p-3 text-center">27</div>
+            <div class="p-3 text-center">28</div>
+            <div class="p-3 text-center text-gray-400">1</div>
+          </div>
+          
+          <div class="mt-6 flex items-center space-x-6 text-sm">
+            <div class="flex items-center">
+              <div class="w-4 h-4 bg-red-600 rounded mr-2"></div>
+              <span>Today</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-4 h-4 bg-emerald-600 rounded mr-2"></div>
+              <span>Sacred Events</span>
+            </div>
+            <div class="flex items-center">
+              <div class="w-4 h-4 bg-purple-600 rounded mr-2"></div>
+              <span>Festivals</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

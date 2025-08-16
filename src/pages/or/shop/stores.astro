@@ -1,0 +1,190 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title={`${t('shop.categories.stores', currentLang)} - ${t('siteName', currentLang)}`} 
+  description={t('shop.categoryDescriptions.stores', currentLang)}
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-gray-50">
+    <!-- Breadcrumb -->
+    <section class="py-4 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav class="flex" aria-label="Breadcrumb">
+          <ol class="flex items-center space-x-4">
+            <li>
+              <div>
+                <a href="/or" class="text-gray-400 hover:text-gray-500">
+                  <svg class="flex-shrink-0 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                  </svg>
+                  <span class="sr-only">Home</span>
+                </a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <a href="/or/shop" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Shop</a>
+              </div>
+            </li>
+            <li>
+              <div class="flex items-center">
+                <svg class="flex-shrink-0 h-5 w-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="ml-4 text-sm font-medium text-gray-900">{t('shop.categories.stores', currentLang)}</span>
+              </div>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gradient-to-r from-green-600 to-emerald-700 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+              <span class="text-4xl">🏪</span>
+            </div>
+          </div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">
+            {t('shop.categories.stores', currentLang)}
+          </h1>
+          <p class="text-lg text-white/90 max-w-2xl mx-auto">
+            {t('shop.categoryDescriptions.stores', currentLang)}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store Locator -->
+    <section class="py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-lg shadow-sm p-8 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">{t('shop.storeLocator.title', currentLang)}</h2>
+          <div class="grid lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-1">
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    {t('shop.storeLocator.enterLocation', currentLang)}
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder={t('shop.storeLocator.locationPlaceholder', currentLang)}
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    {t('shop.storeLocator.searchRadius', currentLang)}
+                  </label>
+                  <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                    <option>Within 5 km</option>
+                    <option>Within 10 km</option>
+                    <option>Within 25 km</option>
+                    <option>Within 50 km</option>
+                  </select>
+                </div>
+                <button class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                  {t('shop.storeLocator.findStores', currentLang)}
+                </button>
+              </div>
+            </div>
+            
+            <div class="lg:col-span-2">
+              <div class="bg-gray-100 rounded-lg h-64 flex items-center justify-center">
+                <div class="text-center text-gray-500">
+                  <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <p>Map will appear here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Store Results -->
+        <div class="space-y-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-bold text-gray-900">Nearby Stores</h3>
+            <span class="text-sm text-gray-600">Found 8 stores</span>
+          </div>
+          
+          <div class="grid gap-6">
+            {Array.from({ length: 8 }, (_, i) => (
+              <div class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow border border-gray-200">
+                <div class="flex items-start justify-between">
+                  <div class="flex-1">
+                    <h4 class="text-xl font-semibold text-gray-900 mb-2">
+                      Religious Store {`${i + 1}`}
+                    </h4>
+                    <p class="text-gray-600 mb-2">Complete range of spiritual items and books</p>
+                    <div class="flex items-center text-sm text-gray-500 mb-2">
+                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                      </svg>
+                      <span>{`${(i + 1) * 0.5}`} km away • Sample Location, City</span>
+                    </div>
+                    <div class="flex items-center mb-3">
+                      <div class="flex text-yellow-400 mr-2">
+                        {[...Array(5)].map((_, j) => (
+                          <svg class={`w-4 h-4 ${j < 4 ? 'fill-current' : 'text-gray-300 fill-current'}`} viewBox="0 0 20 20">
+                            <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <span class="text-sm text-gray-600">4.2 ({`${(i + 1) * 20}`} reviews)</span>
+                    </div>
+                    <div class="flex items-center text-sm text-gray-500">
+                      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                      </svg>
+                      <span>Open until 9:00 PM</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col space-y-2 ml-4">
+                    <button class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors">
+                      Visit Store
+                    </button>
+                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+                      Call Now
+                    </button>
+                    <button class="border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
+                      Get Directions
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- Find More Stores Button -->
+          <div class="text-center mt-8">
+            <button class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+              Find More Stores
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

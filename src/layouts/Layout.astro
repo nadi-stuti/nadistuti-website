@@ -1,0 +1,464 @@
+---
+import "../styles/global.css";
+import {
+  getLanguageFromURL,
+  languages,
+  getAlternateLinks,
+  type Language,
+} from "../i18n";
+
+export interface Props {
+  title: string;
+  description?: string;
+  lang?: Language;
+  alternateLinks?: Array<{ lang: string; href: string }>;
+}
+
+const currentLang = Astro.props.lang || getLanguageFromURL(Astro.url.pathname);
+const {
+  title,
+  description = "Nadi Stuti - A tribute to holy Indian rivers",
+  alternateLinks,
+} = Astro.props;
+const finalAlternateLinks =
+  alternateLinks || getAlternateLinks(Astro.url.pathname);
+const langInfo = languages[currentLang];
+---
+
+<!doctype html>
+<html lang={currentLang} dir={langInfo.dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Multi-language fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Noto+Sans+Gurmukhi:wght@400;500;600;700&family=Noto+Sans+Oriya:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content={currentLang} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={`https://nadistuti.com${Astro.url.pathname}`} />
+
+    <!-- Alternate language links for SEO -->
+    {
+      finalAlternateLinks.map(({ lang, href }) => (
+        <link
+          rel="alternate"
+          hreflang={lang}
+          href={`https://nadistuti.com${href}`}
+        />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href="https://nadistuti.com/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Nadi Stuti",
+        "alternateName": "नदीस्तुति",
+        "description": "A tribute to holy Indian rivers - Sacred hymns and cultural heritage",
+        "url": "https://nadistuti.com",
+        "inLanguage": [
+          "en",
+          "hi",
+          "ta",
+          "te",
+          "kn",
+          "ml",
+          "bn",
+          "gu",
+          "mr",
+          "pa",
+          "or",
+          "as",
+          "sa"
+        ],
+        "about": {
+          "@type": "Thing",
+          "name": "Sacred Rivers of India",
+          "description": "Ancient Vedic hymns and cultural significance of holy rivers in Indian tradition"
+        },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://nadistuti.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <title>{title}</title>
+
+    <!-- WhatsApp FAB Styles -->
+    <style>
+      .whatsapp-fab {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .whatsapp-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        border-radius: 50%;
+        box-shadow:
+          0 4px 12px rgba(37, 211, 102, 0.4),
+          0 2px 4px rgba(0, 0, 0, 0.1);
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+
+      .whatsapp-button:hover {
+        transform: translateY(-2px) scale(1.05);
+        box-shadow:
+          0 8px 20px rgba(37, 211, 102, 0.5),
+          0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .whatsapp-button:active {
+        transform: translateY(0) scale(0.98);
+      }
+
+      .whatsapp-icon {
+        width: 28px;
+        height: 28px;
+        z-index: 2;
+        transition: transform 0.3s ease;
+      }
+
+      .whatsapp-button:hover .whatsapp-icon {
+        transform: scale(1.1);
+      }
+
+      /* Pulse animation */
+      .pulse-ring {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 56px;
+        height: 56px;
+        border: 2px solid rgba(37, 211, 102, 0.6);
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translate(-50%, -50%) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -50%) scale(1.8);
+          opacity: 0;
+        }
+      }
+
+      /* Tooltip */
+      .whatsapp-tooltip {
+        position: absolute;
+        right: 70px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .tooltip-text {
+        display: block;
+      }
+
+      .tooltip-arrow {
+        position: absolute;
+        top: 50%;
+        right: -4px;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 4px solid rgba(0, 0, 0, 0.8);
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+      }
+
+      .whatsapp-button:hover .whatsapp-tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(-5px);
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .whatsapp-fab {
+          bottom: 16px;
+          right: 16px;
+        }
+
+        .whatsapp-button {
+          width: 60px;
+          height: 60px;
+          box-shadow:
+            0 6px 16px rgba(37, 211, 102, 0.4),
+            0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-icon {
+          width: 32px;
+          height: 32px;
+        }
+
+        .pulse-ring {
+          width: 60px;
+          height: 60px;
+        }
+
+        /* Hide tooltip on mobile */
+        .whatsapp-tooltip {
+          display: none;
+        }
+
+        /* Better touch target */
+        .whatsapp-button {
+          -webkit-tap-highlight-color: transparent;
+        }
+      }
+
+      /* Extra small screens */
+      @media (max-width: 480px) {
+        .whatsapp-fab {
+          bottom: 12px;
+          right: 12px;
+        }
+      }
+
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        .pulse-ring {
+          animation: none;
+        }
+
+        .whatsapp-button,
+        .whatsapp-icon,
+        .whatsapp-tooltip {
+          transition: none;
+        }
+      }
+
+      /* High contrast mode */
+      @media (prefers-contrast: high) {
+        .whatsapp-button {
+          border: 2px solid #000;
+        }
+
+        .whatsapp-tooltip {
+          background: #000;
+          border: 1px solid #fff;
+        }
+      }
+
+      /* Dark mode adjustments */
+      @media (prefers-color-scheme: dark) {
+        .whatsapp-tooltip {
+          background: rgba(255, 255, 255, 0.9);
+          color: #000;
+        }
+
+        .tooltip-arrow {
+          border-left-color: rgba(255, 255, 255, 0.9);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class={`min-h-screen bg-gradient-to-br from-blue-50 to-orange-50 font-${currentLang}`}
+  >
+    <slot />
+
+    <!-- WhatsApp Floating Action Button -->
+    <div id="whatsapp-fab" class="whatsapp-fab">
+      <a
+        href="https://chat.whatsapp.com/KNCtYWiR6D856Yaup7iRZ9"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="whatsapp-button"
+        aria-label="Join WhatsApp Group"
+        title="Join WhatsApp Group"
+      >
+        <!-- WhatsApp Icon -->
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
+          ></path>
+        </svg>
+
+        <!-- Pulse animation ring -->
+        <div class="pulse-ring"></div>
+
+        <!-- Tooltip -->
+        <div class="whatsapp-tooltip">
+          <span class="tooltip-text">Join WhatsApp Group</span>
+          <div class="tooltip-arrow"></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Language preference handler -->
+    <script>
+      // Language preference handler - inline for immediate execution
+      (function () {
+        const SUPPORTED_LANGUAGES = [
+          "en",
+          "hi",
+          "ta",
+          "te",
+          "kn",
+          "ml",
+          "bn",
+          "gu",
+          "mr",
+          "pa",
+          "or",
+          "as",
+          "sa",
+        ];
+        const LANGUAGE_STORAGE_KEY = "preferred-language";
+
+        function getCurrentLanguage() {
+          const pathname = window.location.pathname;
+          const langCode = pathname.split("/")[1];
+          return SUPPORTED_LANGUAGES.includes(langCode) ? langCode : "en";
+        }
+
+        function getSavedLanguage() {
+          return localStorage.getItem(LANGUAGE_STORAGE_KEY);
+        }
+
+        function saveLanguagePreference(language: string) {
+          if (SUPPORTED_LANGUAGES.includes(language)) {
+            localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+          }
+        }
+
+        // Save current language preference if not already saved
+        const currentLang = getCurrentLanguage();
+        const savedLang = getSavedLanguage();
+
+        if (!savedLang) {
+          saveLanguagePreference(currentLang);
+        }
+
+        // Make functions available globally for language switchers
+        (window as any).languageHandler = {
+          getCurrentLanguage,
+          getSavedLanguage,
+          saveLanguagePreference,
+          switchLanguage: function (targetLang: string) {
+            if (SUPPORTED_LANGUAGES.includes(targetLang)) {
+              saveLanguagePreference(targetLang);
+              const currentPath = window.location.pathname;
+              const pathWithoutLang =
+                currentPath.replace(/^\/[a-z]{2}/, "") || "/";
+              window.location.href = `/${targetLang}${pathWithoutLang}`;
+            }
+          },
+        };
+      })();
+    </script>
+
+    <!-- WhatsApp FAB JavaScript -->
+    <script>
+      // Enhanced WhatsApp FAB functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const fab = document.getElementById("whatsapp-fab");
+        const button = fab?.querySelector(".whatsapp-button");
+
+        if (!fab || !button) return;
+
+        // Track user interaction for analytics (optional)
+        button.addEventListener("click", function () {
+          console.log("WhatsApp group link clicked");
+
+          // Optional: Track with Google Analytics if available
+          if (typeof gtag !== "undefined") {
+            gtag("event", "click", {
+              event_category: "Social",
+              event_label: "WhatsApp Group",
+              value: 1,
+            });
+          }
+        });
+
+        // Hide FAB when scrolling down, show when scrolling up
+        let lastScrollTop = 0;
+        let scrollTimeout;
+
+        window.addEventListener("scroll", function () {
+          clearTimeout(scrollTimeout);
+
+          scrollTimeout = setTimeout(() => {
+            const scrollTop =
+              window.pageYOffset || document.documentElement.scrollTop;
+
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+              // Scrolling down
+              fab.style.transform = "translateY(100px)";
+              fab.style.opacity = "0.7";
+            } else {
+              // Scrolling up
+              fab.style.transform = "translateY(0)";
+              fab.style.opacity = "1";
+            }
+
+            lastScrollTop = scrollTop;
+          }, 100);
+        });
+
+        // Show/hide based on page visibility
+        document.addEventListener("visibilitychange", function () {
+          if (document.hidden) {
+            fab.style.opacity = "0.5";
+          } else {
+            fab.style.opacity = "1";
+          }
+        });
+
+        // Check if user previously hid the FAB (for future use)
+        if (localStorage.getItem("whatsapp-fab-hidden") === "true") {
+          fab.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

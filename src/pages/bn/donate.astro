@@ -1,0 +1,232 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import DonationForm from '../../components/DonationForm';
+import { getLanguageFromURL } from '../../i18n';
+import { t } from '../../i18n/translations';
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout 
+  title={t('donate.title', currentLang)} 
+  description={t('donate.description', currentLang)}
+  lang={currentLang}
+>
+  <Header />
+  
+  <main class="min-h-screen bg-green-500">
+    <!-- Hero Section -->
+    <section class="py-16 bg-gradient-to-r from-green-600 to-emerald-700 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center">
+              <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">{t('donate.hero.title', currentLang)}</h1>
+          <p class="text-xl md:text-2xl mb-8 text-green-100 max-w-4xl mx-auto">
+            {t('donate.hero.subtitle', currentLang)}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="#donate-form" class="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-all transform hover:scale-105">
+              {t('donate.hero.donate_now', currentLang)}
+            </a>
+            <a href="#impact" class="bg-green-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-900 transition-all border border-green-500">
+              {t('donate.hero.see_impact', currentLang)}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact Statement -->
+    <section id="impact" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{t('donate.impact.title', currentLang)}</h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            {t('donate.impact.subtitle', currentLang)}
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-r from-orange-100 to-yellow-100 rounded-xl p-8 mb-12">
+          <div class="grid md:grid-cols-3 gap-6 text-center">
+            <div>
+              <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.impact.cultural_preservation.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.impact.cultural_preservation.description', currentLang)}</p>
+            </div>
+            <div>
+              <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.impact.global_reach.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.impact.global_reach.description', currentLang)}</p>
+            </div>
+            <div>
+              <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.impact.educational_tools.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.impact.educational_tools.description', currentLang)}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donation Form -->
+    <section id="donate-form" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <DonationForm client:load />
+        </div>
+      </div>
+    </section>
+
+    <!-- Transparency Section -->
+    <section class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">{t('donate.transparency.title', currentLang)}</h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{t('donate.transparency.usage.title', currentLang)}</h3>
+              <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700">{t('donate.transparency.usage.content_development', currentLang)}</span>
+                  <span class="font-semibold text-gray-900">45%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-blue-500 h-2 rounded-full" style="width: 45%"></div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700">{t('donate.transparency.usage.technology', currentLang)}</span>
+                  <span class="font-semibold text-gray-900">30%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-green-500 h-2 rounded-full" style="width: 30%"></div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700">{t('donate.transparency.usage.community_programs', currentLang)}</span>
+                  <span class="font-semibold text-gray-900">15%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-orange-500 h-2 rounded-full" style="width: 15%"></div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-700">{t('donate.transparency.usage.administrative', currentLang)}</span>
+                  <span class="font-semibold text-gray-900">10%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div class="bg-purple-500 h-2 rounded-full" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-4">{t('donate.transparency.achievements.title', currentLang)}</h3>
+              <ul class="space-y-3 text-gray-700">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>{t('donate.transparency.achievements.rivers_documented', currentLang)}</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>{t('donate.transparency.achievements.interactive_map', currentLang)}</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>{t('donate.transparency.achievements.mobile_apps', currentLang)}</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>{t('donate.transparency.achievements.translations', currentLang)}</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                  <span>{t('donate.transparency.achievements.community_members', currentLang)}</span>
+                </li>
+              </ul>
+              
+              <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                <p class="text-sm text-blue-800">
+                  <strong>{t('donate.transparency.annual_report.title', currentLang)}:</strong> {t('donate.transparency.annual_report.description', currentLang)}
+                </p>
+                <a href="/reports/annual-report-2024.pdf" class="text-blue-600 hover:text-blue-800 text-sm font-medium mt-2 inline-block">
+                  {t('donate.transparency.annual_report.download', currentLang)} →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternative Ways to Support -->
+    <section class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gradient-to-r from-green-100 to-blue-100 rounded-xl p-8">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">{t('donate.support.title', currentLang)}</h2>
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.support.share.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.support.share.description', currentLang)}</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.support.code.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.support.code.description', currentLang)}</p>
+            </div>
+            <div class="text-center">
+              <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{t('donate.support.content.title', currentLang)}</h3>
+              <p class="text-gray-700 text-sm">{t('donate.support.content.description', currentLang)}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

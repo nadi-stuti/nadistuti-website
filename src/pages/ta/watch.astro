@@ -1,0 +1,1554 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { getLanguageFromURL } from "../../i18n";
+import { t } from "../../i18n/translations";
+
+const currentLang = getLanguageFromURL(Astro.url.pathname);
+---
+
+<Layout
+  title="பார்க்கவும் - புனித நதிகள் வீடியோ உள்ளடக்கம்"
+  description="எங்கள் YouTube சேனல்களில் இருந்து புனித நதிகளைப் பற்றிய ஆவணப்படங்கள், கல்வி வீடியோக்கள் மற்றும் உள்ளடக்கத்தைப் பார்க்கவும்"
+  lang={currentLang}
+>
+  <Header />
+
+  <main class="min-h-screen bg-gray-50">
+    <!-- Page Header -->
+    <section class="py-16 bg-gradient-to-r from-red-600 to-pink-700 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <div class="flex justify-center mb-6">
+            <div
+              class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-10 h-10 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <h1 class="text-4xl md:text-6xl font-bold mb-6">பார்க்கவும்</h1>
+          <p class="text-xl md:text-2xl mb-8 text-red-100 max-w-4xl mx-auto">
+            எங்கள் தேர்ந்தெடுக்கப்பட்ட YouTube சேனல்களில் இருந்து புனித நதிகளைப்
+            பற்றிய ஆவணப்படங்கள், கல்வி வீடியோக்கள் மற்றும் ஆன்மீக உள்ளடக்கத்தைக்
+            கண்டறியுங்கள்
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#featured"
+              class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-50 transition-all transform hover:scale-105"
+            >
+              சிறப்பு வீடியோக்கள்
+            </a>
+            <a
+              href="#channels"
+              class="bg-red-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-900 transition-all border border-red-500"
+            >
+              சேனல்களைப் பார்க்கவும்
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="py-8 bg-white border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col md:flex-row gap-4 items-center justify-between"
+        >
+          <div class="flex-1 max-w-2xl">
+            <div class="relative">
+              <input
+                type="text"
+                id="videoSearch"
+                placeholder="வீடியோக்கள், பிளேலிஸ்ட்கள் மற்றும் சேனல்களைத் தேடுங்கள்..."
+                class="w-full px-6 py-4 pr-12 text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent shadow-sm"
+              />
+              <button
+                class="absolute right-3 top-3 text-gray-400 hover:text-red-500"
+              >
+                <svg
+                  class="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex gap-4">
+            <select
+              id="contentFilter"
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            >
+              <option value="all">அனைத்து வீடியோக்கள்</option>
+              <option value="featured">சிறப்பு வீடியோக்கள்</option>
+              <option value="playlists">பிளேலிஸ்ட்கள்</option>
+              <option value="channels">YouTube சேனல்கள்</option>
+            </select>
+
+            <select
+              id="sortFilter"
+              class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+            >
+              <option value="recent">மிக சமீபத்திய</option>
+              <option value="popular">மிகவும் பிரபலமான</option>
+              <option value="duration">கால அளவு</option>
+              <option value="alphabetical">அ-ஃ</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- சிறப்பு வீடியோக்கள் Section -->
+    <section id="featured" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            சிறப்பு வீடியோக்கள்
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            புனித நதிகளைப் பற்றிய கையால் தேர்ந்தெடுக்கப்பட்ட ஆவணப்படங்கள்
+            மற்றும் கல்வி உள்ளடக்கம்
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Featured Video 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="புனித கங்கை ஆவணப்படம்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                சிறப்பு
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                45:32
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                புனித கங்கை: காலத்தின் பயணம்
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                பண்டைய மரபுகள் மற்றும் நவீன சவால்களைக் கொண்ட இந்த விரிவான
+                ஆவணப்படத்தின் மூலம் கங்கை நதியின் ஆன்மீக மற்றும் கலாச்சார
+                முக்கியத்துவத்தை ஆராயுங்கள்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    1.25K பார்வைகள்
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    2.3K விருப்பங்கள்
+                  </span>
+                </div>
+                <span>2 நாட்களுக்கு முன்</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-red-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >புனித நதிகள் சேனல்</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  இப்போது பார்க்கவும்
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="யமுனை பாதுகாப்பு"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                சிறப்பு
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                32:18
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                யமுனை மறுமலர்ச்சி: ஒரு பாதுகாப்பு கதை
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                சுற்றுச்சூழல் ஆர்வலர்கள் மற்றும் உள்ளூர் சமூகங்களின்
+                நேர்காணல்களைக் கொண்ட யமுனை நதியை மீட்டெடுக்கும் மற்றும்
+                பாதுகாக்கும் தற்போதைய முயற்சிகளைக் கண்டறியுங்கள்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    89K பார்வைகள்
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    1.8K விருப்பங்கள்
+                  </span>
+                </div>
+                <span>1 வாரத்திற்கு முன்</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-green-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >நதி பாதுகாப்பு</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  இப்போது பார்க்கவும்
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Featured Video 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center"
+              >
+                <img
+                  src="/api/placeholder/480/270"
+                  alt="பண்டைய நதி கோவில்கள்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors"
+                  >
+                    <svg
+                      class="w-8 h-8 text-white ml-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium"
+              >
+                சிறப்பு
+              </div>
+              <div
+                class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm"
+              >
+                28:45
+              </div>
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors"
+              >
+                புனித நதிகளின் கரையில் பண்டைய கோவில்கள்
+              </h3>
+              <p class="text-gray-600 mb-4 text-sm">
+                புனித நதிகளின் கரையில் கட்டப்பட்ட அற்புதமான பண்டைய கோவில்களின்
+                பயணம், அவற்றின் கட்டிடக்கலை மற்றும் ஆன்மீக முக்கியத்துவத்தை
+                ஆராயுங்கள்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 616 0z"></path>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      ></path>
+                    </svg>
+                    1.56K பார்வைகள்
+                  </span>
+                  <span class="flex items-center">
+                    <svg
+                      class="w-4 h-4 mr-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                    3.1K விருப்பங்கள்
+                  </span>
+                </div>
+                <span>3 நாட்களுக்கு முன்</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <div
+                    class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3"
+                  >
+                    <svg
+                      class="w-4 h-4 text-purple-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <span class="text-sm font-medium text-gray-700"
+                    >பாரம்பரிய ஆவணங்கள்</span
+                  >
+                </div>
+                <button
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors"
+                >
+                  இப்போது பார்க்கவும்
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- அனைத்து வீடியோக்களும் Section -->
+    <section id="all-videos" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            அனைத்து வீடியோக்கள்
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            புனித நதிகளைப் பற்றிய எங்கள் முழுமையான வீடியோ தொகுப்பைப் பார்க்கவும்
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Video Grid Items -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-300 to-blue-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="நதி தியானம்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                15:23
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                நதி தியானம்: புனித நீரின் அருகில் அமைதி கண்டறிதல்
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">ஆன்மீக பயணங்கள்</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>45K பார்வைகள்</span>
+                <span>5 நாட்களுக்கு முன்</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Repeat similar video cards -->
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-300 to-green-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="நதி சூழலியல்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                22:17
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                நதி சூழல் அமைப்புகள்: பல்லுயிர் மற்றும் பாதுகாப்பு
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">இயற்கை ஆவணப்படங்கள்</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>78K பார்வைகள்</span>
+                <span>1 வாரத்திற்கு முன்</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-orange-300 to-orange-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="நதி திருவிழாக்கள்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                18:42
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                இந்தியா முழுவதும் புனித நதி திருவிழாக்கள்
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">கலாச்சார பாரம்பரியம்</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>92K பார்வைகள்</span>
+                <span>2 வாரங்களுக்கு முன்</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-300 to-purple-500"
+              >
+                <img
+                  src="/api/placeholder/320/180"
+                  alt="நதி வரலாறு"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  <button
+                    class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      class="w-6 h-6 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs"
+              >
+                35:12
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                நதிகளின் கரையில் பண்டைய நாகரிகங்கள்
+              </h3>
+              <p class="text-xs text-gray-600 mb-2">வரலாற்று ஆவணங்கள்</p>
+              <div
+                class="flex items-center justify-between text-xs text-gray-500"
+              >
+                <span>1.34K பார்வைகள்</span>
+                <span>3 வாரங்களுக்கு முன்</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="text-center mt-12">
+          <button
+            class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+          >
+            மேலும் வீடியோக்களை ஏற்றவும்
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- பிளேலிஸ்ட்கள் Section -->
+    <section id="playlists" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            பிளேலிஸ்ட்கள்
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            தலைப்புகள் மற்றும் விषயங்களின் அடிப்படையில் ஒழுங்கமைக்கப்பட்ட
+            வீடியோக்களின் தேர்ந்தெடுக்கப்பட்ட தொகுப்புகள்
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Playlist 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-blue-400 to-blue-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="கங்கை தொடர்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">12 வீடியோக்கள்</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                புனித கங்கை தொடர்
+              </h3>
+              <p class="text-gray-600 mb-4">
+                கங்கை நதியின் ஆன்மீக, கலாச்சார மற்றும் சுற்றுச்சூழல் அம்சங்களை
+                ஆராயும் முழுமையான ஆவணப்பட தொடர்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>12 வீடியோக்கள் • 8 மணி நேரம்</span>
+                <span>1 வாரத்திற்கு முன் புதுப்பிக்கப்பட்டது</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                பிளேலிஸ்ட் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+
+          <!-- Playlist 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-green-400 to-green-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="நதி பாதுகாப்பு"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">8 வீடியோக்கள்</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                நதி பாதுகாப்பு
+              </h3>
+              <p class="text-gray-600 mb-4">
+                நதி பாதுகாப்பு முயற்சிகள், சுற்றுச்சூழல் சவால்கள் மற்றும்
+                மறுசீரமைப்பு திட்டங்களைப் பற்றிய கல்வி உள்ளடக்கம்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>8 வீடியோக்கள் • 4.5 மணி நேரம்</span>
+                <span>3 நாட்களுக்கு முன் புதுப்பிக்கப்பட்டது</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                பிளேலிஸ்ட் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+
+          <!-- Playlist 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
+          >
+            <div class="relative">
+              <div
+                class="aspect-video bg-gradient-to-br from-purple-400 to-purple-600"
+              >
+                <img
+                  src="/api/placeholder/400/225"
+                  alt="ஆன்மீக பயணங்கள்"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                      ></path>
+                    </svg>
+                    <p class="text-lg font-semibold">15 வீடியோக்கள்</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                ஆன்மீக பயணங்கள்
+              </h3>
+              <p class="text-gray-600 mb-4">
+                தியானம், சடங்குகள் மற்றும் பண்டைய மரபுகளின் மூலம் புனித நதிகளின்
+                ஆன்மீக முக்கியத்துவத்தை ஆராயுங்கள்.
+              </p>
+              <div
+                class="flex items-center justify-between text-sm text-gray-500 mb-4"
+              >
+                <span>15 வீடியோக்கள் • 6 மணி நேரம்</span>
+                <span>5 நாட்களுக்கு முன் புதுப்பிக்கப்பட்டது</span>
+              </div>
+              <button
+                class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                பிளேலிஸ்ட் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YouTube Channels Section -->
+    <section id="channels" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            YouTube சேனல்கள்
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            புனித நதிகள் உள்ளடக்கத்தில் வழக்கமான புதுப்பிப்புகளுக்கு எங்கள்
+            பங்குதாரர் சேனல்களுக்கு குழுசேரவும்
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Channel 1 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-red-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              புனித நதிகள் சேனல்
+            </h3>
+            <p class="text-gray-600 mb-4">
+              இந்தியாவின் புனித நதிகள் மற்றும் அவற்றின் கலாச்சார
+              முக்கியத்துவத்தைப் பற்றிய விரிவான ஆவணப்படங்கள் மற்றும் கல்வி
+              உள்ளடக்கம்.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>2.45K சந்தாதாரர்கள்</span>
+              <span>156 வீடியோக்கள்</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                சந்தா செலுத்தவும்
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                சேனலைப் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+
+          <!-- Channel 2 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-green-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              நதி பாதுகாப்பு இந்தியா
+            </h3>
+            <p class="text-gray-600 mb-4">
+              இந்தியா முழுவதும் நதி பாதுகாப்பு, மாசு கட்டுப்பாடு மற்றும்
+              மறுசீரமைப்பு முயற்சிகளில் கவனம் செலுத்தும் சுற்றுச்சூழல்
+              ஆவணப்படங்கள்.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>1.89K சந்தாதாரர்கள்</span>
+              <span>98 வீடியோக்கள்</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                சந்தா செலுத்தவும்
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                சேனலைப் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+
+          <!-- Channel 3 -->
+          <div
+            class="bg-white rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-10 h-10 text-purple-600"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              ஆன்மீக பாரம்பரியம்
+            </h3>
+            <p class="text-gray-600 mb-4">
+              பண்டைய மரபுகள், சடங்குகள் மற்றும் திருவிழாக்களின் மூலம் புனித
+              நதிகளின் ஆன்மீக மற்றும் கலாச்சார பாரம்பரியத்தை ஆராயுங்கள்.
+            </p>
+            <div
+              class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-6"
+            >
+              <span>3.12K சந்தாதாரர்கள்</span>
+              <span>203 வீடியோக்கள்</span>
+            </div>
+            <div class="flex space-x-3">
+              <button
+                class="flex-1 bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors"
+              >
+                சந்தா செலுத்தவும்
+              </button>
+              <button
+                class="flex-1 border border-gray-300 text-gray-700 py-2 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+              >
+                சேனலைப் பார்க்கவும்
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contribute to Watch Page Section -->
+    <section
+      class="py-16 bg-gradient-to-r from-blue-600 to-purple-700 text-white"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <div
+            class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6"
+          >
+            <svg
+              class="w-8 h-8 text-white"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold mb-4">
+            எங்கள் வாட்ச் பக்கத்திற்கு பங்களிக்கவும்
+          </h2>
+          <p class="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            எங்கள் வீடியோ சேகரிப்பை வளர்க்க உதவுங்கள்! உங்கள் வீடியோக்களைப்
+            பகிரவும், சேனல்களை பரிந்துரைக்கவும், அல்லது எங்கள் வாட்ச் பக்கத்தை
+            இன்னும் சிறப்பாக மாற்ற பிற வழிகளில் பங்களிக்கவும்.
+          </p>
+        </div>
+
+        <!-- New Contribution Cards -->
+        <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          <!-- Audio Knowledge Sharing -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">ஆடியோ அறிவைப் பகிரவும்</h3>
+            <p class="text-blue-100 text-sm mb-4">
+              எங்கள் வாட்ஸ்அப் குழுவில் நதிகளைப் பற்றிய உங்கள் அறிவை ஆடியோ
+              வடிவத்தில் பகிரவும், நாங்கள் அதிலிருந்து ஒரு யூடியூப் வீடியோவை
+              உருவாக்கி எங்கள் சேனலில் பதிவேற்றுவோம்.
+            </p>
+            <a
+              href="https://chat.whatsapp.com/KNCtYWiR6D856Yaup7iRZ9"
+              target="_blank"
+              class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-green-700 transition-colors"
+            >
+              வாட்ஸ்அப் குழுவில் சேரவும்
+            </a>
+          </div>
+
+          <!-- Video Creation Support -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">வீடியோ உருவாக்க ஆதரவு</h3>
+            <p class="text-blue-100 text-sm mb-4">
+              நீங்கள் ஒரு வீடியோவை உருவாக்க விரும்பினால், நீங்கள் எங்களைத்
+              தொடர்பு கொள்ளலாம், நாங்கள் உங்கள் வீட்டு வாசலுக்கு வந்து வீடியோ
+              எடுத்து, உங்கள் மதிப்புமிக்க அறிவை எங்கள் ஆதரவாளர்களுக்கு
+              பரப்புவோம்.
+            </p>
+            <a
+              href="mailto:support@nadistuti.com"
+              class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              ஆதரவைத் தொடர்பு கொள்ளவும்
+            </a>
+          </div>
+
+          <!-- Technical Video Help -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                ></path>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">தொழில்நுட்ப வீடியோ உதவி</h3>
+            <p class="text-blue-100 text-sm mb-4">
+              வீடியோ தயாரிப்பில் தொழில்நுட்ப உதவி வேண்டுமானால், அதிலும் நாங்கள்
+              உதவ முடியும். வீடியோ தயாரிப்பு உதவிக்காக எங்களை தொடர்பு
+              கொள்ளுங்கள்.
+            </p>
+            <a
+              href="mailto:support@nadistuti.com"
+              class="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-purple-700 transition-colors"
+            >
+              தொழில்நுட்ப உதவி பெறுங்கள்
+            </a>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <!-- Submit Videos -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">
+              உங்கள் வீடியோக்களை சமர்ப்பிக்கவும்
+            </h3>
+            <p class="text-blue-100 text-sm">
+              புனித நதிகளைப் பற்றிய உங்கள் சொந்த வீடியோக்களைப் பகிரவும்
+            </p>
+          </div>
+
+          <!-- Suggest Channels -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-9 0a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">
+              சேனல்களை பரிந்துரைக்கவும்
+            </h3>
+            <p class="text-blue-100 text-sm">
+              நாங்கள் அம்சப்படுத்த வேண்டிய YouTube சேனல்களை பரிந்துரைக்கவும்
+            </p>
+          </div>
+
+          <!-- Video Suggestions -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">வீடியோ யோசனைகள்</h3>
+            <p class="text-blue-100 text-sm">
+              நாங்கள் உருவாக்க வேண்டிய புதிய வீடியோக்களுக்கான தலைப்புகளை
+              பரிந்துரைக்கவும்
+            </p>
+          </div>
+
+          <!-- Moderate Content -->
+          <div
+            class="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-all"
+          >
+            <div
+              class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">
+              மதிப்பீடு செய்ய உதவுங்கள்
+            </h3>
+            <p class="text-blue-100 text-sm">
+              வீடியோ உள்ளடக்கத்தை மதிப்பாய்வு செய்து ஒழுங்கமைக்க எங்களுக்கு
+              உதவுங்கள்
+            </p>
+          </div>
+        </div>
+
+        <!-- Contribution Forms -->
+        <div class="grid md:grid-cols-2 gap-8">
+          <!-- Submit Video Form -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Submit Your Video</h3>
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Your Name *</label
+                >
+                <input
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Email Address *</label
+                >
+                <input
+                  type="email"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Video URL *</label
+                >
+                <input
+                  type="url"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="https://youtube.com/watch?v=..."
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Video Description *</label
+                >
+                <textarea
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Describe your video and its relevance to sacred rivers..."
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Related River(s)</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="e.g., Ganga, Yamuna, Saraswati"
+                />
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-white text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
+                Submit Video
+              </button>
+            </form>
+          </div>
+
+          <!-- Suggest Channel Form -->
+          <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
+            <h3 class="text-2xl font-bold mb-6">Suggest a Channel</h3>
+            <form class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Your Name</label
+                >
+                <input
+                  type="text"
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Email Address *</label
+                >
+                <input
+                  type="email"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="your@email.com"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Channel URL *</label
+                >
+                <input
+                  type="url"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="https://youtube.com/channel/..."
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Channel Name *</label
+                >
+                <input
+                  type="text"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Channel name"
+                />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Why should we feature this channel? *</label
+                >
+                <textarea
+                  rows="4"
+                  required
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white placeholder-blue-200 focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                  placeholder="Explain why this channel would be valuable for our audience..."
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-blue-100 mb-2"
+                  >Content Focus</label
+                >
+                <select
+                  class="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-white focus:ring-2 focus:ring-white/50 focus:border-transparent"
+                >
+                  <option value="">Select content type</option>
+                  <option value="documentary">Documentaries</option>
+                  <option value="spiritual">Spiritual Content</option>
+                  <option value="educational">Educational</option>
+                  <option value="conservation">Conservation</option>
+                  <option value="cultural">Cultural Heritage</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-white text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+              >
+                Suggest Channel
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Additional Contribution Options -->
+        <div class="mt-12 text-center">
+          <h3 class="text-2xl font-bold mb-6">Other Ways to Contribute</h3>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="mailto:videos@nadistuti.com"
+              class="bg-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors"
+            >
+              Email Us Ideas
+            </a>
+            <a
+              href="/community"
+              class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            >
+              Join Community
+            </a>
+            <a
+              href="/contribute"
+              class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors border border-blue-500"
+            >
+              More Ways to Help
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <script>
+    // Simple filtering functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const contentFilter = document.getElementById("contentFilter");
+      const searchInput = document.getElementById("videoSearch");
+
+      // Show/hide sections based on filter
+      contentFilter.addEventListener("change", function () {
+        const selectedValue = this.value;
+        const sections = {
+          featured: document.getElementById("featured"),
+          all: document.getElementById("all-videos"),
+          playlists: document.getElementById("playlists"),
+          channels: document.getElementById("channels"),
+        };
+
+        // Hide all sections
+        Object.values(sections).forEach((section) => {
+          if (section) section.style.display = "none";
+        });
+
+        // Show selected section or all if 'all' is selected
+        if (selectedValue === "all") {
+          Object.values(sections).forEach((section) => {
+            if (section) section.style.display = "block";
+          });
+        } else if (sections[selectedValue]) {
+          sections[selectedValue].style.display = "block";
+        }
+      });
+
+      // Search functionality (basic implementation)
+      searchInput.addEventListener("input", function () {
+        const searchTerm = this.value.toLowerCase();
+        // This would typically filter the video cards based on the search term
+        console.log("Searching for:", searchTerm);
+      });
+    });
+  </script>
+</Layout>

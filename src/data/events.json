@@ -1,0 +1,293 @@
+{
+  "upcomingEvents": [
+    {
+      "id": "yamuna-cleaning-2025-03",
+      "title": "Yamuna River Cleaning Drive",
+      "description": "Join 500+ volunteers in cleaning the sacred Yamuna river banks in Delhi. Includes breakfast, cleaning supplies, and cultural program.",
+      "category": "conservation",
+      "date": "2025-03-15",
+      "time": "06:00",
+      "location": "Delhi, India",
+      "coordinates": { "lat": 28.6139, "lng": 77.2090 },
+      "price": 0,
+      "currency": "INR",
+      "capacity": 500,
+      "registered": 247,
+      "organizer": "NadiStuti Team",
+      "contact": {
+        "email": "events@nadistuti.com",
+        "phone": "+91-9876543210",
+        "whatsapp": "https://wa.me/919876543210"
+      },
+      "tags": ["cleaning", "volunteer", "yamuna", "delhi", "free"],
+      "image": "/images/events/yamuna-cleaning.jpg",
+      "featured": true
+    },
+    {
+      "id": "ganga-aarti-varanasi-2025-03",
+      "title": "Ganga Aarti at Varanasi",
+      "description": "Experience the divine evening Ganga Aarti ceremony at Dashashwamedh Ghat. Includes boat ride and traditional prasadam.",
+      "category": "spiritual",
+      "date": "2025-03-22",
+      "time": "18:30",
+      "location": "Varanasi, Uttar Pradesh",
+      "coordinates": { "lat": 25.3176, "lng": 82.9739 },
+      "price": 500,
+      "currency": "INR",
+      "capacity": 100,
+      "registered": 67,
+      "organizer": "NadiStuti Team",
+      "contact": {
+        "email": "spiritual@nadistuti.com",
+        "phone": "+91-9876543211"
+      },
+      "tags": ["aarti", "ganga", "varanasi", "spiritual", "boat"],
+      "image": "/images/events/ganga-aarti.jpg",
+      "featured": true
+    },
+    {
+      "id": "river-ecology-workshop-2025-04",
+      "title": "River Ecology Workshop",
+      "description": "3-day intensive workshop on river ecosystems, water conservation, and sustainable practices. Includes field trips and certification.",
+      "category": "education",
+      "date": "2025-04-05",
+      "endDate": "2025-04-07",
+      "time": "09:00",
+      "location": "Rishikesh, Uttarakhand",
+      "coordinates": { "lat": 30.0869, "lng": 78.2676 },
+      "price": 2500,
+      "currency": "INR",
+      "capacity": 50,
+      "registered": 32,
+      "organizer": "River Conservation Institute",
+      "contact": {
+        "email": "education@nadistuti.com",
+        "phone": "+91-9876543212"
+      },
+      "tags": ["workshop", "ecology", "education", "certification", "rishikesh"],
+      "image": "/images/events/ecology-workshop.jpg",
+      "featured": true
+    },
+    {
+      "id": "narmada-boat-tour-2025-04",
+      "title": "Sacred Narmada Boat Tour",
+      "description": "Spiritual boat journey along the sacred Narmada river with cultural storytelling and traditional music.",
+      "category": "tourism",
+      "date": "2025-04-12",
+      "time": "07:00",
+      "location": "Maheshwar, Madhya Pradesh",
+      "coordinates": { "lat": 22.1760, "lng": 75.5762 },
+      "price": 800,
+      "currency": "INR",
+      "capacity": 30,
+      "registered": 18,
+      "organizer": "Narmada Heritage Tours",
+      "contact": {
+        "email": "tours@nadistuti.com",
+        "phone": "+91-9876543213"
+      },
+      "tags": ["boat", "narmada", "tourism", "cultural", "maheshwar"],
+      "image": "/images/events/narmada-boat.jpg",
+      "featured": false
+    }
+  ],
+  "recentEvents": [
+    {
+      "id": "narmada-cleaning-2025-02",
+      "title": "Narmada River Cleaning",
+      "description": "Successfully cleaned 5km stretch of Narmada riverbank in Madhya Pradesh with 250+ volunteers. Collected 2 tons of waste.",
+      "category": "conservation",
+      "date": "2025-02-18",
+      "location": "Madhya Pradesh, India",
+      "participants": 250,
+      "impact": {
+        "wasteCollected": "2 tons",
+        "areaCleared": "5 km",
+        "treesPlanted": 50
+      },
+      "organizer": "NadiStuti Team",
+      "tags": ["cleaning", "narmada", "volunteer", "completed"],
+      "image": "/images/events/narmada-cleaning-completed.jpg",
+      "gallery": [
+        "/images/events/narmada-1.jpg",
+        "/images/events/narmada-2.jpg",
+        "/images/events/narmada-3.jpg"
+      ]
+    },
+    {
+      "id": "youth-education-camp-2025-02",
+      "title": "Youth Education Camp",
+      "description": "Conducted 3-day river awareness camp for 150 students from 10 schools. Included field trips and interactive sessions.",
+      "category": "education",
+      "date": "2025-02-10",
+      "endDate": "2025-02-12",
+      "location": "Pune, Maharashtra",
+      "participants": 150,
+      "impact": {
+        "studentsReached": 150,
+        "schoolsParticipated": 10,
+        "certificatesIssued": 150
+      },
+      "organizer": "Education Outreach Team",
+      "tags": ["education", "youth", "schools", "completed"],
+      "image": "/images/events/youth-camp-completed.jpg"
+    },
+    {
+      "id": "saraswati-prayer-2025-01",
+      "title": "Saraswati River Prayer",
+      "description": "Organized special prayer ceremony at Saraswati river site with 500+ devotees. Included cultural programs and prasadam.",
+      "category": "spiritual",
+      "date": "2025-01-28",
+      "location": "Haryana, India",
+      "participants": 500,
+      "impact": {
+        "devoteesParticipated": 500,
+        "culturalPrograms": 5,
+        "prasadamDistributed": "500 servings"
+      },
+      "organizer": "Spiritual Events Team",
+      "tags": ["prayer", "saraswati", "spiritual", "completed"],
+      "image": "/images/events/saraswati-prayer-completed.jpg"
+    }
+  ],
+  "featuredEvents": [
+    {
+      "id": "ganga-aarti-daily",
+      "title": "Daily Ganga Aarti Coverage",
+      "description": "Experience the divine evening Ganga Aarti ceremony at various ghats including Varanasi, Haridwar, and Rishikesh. We provide live coverage, cultural context, and participation opportunities.",
+      "category": "spiritual",
+      "type": "recurring",
+      "schedule": "Daily 6:30 PM",
+      "locations": ["Varanasi", "Haridwar", "Rishikesh", "Allahabad"],
+      "organizer": "NadiStuti Team",
+      "tags": ["aarti", "ganga", "daily", "live-coverage"],
+      "image": "/images/events/daily-aarti.jpg"
+    },
+    {
+      "id": "narmada-parikrama",
+      "title": "Sacred Narmada Circumambulation",
+      "description": "Join the sacred 3,300 km Narmada Parikrama journey. We organize group pilgrimages, provide support, and document this transformative spiritual experience.",
+      "category": "spiritual",
+      "type": "pilgrimage",
+      "duration": "3-4 Months",
+      "distance": "3,300 km",
+      "organizer": "Pilgrimage Support Team",
+      "tags": ["parikrama", "narmada", "pilgrimage", "group-journey"],
+      "image": "/images/events/narmada-parikrama.jpg"
+    },
+    {
+      "id": "kumbh-mela-coverage",
+      "title": "Kumbh Mela Coverage",
+      "description": "Complete coverage of Kumbh Mela celebrations with live updates, cultural insights, and participation guides.",
+      "category": "spiritual",
+      "type": "festival",
+      "frequency": "Every 3-12 Years",
+      "nextEvent": "2025-01-13",
+      "location": "Prayagraj, Uttar Pradesh",
+      "organizer": "Festival Coverage Team",
+      "tags": ["kumbh", "mela", "festival", "coverage"],
+      "image": "/images/events/kumbh-mela.jpg"
+    }
+  ],
+  "userEvents": [
+    {
+      "id": "user-pond-cleaning-pune",
+      "title": "Local Pond Cleaning Drive",
+      "description": "Organized cleaning of historic Katraj Lake with 50+ volunteers. Removed plastic waste and planted native plants.",
+      "organizer": {
+        "name": "Rajesh Kumar",
+        "location": "Pune, Maharashtra",
+        "avatar": "RK"
+      },
+      "date": "2025-02-20",
+      "participants": 50,
+      "category": "conservation",
+      "status": "completed",
+      "impact": {
+        "wasteRemoved": "500 kg",
+        "plantsPlanted": 25,
+        "areaCleared": "2 hectares"
+      },
+      "tags": ["pond", "cleaning", "pune", "user-organized"],
+      "image": "/images/events/user-pond-cleaning.jpg",
+      "featured": true
+    },
+    {
+      "id": "user-heritage-walk-jaipur",
+      "title": "River Heritage Walk",
+      "description": "Conducted heritage walk along Chambal river sharing historical stories and cultural significance with 30 participants.",
+      "organizer": {
+        "name": "Priya Sharma",
+        "location": "Jaipur, Rajasthan",
+        "avatar": "PS"
+      },
+      "date": "2025-02-15",
+      "participants": 30,
+      "category": "education",
+      "status": "featured",
+      "tags": ["heritage", "walk", "chambal", "jaipur", "cultural"],
+      "image": "/images/events/user-heritage-walk.jpg",
+      "featured": true
+    },
+    {
+      "id": "user-water-awareness-ahmedabad",
+      "title": "Youth Water Awareness",
+      "description": "Organized water conservation workshop for 100+ school students with interactive games and practical demonstrations.",
+      "organizer": {
+        "name": "Arjun Mehta",
+        "location": "Ahmedabad, Gujarat",
+        "avatar": "AM"
+      },
+      "date": "2025-02-10",
+      "participants": 100,
+      "category": "education",
+      "status": "trending",
+      "impact": {
+        "studentsReached": 100,
+        "schoolsVisited": 5,
+        "workshopsHeld": 3
+      },
+      "tags": ["awareness", "youth", "ahmedabad", "schools"],
+      "image": "/images/events/user-water-awareness.jpg",
+      "featured": true
+    }
+  ],
+  "categories": {
+    "conservation": {
+      "name": "Conservation Events",
+      "description": "River cleaning drives, tree plantation, water quality monitoring, and environmental awareness programs.",
+      "color": "green",
+      "icon": "heart"
+    },
+    "education": {
+      "name": "Educational Camps",
+      "description": "River ecology workshops, Sanskrit learning camps, cultural heritage programs, and youth education initiatives.",
+      "color": "blue",
+      "icon": "book"
+    },
+    "spiritual": {
+      "name": "Spiritual Gatherings",
+      "description": "Ganga Aarti, river prayers, meditation sessions, pilgrimage tours, and sacred ritual ceremonies.",
+      "color": "orange",
+      "icon": "flame"
+    },
+    "tourism": {
+      "name": "Tourism & Recreation",
+      "description": "Boat rides, river rafting, cultural tours, photography expeditions, and heritage site visits.",
+      "color": "purple",
+      "icon": "navigation"
+    },
+    "community": {
+      "name": "Community Programs",
+      "description": "Local water body events, user-organized activities, community festivals, and volunteer programs.",
+      "color": "pink",
+      "icon": "users"
+    },
+    "featured": {
+      "name": "Featured Events",
+      "description": "Major river festivals, Narmada Parikrama, Kumbh Mela coverage, and special cultural celebrations.",
+      "color": "yellow",
+      "icon": "star"
+    }
+  }
+}

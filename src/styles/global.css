@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  /* Language-specific font families */
+  .font-en, .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', system-ui, sans-serif;
+  }
+  
+  .font-hi, .font-sa {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-ta {
+    font-family: 'Noto Sans Tamil', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-te {
+    font-family: 'Noto Sans Telugu', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-kn {
+    font-family: 'Noto Sans Kannada', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-ml {
+    font-family: 'Noto Sans Malayalam', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-bn {
+    font-family: 'Noto Sans Bengali', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-gu {
+    font-family: 'Noto Sans Gujarati', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-mr {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-pa {
+    font-family: 'Noto Sans Gurmukhi', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-or {
+    font-family: 'Noto Sans Oriya', 'Arial Unicode MS', sans-serif;
+  }
+  
+  .font-as {
+    font-family: 'Noto Sans Bengali', 'Arial Unicode MS', sans-serif;
+  }
+  
+  /* Sanskrit text styling */
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+    line-height: 1.8;
+  }
+  
+  /* Language-specific text direction and styling */
+  [lang="hi"], [lang="sa"], [lang="mr"] {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="ta"] {
+    font-family: 'Noto Sans Tamil', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="te"] {
+    font-family: 'Noto Sans Telugu', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="kn"] {
+    font-family: 'Noto Sans Kannada', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="ml"] {
+    font-family: 'Noto Sans Malayalam', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="bn"], [lang="as"] {
+    font-family: 'Noto Sans Bengali', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="gu"] {
+    font-family: 'Noto Sans Gujarati', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="pa"] {
+    font-family: 'Noto Sans Gurmukhi', 'Arial Unicode MS', sans-serif;
+  }
+  
+  [lang="or"] {
+    font-family: 'Noto Sans Oriya', 'Arial Unicode MS', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-6 py-3 rounded-lg font-semibold transition-all border border-white/30;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent;
+  }
+  
+  /* Multi-language text utilities */
+  .text-multilang {
+    line-height: 1.7;
+    word-spacing: 0.1em;
+  }
+  
+  .text-indic {
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+  }
+}

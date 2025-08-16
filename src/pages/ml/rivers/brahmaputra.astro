@@ -1,0 +1,274 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+
+const currentLang = 'ml';
+---
+
+<Layout 
+  title={`${t('river.brahmaputra', currentLang)} - Nadi Stuti`} 
+  description={`Discover the sacred ${t('river.brahmaputra', currentLang)} river`}
+  lang={currentLang}
+>
+  <Header />
+  
+    
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-4 py-4">
+        <a 
+          href={getLocalizedPath("/", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("ui.home", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a 
+          href={getLocalizedPath("/rivers", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("nav.rivers", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-gray-900 font-medium">
+          {t(`river.brahmaputra`, currentLang)}
+        </span>
+      </div>
+    </div>
+  </nav><main>
+        
+    <!-- Hero Section -->
+    <section class="relative h-96 overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="/images/brahmaputra-assam.jpg" 
+          alt="Brahmaputra in Assam" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-center text-white text-center">
+        <div>
+          <h1 class="text-5xl font-bold mb-4 text-multilang">
+            <span class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit">
+              ब्रह्मपुत्र
+            </span>
+            {t('river.brahmaputra', currentLang)}
+          </h1>
+          <p class="text-xl text-gray-200 text-multilang">Son of Brahma - The Mighty River of the East</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      
+      <!-- {t('river.geographical.title', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.geographical.title', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-green-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.basic.info', currentLang)}</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.source', currentLang)}</dt>
+                <dd class="text-gray-900">{t('brahmaputra.source.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.length', currentLang)}</dt>
+                <dd class="text-gray-900">{t('brahmaputra.length.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Basin Area:</dt>
+                <dd class="text-gray-900">651,334 km²</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Mouth:</dt>
+                <dd class="text-gray-900">Bay of Bengal</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Countries:</dt>
+                <dd class="text-gray-900">China, India, Bangladesh</dd>
+              </div>
+            </dl>
+          </div>
+          
+          <div class="bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.sacred.geography', currentLang)}</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• <strong>Pasighat:</strong> First town in India</li>
+              <li>• <strong>Dibrugarh:</strong> Tea capital of India</li>
+              <li>• <strong>Guwahati:</strong> Major city on the banks</li>
+              <li>• <strong>Majuli:</strong> World's largest river island</li>
+              <li>• <strong>Dhubri:</strong> Important river port</li>
+              <li>• <strong>Sundarbans:</strong> Delta region with mangroves</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.major.tributaries', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.major.tributaries', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.left.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Dibang:</strong>
+                <span class="text-gray-600"> Major tributary from Arunachal Pradesh</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Lohit:</strong>
+                <span class="text-gray-600"> Flows through Arunachal Pradesh</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                <strong class="text-gray-900">Dhansiri:</strong>
+                <span class="text-gray-600"> Flows through Assam and Nagaland</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.right.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                <strong class="text-gray-900">Subansiri:</strong>
+                <span class="text-gray-600"> Gold-bearing river from Himalayas</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                <strong class="text-gray-900">Kameng:</strong>
+                <span class="text-gray-600"> Flows through Arunachal Pradesh</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                <strong class="text-gray-900">Manas:</strong>
+                <span class="text-gray-600"> Flows through Bhutan and Assam</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cultural and Religious Significance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.cultural.significance', currentLang)}</h2>
+        <div class="prose prose-lg max-w-none">
+          <div class="bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-lg mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Son of Brahma</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Brahmaputra literally means "Son of Brahma" in Sanskrit. According to Hindu mythology, the river was born 
+              from the kamandalu (water pot) of Lord Brahma. The river is considered masculine, unlike most other rivers 
+              in India which are considered feminine. In Assamese culture, it's called "Luit" and is deeply revered as 
+              the lifeline of Assam, supporting agriculture, transportation, and cultural identity.
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-green-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Cultural Festivals</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Bihu:</strong> Assamese New Year celebrated on riverbanks</li>
+                <li>• <strong>Majuli Festival:</strong> Cultural celebration on river island</li>
+                <li>• <strong>Boat Racing:</strong> Traditional competitions during festivals</li>
+                <li>• <strong>River Worship:</strong> Prayers for good harvest and protection</li>
+              </ul>
+            </div>
+            
+            <div class="bg-blue-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Ecological Importance</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Biodiversity:</strong> Rich aquatic and terrestrial life</li>
+                <li>• <strong>Wetlands:</strong> Important bird migration route</li>
+                <li>• <strong>Agriculture:</strong> Fertile alluvial soil deposition</li>
+                <li>• <strong>Fisheries:</strong> Major source of fish for the region</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Unique Features -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">Unique Features</h2>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-yellow-100 to-green-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Majuli Island</h3>
+            <p class="text-gray-700">
+              The world's largest river island, Majuli, is formed by the Brahmaputra. It's a UNESCO World Heritage site 
+              and center of Assamese neo-Vaishnavite culture with numerous satras (monasteries).
+            </p>
+          </div>
+          
+          <div class="bg-blue-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Tidal Bore</h3>
+            <p class="text-gray-700">
+              The river experiences a unique phenomenon called tidal bore, where ocean tides push upstream creating 
+              waves that can travel hundreds of kilometers inland.
+            </p>
+          </div>
+          
+          <div class="bg-green-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Braided River System</h3>
+            <p class="text-gray-700">
+              Brahmaputra is known for its braided channel pattern, constantly changing course and creating new channels, 
+              making it one of the most dynamic river systems in the world.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download PDF -->
+      <section class="text-center">
+        <div class="bg-gradient-to-r from-green-600 to-blue-600 text-white p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Complete Brahmaputra Information</h3>
+          <p class="text-green-100 mb-6">
+            Download a comprehensive PDF with detailed information about Brahmaputra, including maps, tributaries, and cultural significance.
+          </p>
+          <a 
+            href="/data/river report/Brahmaputra-report.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-green-50 transition-all transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download Brahmaputra PDF
+          </a>
+        </div>
+      </section>
+    </div>
+    <!-- Back to Rivers Button -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
+      <a 
+        href={getLocalizedPath("/rivers", currentLang)}
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+      >
+        <svg 
+          class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {t("ui.back_to_rivers", currentLang)}
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+</style>
+

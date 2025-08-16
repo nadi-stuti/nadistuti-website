@@ -1,16 +1,54 @@
 ---
-
+import LanguageSelector from "../components/LanguageSelector.astro";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Choose Your Language - Nadi Stuti</title>
+    <meta
+      name="description"
+      content="Select your preferred language to explore Nadi Stuti in your native language."
+    />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+  </head>
+  <body>
+    <LanguageSelector />
+
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/en/" />
+    </noscript>
+
+    <!-- Loading message while JavaScript loads -->
+    <div
+      id="loading-message"
+      style="
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+    color: #666;
+  "
+    >
+      <div style="margin-bottom: 1rem;">Loading...</div>
+      <div style="font-size: 0.9rem;">
+        Please wait while we prepare the language selector
+      </div>
+    </div>
+
+    <script>
+      // Hide loading message once language selector is ready
+      document.addEventListener("DOMContentLoaded", () => {
+        const loadingMessage = document.getElementById("loading-message");
+
+        if (loadingMessage) {
+          loadingMessage.style.display = "none";
+        }
+      });
+    </script>
+  </body>
 </html>

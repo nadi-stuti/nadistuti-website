@@ -1,0 +1,273 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
+import { t } from '../../../i18n/translations';
+const currentLang = 'as';
+---
+
+<Layout 
+  title={`${t('river.godavari', currentLang)} - Nadi Stuti`} 
+  description={`Discover the sacred ${t('river.godavari', currentLang)} river`}
+  lang={currentLang}
+>
+  <Header />
+  
+    
+  <!-- Breadcrumbs -->
+  <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center space-x-4 py-4">
+        <a 
+          href={getLocalizedPath("/", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("ui.home", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <a 
+          href={getLocalizedPath("/rivers", currentLang)}
+          class="text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          {t("nav.rivers", currentLang)}
+        </a>
+        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+        <span class="text-gray-900 font-medium">
+          {t(`river.godavari`, currentLang)}
+        </span>
+      </div>
+    </div>
+  </nav><main>
+        
+    <!-- Hero Section -->
+    <section class="relative h-96 overflow-hidden">
+      <div class="absolute inset-0">
+        <img 
+          src="/images/godavari-nashik.jpg" 
+          alt="Godavari at Nashik" 
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+      <div class="relative z-10 h-full flex items-center justify-center text-white text-center">
+        <div>
+          <h1 class="text-5xl font-bold mb-4 text-multilang">
+            <span class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit">
+              गोदावरी
+            </span>
+            {t('river.godavari', currentLang)}
+          </h1>
+          <p class="text-xl text-gray-200 text-multilang">Ganga of the South - The Longest River of Peninsular India</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      
+      <!-- {t('river.geographical.title', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.geographical.title', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="bg-orange-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.basic.info', currentLang)}</h3>
+            <dl class="space-y-2">
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.source', currentLang)}</dt>
+                <dd class="text-gray-900">{t('godavari.source.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">{t('river.length', currentLang)}</dt>
+                <dd class="text-gray-900">{t('godavari.length.value', currentLang)}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Basin Area:</dt>
+                <dd class="text-gray-900">312,812 km²</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">Mouth:</dt>
+                <dd class="text-gray-900">Bay of Bengal</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="font-medium text-gray-700">States:</dt>
+                <dd class="text-gray-900">Maharashtra, Telangana, Andhra Pradesh, Chhattisgarh</dd>
+              </div>
+            </dl>
+          </div>
+          
+          <div class="bg-red-50 p-6 rounded-lg">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.sacred.geography', currentLang)}</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• <strong>Trimbakeshwar:</strong> Sacred source with Jyotirlinga</li>
+              <li>• <strong>Nashik:</strong> Holy city, Kumbh Mela site</li>
+              <li>• <strong>Paithan:</strong> Ancient capital of Satavahanas</li>
+              <li>• <strong>Nanded:</strong> Sikh pilgrimage center</li>
+              <li>• <strong>Rajahmundry:</strong> Cultural center of Andhra Pradesh</li>
+              <li>• <strong>Antarvedi:</strong> Confluence with Bay of Bengal</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.major.tributaries', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.major.tributaries', currentLang)}</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.left.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+                <strong class="text-gray-900">Pranhita:</strong>
+                <span class="text-gray-600"> Largest tributary, confluence of Wardha and Wainganga</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+                <strong class="text-gray-900">Indravati:</strong>
+                <span class="text-gray-600"> Major tributary from Chhattisgarh</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-500">
+                <strong class="text-gray-900">Sabari:</strong>
+                <span class="text-gray-600"> Sacred river mentioned in Ramayana</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">{t('river.right.bank', currentLang)}</h3>
+            <ul class="space-y-3">
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+                <strong class="text-gray-900">Purna:</strong>
+                <span class="text-gray-600"> Flows through Maharashtra</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+                <strong class="text-gray-900">Manjra:</strong>
+                <span class="text-gray-600"> Major tributary in Maharashtra</span>
+              </li>
+              <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-red-500">
+                <strong class="text-gray-900">Manair:</strong>
+                <span class="text-gray-600"> Flows through Telangana</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cultural and Religious Significance -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.cultural.significance', currentLang)}</h2>
+        <div class="prose prose-lg max-w-none">
+          <div class="bg-gradient-to-r from-orange-50 to-red-50 p-8 rounded-lg mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Ganga of the South</h3>
+            <p class="text-gray-700 leading-relaxed">
+              Godavari is revered as the "Ganga of the South" and holds immense religious significance in Hindu tradition. 
+              The river originates near the sacred Trimbakeshwar Jyotirlinga temple, one of the twelve Jyotirlingas of Lord Shiva. 
+              According to legend, the river was brought to earth by Sage Gautama to purify his ashram. The river is considered 
+              equally sacred as the Ganga, and bathing in its waters is believed to wash away sins and grant moksha.
+            </p>
+          </div>
+          
+          <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-orange-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">{t('river.sacred.festivals', currentLang)}</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Kumbh Mela:</strong> Held every 12 years at Nashik</li>
+                <li>• <strong>Godavari Pushkaram:</strong> Once in 12 years grand celebration</li>
+                <li>• <strong>Ganga Aarti:</strong> Daily evening prayers at ghats</li>
+                <li>• <strong>Makar Sankranti:</strong> Sacred bathing festival</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-50 p-6 rounded-lg">
+              <h4 class="text-lg font-semibold text-gray-900 mb-3">Pilgrimage Sites</h4>
+              <ul class="space-y-2 text-gray-700">
+                <li>• <strong>Trimbakeshwar:</strong> Source and Jyotirlinga temple</li>
+                <li>• <strong>Nashik:</strong> Holy city with numerous temples</li>
+                <li>• <strong>Paithan:</strong> Ancient religious center</li>
+                <li>• <strong>Bhadrachalam:</strong> Famous Rama temple</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- {t('river.scriptural.references', currentLang)} -->
+      <section class="mb-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-multilang">{t('river.scriptural.references', currentLang)}</h2>
+        <div class="space-y-6">
+          <div class="bg-gradient-to-r from-orange-100 to-red-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Brahma Purana</h3>
+            <p class="text-gray-700">
+              "Godavari is the most sacred among all rivers in the Deccan. She purifies all sins and grants liberation 
+              to those who bathe in her waters with devotion."
+            </p>
+          </div>
+          
+          <div class="bg-orange-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Skanda Purana</h3>
+            <p class="text-gray-700">
+              "The river Godavari, flowing from Trimbak, is as sacred as Ganga. Those who perform shraddha (ancestral rites) 
+              on her banks attain great merit."
+            </p>
+          </div>
+          
+          <div class="bg-red-100 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3">Ramayana Connection</h3>
+            <p class="text-gray-700">
+              "Lord Rama, Sita, and Lakshmana spent part of their exile on the banks of Godavari at Panchavati, 
+              making it eternally sacred in Hindu tradition."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Download PDF -->
+      <section class="text-center">
+        <div class="bg-gradient-to-r from-orange-600 to-red-600 text-white p-8 rounded-lg">
+          <h3 class="text-2xl font-bold mb-4">Complete Godavari Information</h3>
+          <p class="text-orange-100 mb-6">
+            Download a comprehensive PDF with detailed information about Godavari, including maps, tributaries, and cultural significance.
+          </p>
+          <a 
+            href="/data/river report/Godavari-report.pdf" target="_blank"
+            class="inline-flex items-center bg-white text-orange-600 px-8 py-3 rounded-lg font-semibold hover:bg-orange-50 transition-all transform hover:scale-105"
+          >
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+            Download Godavari PDF
+          </a>
+        </div>
+      </section>
+    </div>
+    <!-- Back to Rivers Button -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
+      <a 
+        href={getLocalizedPath("/rivers", currentLang)}
+        class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+      >
+        <svg 
+          class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        {t("ui.back_to_rivers", currentLang)}
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .font-sanskrit {
+    font-family: 'Noto Sans Devanagari', 'Arial Unicode MS', sans-serif;
+  }
+</style>
+
