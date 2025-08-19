@@ -31,7 +31,7 @@ NadiStuti is an open-source cultural and educational project dedicated to preser
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/nadi-stuti/website.git
+git clone https://github.com/nadi-stuti/nadistuti-website.git
 cd website
 ```
 
