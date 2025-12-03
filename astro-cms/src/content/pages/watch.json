@@ -1,0 +1,15 @@
+{
+  "slug": "watch",
+  "title": {
+    "en": "Watch the Nadi Stuti Anthem",
+    "hi": "नदी स्तुति गान देखें"
+  },
+  "description": {
+    "en": "Experience the official Nadi Stuti anthem video.",
+    "hi": "आधिकारिक नदी स्तुति गान वीडियो का अनुभव करें।"
+  },
+  "content": {
+    "en": "src/content/pages/watch.en.mdoc",
+    "hi": "src/content/pages/watch.hi.mdoc"
+  }
+}

@@ -1,0 +1,46 @@
+---
+const languages = {
+  en: 'English',
+  hi: 'हिन्दी',
+  as: 'অসমীয়া',
+  bn: 'বাংলা',
+  gu: 'ગુજરાતી',
+  kn: 'ಕನ್ನಡ',
+  ml: 'മലയാളം',
+  mr: 'मराठी',
+  or: 'ଓଡ଼ିଆ',
+  pa: 'ਪੰਜਾਬੀ',
+  sa: 'संस्कृतम्',
+  ta: 'தமிழ்',
+  te: 'తెలుగు',
+};
+---
+
+<div id="language-selector" class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-orange-50 px-4">
+  <div class="max-w-2xl w-full bg-white/70 backdrop-blur-xl rounded-2xl shadow-lg p-8 text-center">
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Choose Your Language</h1>
+    <p class="text-gray-600 mb-8">Select your preferred language to continue.</p>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {Object.entries(languages).map(([code, name]) => (
+        <a href={`/${code}/`} class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition-transform duration-200 ease-in-out">
+          <span class="text-lg font-semibold text-gray-700">{name}</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="mt-8 text-sm text-gray-500">
+    <p>Nadi Stuti - A Tribute to Holy Indian Rivers</p>
+  </div>
+</div>
+
+<script>
+  // Hide loading message once this component is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    const loadingMessage = document.getElementById("loading-message");
+    if (loadingMessage) {
+      loadingMessage.style.display = "none";
+    }
+  });
+</script>

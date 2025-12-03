@@ -1,0 +1,15 @@
+{
+  "slug": "home",
+  "title": {
+    "en": "Nadi Stuti - A Tribute to Holy Indian Rivers",
+    "hi": "नदी स्तुति - पवित्र भारतीय नदियों को श्रद्धांजलि"
+  },
+  "description": {
+    "en": "An exploration of the sacred rivers of India, their stories, and their significance.",
+    "hi": "भारत की पवित्र नदियों, उनकी कहानियों और उनके महत्व का अन्वेषण।"
+  },
+  "content": {
+    "en": "src/content/pages/home.en.mdoc",
+    "hi": "src/content/pages/home.hi.mdoc"
+  }
+}
