@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { getLanguageFromURL, getLocalizedPath } from "../i18n";
+import { BookOpen, Headphones, MessageCircle, ArrowRight } from "lucide-react";
 
 const currentLang = "en";
 ---
@@ -127,6 +128,108 @@ const currentLang = "en";
             Work in Progress
           </span>
           <p class="text-sm text-gray-400">Stay tuned for the unveiling</p>
+        </div>
+
+        <!-- Resources Section -->
+        <!-- Resources Section -->
+        <div class="mt-16">
+          <p
+            class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed"
+          >
+            While we build here, we invite you to explore
+          </p>
+
+          <div class="grid gap-6 md:grid-cols-3 text-left">
+            <!-- Nadikosh -->
+            <div
+              class="group bg-white rounded-2xl p-6 shadow-sm border border-blue-50 hover:shadow-md hover:border-blue-100 transition-all duration-300"
+            >
+              <div
+                class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <BookOpen className="w-6 h-6 text-blue-600" />
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2 font-serif">
+                Nadikosh
+              </h3>
+              <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                Dive into the sacred history, geography, and spiritual
+                significance of our holy rivers through our comprehensive
+                knowledge repository.
+              </p>
+              <a
+                href="https://kosh.nadistuti.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white border border-blue-200 text-blue-700 text-sm font-semibold rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors gap-2 group/btn"
+              >
+                Explore Knowledge
+                <ArrowRight
+                  className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                />
+              </a>
+            </div>
+
+            <!-- Katha -->
+            <div
+              class="group bg-white rounded-2xl p-6 shadow-sm border border-orange-50 hover:shadow-md hover:border-orange-100 transition-all duration-300"
+            >
+              <div
+                class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <Headphones className="w-6 h-6 text-orange-600" />
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2 font-serif">
+                Brahmalok
+              </h3>
+              <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                Immerse yourself in divine storytelling. Listen to enchanting
+                tales of the rivers narrated by the divine voices of Brahma and
+                Ma Saraswati themselves.
+              </p>
+              <a
+                href="https://katha.nadistuti.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white border border-orange-200 text-orange-700 text-sm font-semibold rounded-lg hover:bg-orange-50 hover:border-orange-300 transition-colors gap-2 group/btn"
+              >
+                Listen to Katha
+                <ArrowRight
+                  className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                />
+              </a>
+            </div>
+
+            <!-- Sabha -->
+            <div
+              class="group bg-white rounded-2xl p-6 shadow-sm border border-green-50 hover:shadow-md hover:border-green-100 transition-all duration-300"
+            >
+              <div
+                class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+              >
+                <MessageCircle className="w-6 h-6 text-green-600" />
+              </div>
+              <h3 class="text-lg font-bold text-gray-900 mb-2 font-serif">
+                Nadi Stuti Sabha
+              </h3>
+              <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                Join our WhatsApp community. Be part of our growing movement,
+                discuss river conservation, and help us empower the cause
+                together.
+              </p>
+              <a
+                href="https://chat.whatsapp.com/GWWZngBJzYsDZ8AGzF6Xt4"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center w-full px-4 py-2.5 bg-white border border-green-200 text-green-700 text-sm font-semibold rounded-lg hover:bg-green-50 hover:border-green-300 transition-colors gap-2 group/btn"
+              >
+                Join Community
+                <ArrowRight
+                  className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
