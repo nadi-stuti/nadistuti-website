@@ -9,11 +9,11 @@ import { getLocalizedPath, type Language } from "../../../i18n";
 export async function getStaticPaths() {
     const pages = await getCollection("homepage");
     return pages.map((page) => {
-        const [lang] = page.slug.split("/");
+        const [lang] = page.id.split("/");
         // If the slug is just 'en' or 'hi', use that.
         // If it was 'homepage/en', we would need to parse differently.
         // Based on my creation, the slug is just the filename 'en' or 'hi'.
-        return { params: { lang: page.slug } };
+        return { params: { lang } };
     });
 }
 

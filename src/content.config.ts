@@ -1,7 +1,8 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const homepageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/homepage' }),
   schema: z.object({
     title: z.string(),
     subtitle: z.string(),
@@ -73,7 +74,7 @@ const homepageCollection = defineCollection({
 });
 
 const riversPageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/rivers_page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -109,7 +110,7 @@ const riversPageCollection = defineCollection({
 });
 
 const riversCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/rivers' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -192,7 +193,7 @@ const riversCollection = defineCollection({
 });
 
 const studyHubPageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -298,7 +299,7 @@ const studyHubPageCollection = defineCollection({
 });
 
 const studyHubHistoricalCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_historical' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -331,7 +332,7 @@ const studyHubHistoricalCollection = defineCollection({
 });
 
 const studyHubScripturesCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_scriptures' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -364,7 +365,7 @@ const studyHubScripturesCollection = defineCollection({
 });
 
 const studyHubResearchCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_research' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -400,7 +401,7 @@ const studyHubResearchCollection = defineCollection({
 });
 
 const studyHubGeographyCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_geography' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -438,7 +439,7 @@ const studyHubGeographyCollection = defineCollection({
 });
 
 const studyHubRitualsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_rituals' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -480,7 +481,7 @@ const studyHubRitualsCollection = defineCollection({
 });
 
 const studyHubHandbooksCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_handbooks' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -513,7 +514,7 @@ const studyHubHandbooksCollection = defineCollection({
 });
 
 const studyHubHolyCalendarCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_holy_calendar' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -565,7 +566,7 @@ const studyHubHolyCalendarCollection = defineCollection({
 });
 
 const studyHubMultimediaCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_multimedia' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -601,7 +602,7 @@ const studyHubMultimediaCollection = defineCollection({
 });
 
 const studyHubSlideshowsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_slideshows' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -634,7 +635,7 @@ const studyHubSlideshowsCollection = defineCollection({
 
 // New Scalable Schemas
 const studyHubIndicesCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_indices' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -658,7 +659,7 @@ const studyHubIndicesCollection = defineCollection({
 });
 
 const studyResourcesCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_resources' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -703,7 +704,7 @@ const studyResourcesCollection = defineCollection({
 });
 
 const appsPageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/apps_page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -754,7 +755,7 @@ const appsPageCollection = defineCollection({
 });
 
 const watchPageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/watch_page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -857,7 +858,7 @@ const watchPageCollection = defineCollection({
 });
 
 const communityPageCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/community_page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
