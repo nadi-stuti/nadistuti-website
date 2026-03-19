@@ -193,7 +193,7 @@ const riversCollection = defineCollection({
 });
 
 const studyHubPageCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_page' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/page' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -299,7 +299,7 @@ const studyHubPageCollection = defineCollection({
 });
 
 const studyHubHistoricalCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_historical' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/historical' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -332,7 +332,7 @@ const studyHubHistoricalCollection = defineCollection({
 });
 
 const studyHubScripturesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_scriptures' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/scriptures' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -365,7 +365,7 @@ const studyHubScripturesCollection = defineCollection({
 });
 
 const studyHubResearchCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_research' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/research' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -401,7 +401,7 @@ const studyHubResearchCollection = defineCollection({
 });
 
 const studyHubGeographyCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_geography' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/geography' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -439,7 +439,7 @@ const studyHubGeographyCollection = defineCollection({
 });
 
 const studyHubRitualsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_rituals' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/rituals' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -481,7 +481,7 @@ const studyHubRitualsCollection = defineCollection({
 });
 
 const studyHubHandbooksCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_handbooks' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/handbooks' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -514,7 +514,7 @@ const studyHubHandbooksCollection = defineCollection({
 });
 
 const studyHubHolyCalendarCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_holy_calendar' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/holy_calendar' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -566,7 +566,7 @@ const studyHubHolyCalendarCollection = defineCollection({
 });
 
 const studyHubMultimediaCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_multimedia' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/multimedia' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -602,7 +602,7 @@ const studyHubMultimediaCollection = defineCollection({
 });
 
 const studyHubSlideshowsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_slideshows' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/slideshows' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -635,7 +635,7 @@ const studyHubSlideshowsCollection = defineCollection({
 
 // New Scalable Schemas
 const studyHubIndicesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub_indices' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/indices' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
