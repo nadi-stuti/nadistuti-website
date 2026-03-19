@@ -5,7 +5,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
   const { pathname } = context.url;
 
   // Skip middleware for API routes and static assets
-  if (pathname.startsWith('/api/') || pathname.startsWith('/_') || pathname.includes('.')) {
+  if (pathname.startsWith('/api/') || pathname.startsWith('/_') || pathname.includes('.') || pathname.startsWith('/migrate')) {
     return next();
   }
 

@@ -1,0 +1,485 @@
+---
+import { getEntry, getCollection } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import { getLocalizedPath, type Language } from "../../../../i18n";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "hi" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang as Language;
+
+const entry = await getEntry("study_hub_indices", `geography/${currentLang}`);
+
+if (!entry) {
+    return Astro.redirect("/404");
+}
+
+const { data } = entry;
+
+// Fetch documents from the scalable collection
+const allResources = await getCollection("study_resources");
+const documents = allResources
+    .filter((doc) => {
+        return (
+            doc.data.category === "geography" &&
+            doc.data.language === currentLang
+        );
+    })
+    .map((doc) => ({
+        ...doc.data,
+        period: doc.data.period || "Modern",
+        period_color: doc.data.period_color || "blue",
+        image_url: doc.data.thumbnail || "/api/placeholder/400/200",
+        image_label: "Map", // Default
+        scale: doc.data.tags?.find((t) => t.includes(":")) || "Scale: N/A", // Heuristic for scale
+        resolution: doc.data.tags?.find(
+            (t) => t.includes("m") || t.includes("px"),
+        ), // Heuristic
+        year: doc.data.time_range || "Unknown Year",
+        bg_gradient: "from-blue-100 to-blue-200", // Default gradient
+        downloads: doc.data.likes, // Map likes to downloads for display
+    }));
+
+const getColorClasses = (color: string) => {
+    switch (color) {
+        case "orange":
+            return {
+                bg: "bg-orange-100",
+                text: "text-orange-800",
+                iconBg: "bg-orange-100",
+                iconText: "text-orange-600",
+                hoverText: "hover:text-orange-700",
+                buttonText: "text-orange-600",
+                badgeBg: "bg-blue-500", // Default badge
+                badgeText: "text-white",
+            };
+        case "green":
+            return {
+                bg: "bg-green-100",
+                text: "text-green-800",
+                iconBg: "bg-green-100",
+                iconText: "text-green-600",
+                hoverText: "hover:text-green-700",
+                buttonText: "text-green-600",
+                badgeBg: "bg-green-500",
+                badgeText: "text-white",
+            };
+        case "purple":
+            return {
+                bg: "bg-purple-100",
+                text: "text-purple-800",
+                iconBg: "bg-purple-100",
+                iconText: "text-purple-600",
+                hoverText: "hover:text-purple-700",
+                buttonText: "text-purple-600",
+                badgeBg: "bg-purple-500",
+                badgeText: "text-white",
+            };
+        default:
+            return {
+                bg: "bg-gray-100",
+                text: "text-gray-800",
+                iconBg: "bg-gray-100",
+                iconText: "text-gray-600",
+                hoverText: "hover:text-gray-700",
+                buttonText: "text-gray-600",
+                badgeBg: "bg-gray-500",
+                badgeText: "text-white",
+            };
+    }
+};
+---
+
+<Layout title={data.title} description={data.description} lang={currentLang}>
+    <Header />
+
+    <main class="min-h-screen bg-gray-50">
+        <!-- Breadcrumb -->
+        <section class="py-4 bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-4">
+                        <li>
+                            <div>
+                                <a
+                                    href={getLocalizedPath("/", currentLang)}
+                                    class="text-gray-400 hover:text-gray-500"
+                                >
+                                    <svg
+                                        class="flex-shrink-0 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                                        ></path>
+                                    </svg>
+                                    <span class="sr-only">Home</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <a
+                                    href={getLocalizedPath(
+                                        "/study-hub",
+                                        currentLang,
+                                    )}
+                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                >
+                                    {
+                                        currentLang === "hi"
+                                            ? "अध्ययन केंद्र"
+                                            : "Study Hub"
+                                    }
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span
+                                    class="ml-4 text-sm font-medium text-gray-900"
+                                    >{data.hero.title}</span
+                                >
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Page Header -->
+        <section
+            class="py-12 bg-gradient-to-r from-blue-500 to-cyan-600 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div
+                        class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-8 h-8 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold">{data.hero.title}</h1>
+                        <p class="text-xl text-blue-100 mt-2">
+                            {data.hero.description}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    {
+                        data.stats?.map((stat) => (
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <div class="text-2xl font-bold">
+                                    {stat.value}
+                                </div>
+                                <div class="text-blue-100">{stat.label}</div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="py-8 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col gap-4">
+                    <!-- Search Bar -->
+                    <div class="w-full">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                placeholder={data.filter_options
+                                    ?.search_placeholder}
+                                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                            />
+                            <svg
+                                class="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Filter Dropdowns -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.categories?.map(
+                                    (option) => <option>{option}</option>,
+                                )
+                            }
+                        </select>
+
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.periods?.map((option) => (
+                                    <option>{option}</option>
+                                ))
+                            }
+                        </select>
+
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.sort?.map((option) => (
+                                    <option>{option}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Maps Grid -->
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {
+                        documents.map((doc, index) => {
+                            const colors = getColorClasses(doc.period_color);
+                            return (
+                                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
+                                    <div
+                                        class={`relative h-48 bg-gradient-to-br ${doc.bg_gradient}`}
+                                    >
+                                        <img
+                                            src={doc.image_url}
+                                            alt={doc.title}
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute top-4 right-4">
+                                            <span
+                                                class={`${colors.badgeBg} ${colors.badgeText} px-2 py-1 rounded-full text-xs`}
+                                            >
+                                                {doc.image_label}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-6">
+                                        <div class="flex items-start justify-between mb-4">
+                                            <div
+                                                class={`w-12 h-12 ${colors.iconBg} rounded-lg flex items-center justify-center`}
+                                            >
+                                                <svg
+                                                    class={`w-6 h-6 ${colors.iconText}`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <span
+                                                class={`text-xs ${colors.bg} ${colors.text} px-2 py-1 rounded-full`}
+                                            >
+                                                {doc.period}
+                                            </span>
+                                        </div>
+
+                                        <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                            {doc.title}
+                                        </h3>
+                                        <p class="text-sm text-gray-600 mb-4">
+                                            {doc.description}
+                                        </p>
+
+                                        <div class="flex items-center text-xs text-gray-500 mb-4">
+                                            <svg
+                                                class="w-4 h-4 mr-1"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                                />
+                                            </svg>
+                                            <span class="mr-4">
+                                                {doc.scale || doc.resolution}
+                                            </span>
+                                            <svg
+                                                class="w-4 h-4 mr-1"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                            <span>{doc.year}</span>
+                                        </div>
+
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <svg
+                                                    class="w-4 h-4 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                    />
+                                                </svg>
+                                                <span class="mr-4">
+                                                    {doc.views}
+                                                </span>
+                                                <svg
+                                                    class="w-4 h-4 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V8"
+                                                    />
+                                                </svg>
+                                                <span>{doc.downloads}</span>
+                                            </div>
+                                            <button
+                                                class={`${colors.buttonText} ${colors.hoverText} font-medium text-sm`}
+                                            >
+                                                {currentLang === "hi"
+                                                    ? "मानचित्र देखें"
+                                                    : "View Map"}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+
+                <!-- Pagination -->
+                <div class="mt-12 flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        {
+                            currentLang === "hi" ? (
+                                <span>
+                                    <span class="font-medium">85</span> परिणामों
+                                    में से <span class="font-medium">1</span> से{" "}
+                                    <span class="font-medium">3</span> दिखाया जा
+                                    रहा है
+                                </span>
+                            ) : (
+                                <span>
+                                    Showing <span class="font-medium">1</span>{" "}
+                                    to <span class="font-medium">3</span> of{" "}
+                                    <span class="font-medium">85</span> results
+                                </span>
+                            )
+                        }
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button
+                            class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                        >
+                            {currentLang === "hi" ? "पिछला" : "Previous"}
+                        </button>
+                        <button
+                            class="px-3 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                        >
+                            1
+                        </button>
+                        <button
+                            class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                        >
+                            2
+                        </button>
+                        <button
+                            class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                        >
+                            3
+                        </button>
+                        <button
+                            class="px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                        >
+                            {currentLang === "hi" ? "अगला" : "Next"}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

@@ -1,0 +1,432 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import { getLocalizedPath, type Language } from "../../../../i18n";
+
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+    const rivers = await getCollection("rivers");
+    return rivers.map((river) => {
+        const [slug, lang] = river.slug.split("/");
+        return {
+            params: { lang, slug },
+            props: { entry: river },
+        };
+    });
+}
+
+interface Props {
+    entry: CollectionEntry<"rivers">;
+}
+
+const { lang, slug } = Astro.params;
+const { entry } = Astro.props;
+
+if (!entry) {
+    return Astro.redirect("/404");
+}
+
+const currentLang = lang as Language;
+const { data } = entry;
+
+// Helper translations for UI elements not in content
+const t = {
+    home: { en: "Home", hi: "मुख्य पृष्ठ" },
+    rivers: { en: "Rivers", hi: "नदियां" },
+    back_to_rivers: { en: "Back to Rivers", hi: "नदियों पर वापस जाएं" },
+};
+---
+
+<Layout
+    title={`${data.title} - Nadi Stuti`}
+    description={data.description}
+    lang={currentLang}
+>
+    <Header />
+
+    <!-- Breadcrumbs -->
+    <nav class="bg-gray-50 border-b border-gray-200" aria-label="Breadcrumb">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-2 py-4 text-sm sm:text-base">
+                <a
+                    href={getLocalizedPath("/", currentLang)}
+                    class="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                    {t.home[currentLang] || t.home.en}
+                </a>
+                <svg
+                    class="w-4 h-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"></path>
+                </svg>
+                <a
+                    href={getLocalizedPath("/rivers", currentLang)}
+                    class="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                    {t.rivers[currentLang] || t.rivers.en}
+                </a>
+                <svg
+                    class="w-4 h-4 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5l7 7-7 7"></path>
+                </svg>
+                <span class="text-gray-900 font-medium truncate">
+                    {data.title}
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="min-h-screen bg-white">
+        <!-- Hero Section -->
+        <section class="relative h-96 overflow-hidden">
+            <div class="absolute inset-0">
+                <img
+                    src={data.hero_image}
+                    alt={data.title}
+                    class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-black/50"></div>
+            </div>
+            <div
+                class="relative z-10 h-full flex items-center justify-center text-white text-center px-4"
+            >
+                <div>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                        <span
+                            class="block text-2xl font-normal mb-2 text-blue-200 font-sanskrit"
+                        >
+                            {data.sanskrit_name}
+                        </span>
+                        {data.title}
+                    </h1>
+                    <p class="text-xl md:text-2xl text-gray-200">
+                        {data.short_description}
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Geographical Details -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                    {data.geo_details.title}
+                </h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                            Basic Information
+                        </h3>
+                        <dl class="space-y-3">
+                            <div
+                                class="flex justify-between border-b border-blue-100 pb-2"
+                            >
+                                <dt class="font-medium text-gray-700">
+                                    Source:
+                                </dt>
+                                <dd class="text-gray-900 text-right">
+                                    {data.geo_details.source}
+                                </dd>
+                            </div>
+                            <div
+                                class="flex justify-between border-b border-blue-100 pb-2"
+                            >
+                                <dt class="font-medium text-gray-700">
+                                    Length:
+                                </dt>
+                                <dd class="text-gray-900 text-right">
+                                    {data.geo_details.length}
+                                </dd>
+                            </div>
+                            <div
+                                class="flex justify-between border-b border-blue-100 pb-2"
+                            >
+                                <dt class="font-medium text-gray-700">
+                                    Basin Area:
+                                </dt>
+                                <dd class="text-gray-900 text-right">
+                                    {data.geo_details.basin_area}
+                                </dd>
+                            </div>
+                            <div
+                                class="flex justify-between border-b border-blue-100 pb-2"
+                            >
+                                <dt class="font-medium text-gray-700">
+                                    Mouth:
+                                </dt>
+                                <dd class="text-gray-900 text-right">
+                                    {data.geo_details.mouth}
+                                </dd>
+                            </div>
+                            <div class="pt-2">
+                                <dt class="font-medium text-gray-700 mb-1">
+                                    States:
+                                </dt>
+                                <dd class="text-gray-900">
+                                    {data.geo_details.states}
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="bg-orange-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                            {data.geo_details.sacred_geography.title}
+                        </h3>
+                        <ul class="space-y-2 text-gray-700">
+                            {
+                                data.geo_details.sacred_geography.places.map(
+                                    (place) => (
+                                        <li>
+                                            • <strong>{place.name}:</strong>{" "}
+                                            {place.description}
+                                        </li>
+                                    ),
+                                )
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Major Tributaries -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                    {data.tributaries.title}
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                            {data.tributaries.right_bank.title}
+                        </h3>
+                        <ul class="space-y-3">
+                            {
+                                data.tributaries.right_bank.list.map(
+                                    (tributary) => (
+                                        <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-blue-500">
+                                            <strong class="text-gray-900">
+                                                {tributary.name}:
+                                            </strong>
+                                            <span class="text-gray-600 block mt-1 text-sm">
+                                                {tributary.description}
+                                            </span>
+                                        </li>
+                                    ),
+                                )
+                            }
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                            {data.tributaries.left_bank.title}
+                        </h3>
+                        <ul class="space-y-3">
+                            {
+                                data.tributaries.left_bank.list.map(
+                                    (tributary) => (
+                                        <li class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-green-500">
+                                            <strong class="text-gray-900">
+                                                {tributary.name}:
+                                            </strong>
+                                            <span class="text-gray-600 block mt-1 text-sm">
+                                                {tributary.description}
+                                            </span>
+                                        </li>
+                                    ),
+                                )
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cultural and Religious Significance -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                    {data.cultural_significance.title}
+                </h2>
+                <div class="prose prose-lg max-w-none">
+                    <div
+                        class="bg-gradient-to-r from-orange-50 to-yellow-50 p-8 rounded-lg mb-8"
+                    >
+                        <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                            {data.cultural_significance.hindu_tradition.title}
+                        </h3>
+                        <p
+                            class="text-gray-700 leading-relaxed whitespace-pre-line"
+                        >
+                            {
+                                data.cultural_significance.hindu_tradition
+                                    .description
+                            }
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h4
+                                class="text-lg font-semibold text-gray-900 mb-3"
+                            >
+                                {data.cultural_significance.festivals.title}
+                            </h4>
+                            <ul class="space-y-2 text-gray-700">
+                                {
+                                    data.cultural_significance.festivals.list.map(
+                                        (festival) => (
+                                            <li>
+                                                •{" "}
+                                                <strong>
+                                                    {festival.name}:
+                                                </strong>{" "}
+                                                {festival.description}
+                                            </li>
+                                        ),
+                                    )
+                                }
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 p-6 rounded-lg">
+                            <h4
+                                class="text-lg font-semibold text-gray-900 mb-3"
+                            >
+                                {data.cultural_significance.practices.title}
+                            </h4>
+                            <ul class="space-y-2 text-gray-700">
+                                {
+                                    data.cultural_significance.practices.list.map(
+                                        (practice) => (
+                                            <li>
+                                                •{" "}
+                                                <strong>
+                                                    {practice.name}:
+                                                </strong>{" "}
+                                                {practice.description}
+                                            </li>
+                                        ),
+                                    )
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Scriptural References -->
+            <section class="mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-8">
+                    {data.scriptural_references.title}
+                </h2>
+                <div class="space-y-6">
+                    {
+                        data.scriptural_references.references.map(
+                            (ref, index) => (
+                                <div
+                                    class={`p-6 rounded-lg ${index % 2 === 0 ? "bg-gradient-to-r from-orange-100 to-yellow-100" : "bg-blue-100"}`}
+                                >
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                                        {ref.source}
+                                    </h3>
+                                    <blockquote class="text-gray-800 italic mb-3 font-serif text-lg">
+                                        "{ref.quote}"
+                                    </blockquote>
+                                    {ref.meaning && (
+                                        <p class="text-gray-700 text-sm">
+                                            {ref.meaning}
+                                        </p>
+                                    )}
+                                </div>
+                            ),
+                        )
+                    }
+                </div>
+            </section>
+
+            <!-- Download PDF -->
+            <section class="text-center">
+                <div
+                    class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-lg"
+                >
+                    <h3 class="text-2xl font-bold mb-4">
+                        {data.pdf_download.title}
+                    </h3>
+                    <p class="text-blue-100 mb-6">
+                        {data.pdf_download.description}
+                    </p>
+                    <a
+                        href={data.pdf_download.file_path}
+                        target="_blank"
+                        class="inline-flex items-center bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all transform hover:scale-105"
+                    >
+                        <svg
+                            class="w-5 h-5 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            ></path>
+                        </svg>
+                        {data.pdf_download.button_text}
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- Back to Rivers Button -->
+        <div
+            class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16"
+        >
+            <a
+                href={getLocalizedPath("/rivers", currentLang)}
+                class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group"
+            >
+                <svg
+                    class="w-5 h-5 mr-2 transform group-hover:-translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 19l-7-7 7-7"></path>
+                </svg>
+                {t.back_to_rivers[currentLang] || t.back_to_rivers.en}
+            </a>
+        </div>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .font-sanskrit {
+        font-family: "Noto Sans Devanagari", "Arial Unicode MS", sans-serif;
+    }
+</style>

@@ -1,0 +1,569 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import { getLocalizedPath, type Language } from "../../../../i18n";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "hi" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang as Language;
+
+const entry = await getEntry("study_hub_holy_calendar", currentLang);
+
+if (!entry) {
+    return Astro.redirect("/404");
+}
+
+const { data } = entry;
+
+const getRiverColorClasses = (color: string) => {
+    switch (color) {
+        case "blue":
+            return { bg: "bg-blue-100", text: "text-blue-800" };
+        case "yellow":
+            return { bg: "bg-yellow-100", text: "text-yellow-800" };
+        case "green":
+            return { bg: "bg-green-100", text: "text-green-800" };
+        case "purple":
+            return { bg: "bg-purple-100", text: "text-purple-800" };
+        case "orange":
+            return { bg: "bg-orange-100", text: "text-orange-800" };
+        case "pink":
+            return { bg: "bg-pink-100", text: "text-pink-800" };
+        case "red":
+            return { bg: "bg-red-100", text: "text-red-800" };
+        default:
+            return { bg: "bg-gray-100", text: "text-gray-800" };
+    }
+};
+
+const getBorderColorClass = (color: string) => {
+    switch (color) {
+        case "emerald":
+            return "border-emerald-500";
+        case "purple":
+            return "border-purple-500";
+        case "orange":
+            return "border-orange-500";
+        default:
+            return "border-gray-500";
+    }
+};
+
+const getIconColorClasses = (color: string) => {
+    switch (color) {
+        case "emerald":
+            return { bg: "bg-emerald-100", text: "text-emerald-600" };
+        case "purple":
+            return { bg: "bg-purple-100", text: "text-purple-600" };
+        case "orange":
+            return { bg: "bg-orange-100", text: "text-orange-600" };
+        case "blue": // For past events used blue in static
+            return { bg: "bg-blue-100", text: "text-blue-600" };
+        default:
+            return { bg: "bg-gray-100", text: "text-gray-600" };
+    }
+};
+
+const getButtonColorClasses = (color: string) => {
+    switch (color) {
+        case "emerald":
+            return "text-emerald-600 hover:text-emerald-700";
+        case "purple":
+            return "text-purple-600 hover:text-purple-700";
+        case "orange":
+            return "text-orange-600 hover:text-orange-700";
+        default:
+            return "text-gray-600 hover:text-gray-700";
+    }
+};
+---
+
+<Layout title={data.title} description={data.description} lang={currentLang}>
+    <Header />
+
+    <main class="min-h-screen bg-gray-50">
+        <!-- Breadcrumb -->
+        <section class="py-4 bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-4">
+                        <li>
+                            <div>
+                                <a
+                                    href={getLocalizedPath("/", currentLang)}
+                                    class="text-gray-400 hover:text-gray-500"
+                                >
+                                    <svg
+                                        class="flex-shrink-0 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                                        ></path>
+                                    </svg>
+                                    <span class="sr-only">Home</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <a
+                                    href={getLocalizedPath(
+                                        "/study-hub",
+                                        currentLang,
+                                    )}
+                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                >
+                                    {
+                                        currentLang === "hi"
+                                            ? "अध्ययन केंद्र"
+                                            : "Study Hub"
+                                    }
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span
+                                    class="ml-4 text-sm font-medium text-gray-900"
+                                    >{data.hero.title}</span
+                                >
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Page Header -->
+        <section
+            class="py-12 bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div
+                        class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-8 h-8 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold">{data.hero.title}</h1>
+                        <p class="text-xl text-emerald-100 mt-2">
+                            {data.hero.description}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+                    {
+                        data.stats.map((stat) => (
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <div class="text-2xl font-bold">
+                                    {stat.value}
+                                </div>
+                                <div class="text-emerald-100">{stat.label}</div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendar Navigation -->
+        <section class="py-8 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="flex flex-col lg:flex-row gap-6 items-center justify-between"
+                >
+                    <div class="flex items-center space-x-4">
+                        <button
+                            class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                        >
+                            <svg
+                                class="w-4 h-4 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            {
+                                currentLang === "hi"
+                                    ? "पिछला महीना"
+                                    : "Previous Month"
+                            }
+                        </button>
+                        <div class="text-center">
+                            <h2 class="text-2xl font-bold text-gray-900">
+                                {data.calendar_info.month_year}
+                            </h2>
+                            <p class="text-sm text-gray-600">
+                                {data.calendar_info.hindu_month}
+                            </p>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                        >
+                            {currentLang === "hi" ? "अगला महीना" : "Next Month"}
+                            <svg
+                                class="w-4 h-4 ml-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <select
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                        >
+                            {
+                                data.filter_options.rivers.map((option) => (
+                                    <option>{option}</option>
+                                ))
+                            }
+                        </select>
+
+                        <select
+                            class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                        >
+                            {
+                                data.filter_options.event_types.map(
+                                    (option) => <option>{option}</option>,
+                                )
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upcoming Events -->
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {
+                            currentLang === "hi"
+                                ? "आगामी पवित्र कार्यक्रम"
+                                : "Upcoming Sacred Events"
+                        }
+                    </h2>
+                    <p class="text-gray-600">
+                        {
+                            currentLang === "hi"
+                                ? "इन महत्वपूर्ण तिथियों और उत्सवों को न चूकें"
+                                : "Don't miss these important dates and celebrations"
+                        }
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    {
+                        data.upcoming_events.map((event) => {
+                            const borderClass = getBorderColorClass(
+                                event.border_color,
+                            );
+                            const iconColors = getIconColorClasses(
+                                event.border_color,
+                            ); // Using border color effectively as type color
+                            const riverColors = getRiverColorClasses(
+                                event.river_color,
+                            );
+                            const buttonClass = getButtonColorClasses(
+                                event.border_color,
+                            );
+                            return (
+                                <div
+                                    class={`bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6 border-l-4 ${borderClass}`}
+                                >
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div
+                                                class={`w-12 h-12 ${iconColors.bg} rounded-lg flex items-center justify-center`}
+                                            >
+                                                <svg
+                                                    class={`w-6 h-6 ${iconColors.text}`}
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div
+                                                    class={`text-sm font-medium ${iconColors.text}`}
+                                                >
+                                                    {event.date}
+                                                </div>
+                                                <div class="text-xs text-gray-500">
+                                                    {event.tithi}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class={`text-xs ${riverColors.bg} ${riverColors.text} px-2 py-1 rounded-full`}
+                                        >
+                                            {event.river}
+                                        </span>
+                                    </div>
+
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                        {event.title}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 mb-4">
+                                        {event.description}
+                                    </p>
+
+                                    <div class="space-y-2 mb-4">
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                                />
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                                />
+                                            </svg>
+                                            <span>{event.location}</span>
+                                        </div>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                            <span>{event.time}</span>
+                                        </div>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                                />
+                                            </svg>
+                                            <span>{event.organizer}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-green-600 font-medium bg-green-100 px-2 py-1 rounded-full">
+                                            {event.days_left_label}
+                                        </span>
+                                        <button
+                                            class={`${buttonClass} font-medium text-sm`}
+                                        >
+                                            {currentLang === "hi"
+                                                ? "विवरण देखें"
+                                                : "View Details"}
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+
+                <!-- Recent Past Events -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                        {
+                            currentLang === "hi"
+                                ? "हालिया और पिछले आयोजन"
+                                : "Recent Past Events"
+                        }
+                    </h2>
+                    <p class="text-gray-600">
+                        {
+                            currentLang === "hi"
+                                ? "हाल के उत्सवों और उनके महत्व के बारे में जानें"
+                                : "Learn about recent celebrations and their significance"
+                        }
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    {
+                        data.past_events.map((event) => {
+                            const riverColors = getRiverColorClasses(
+                                event.river_color,
+                            );
+                            return (
+                                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400 opacity-75">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                                                <svg
+                                                    class="w-6 h-6 text-gray-600"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                                                    />
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm font-medium text-gray-600">
+                                                    {event.date}
+                                                </div>
+                                                <div class="text-xs text-gray-500">
+                                                    {event.tithi}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <span
+                                            class={`text-xs ${riverColors.bg} ${riverColors.text} px-2 py-1 rounded-full`}
+                                        >
+                                            {event.river}
+                                        </span>
+                                    </div>
+
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                        {event.title}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 mb-4">
+                                        {event.description}
+                                    </p>
+
+                                    <div class="space-y-2 mb-4">
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                                />
+                                            </svg>
+                                            <span>{event.attendance}</span>
+                                        </div>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                                                />
+                                            </svg>
+                                            <span>{event.status}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-xs text-gray-600 font-medium bg-gray-100 px-2 py-1 rounded-full">
+                                            {event.days_ago_label}
+                                        </span>
+                                        <button class="text-emerald-600 hover:text-emerald-700 font-medium text-sm">
+                                            {currentLang === "hi"
+                                                ? "रिपोर्ट देखें"
+                                                : "View Report"}
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

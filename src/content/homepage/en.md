@@ -1,0 +1,106 @@
+---
+title: "NadiStuti - A Tribute to Holy Indian Rivers"
+subtitle: "Discover the spiritual and geographical significance of India's sacred rivers through the ancient Nadi Stuti hymn."
+mission: "Our mission is to preserve and promote the cultural heritage of India's rivers through technology and education."
+hero:
+  image: "/images/ganga-sunrise.jpg"
+  alt: "Sacred Ganga at sunrise"
+  read_hymn_button: "Read Hymn"
+  explore_rivers_button: "Explore Rivers"
+hymn:
+  title: "The Nadi Stuti Hymn"
+  description: "Rig Veda 10.75 - A timeless invocation to the rivers"
+  translation_title: "English Translation"
+  download_pdf_button: "Download PDF"
+  sanskrit_text:
+    - "प्र सु व॑ आपो महि॒मान॑मुत्त॒मं का॒रुर्वो॑चाति॒ सद॑ने वि॒वस्व॑तः ।"
+    - "प्र स॒प्तस॑प्त त्रे॒धा हि च॑क्र॒मुः प्र सृत्व॑रीणा॒मति॒ सिन्धु॒रोज॑सा ॥ (1)"
+    - "प्र ते॑ऽरद॒द्वरु॑णो॒ यात॑वे प॒थः सिन्धो॒ यद्वाजाँ॑ अ॒भ्यद्र॑व॒स्त्वम्"
+    - "भूम्या॒ अधि॑ प्र॒वता॑ यासि॒ सानु॑ना॒ यदे॑षा॒मग्रं॒ जग॑तामिर॒ज्यसि॑ ॥ (2)"
+    - "दि॒वि स्व॒नो य॑तते॒ भूम्यो॒पर्य॑न॒न्तं शुष्म॒मुदि॑यर्ति भा॒नुना॑ ।"
+    - "अ॒भ्रादि॑व॒ प्र स्त॑नयन्ति वृ॒ष्टय॒: सिन्धु॒र्यदेति॑ वृष॒भो न रोरु॑वत् ॥ (3)"
+  translation_text:
+    - "“Waters, the worshipper addresses to you excellent praise in the dwelling of the instrumental tutor of the rite;they flowed by sevens through the three (worlds); but the Sindhu surpasses (all) the (other) streams in strength.” (1)"
+    - "“For your course, Sindhu, Varuṇa tore open a path, since you hastened towards food; you go by alofty road down upon the earth, by which (road) you reign in the sight of all worlds.” (2)"
+    - "“The sound goes forth in heaven above the earth; (Sindhu) with shining wave animates his endlessspeed; as rains issue thundering from the cloud, so Sindhu (thunders) when he advances roaring like a bull.” (3)"
+rivers_section:
+  title: "Sacred Rivers of India"
+  description: "Explore the 10 holy rivers mentioned in the Nadi Stuti hymn and their cultural significance."
+  view_map_button: "View Interactive Map"
+  view_calendar_button: "Holy Calendar"
+  rivers_list:
+    - name: "Ganga"
+      sanskrit: "गङ्गा"
+      slug: "ganga"
+    - name: "Yamuna"
+      sanskrit: "यमुना"
+      slug: "yamuna"
+    - name: "Saraswati"
+      sanskrit: "सरस्वती"
+      slug: "saraswati"
+    - name: "Krishna"
+      sanskrit: "कृष्णा"
+      slug: "krishna"
+    - name: "Kaveri"
+      sanskrit: "कावेरी"
+      slug: "kaveri"
+    - name: "Godavari"
+      sanskrit: "गोदावरी"
+      slug: "godavari"
+    - name: "Brahmaputra"
+      sanskrit: "ब्रह्मपुत्र"
+      slug: "brahmaputra"
+    - name: "Narmada"
+      sanskrit: "नर्मदा"
+      slug: "narmada"
+    - name: "Indus"
+      sanskrit: "सिन्धु"
+      slug: "indus"
+    - name: "Mahanadi"
+      sanskrit: "महानदी"
+      slug: "mahanadi"
+mission_section:
+  title: "Our Mission"
+  description: "Bridging ancient wisdom with modern technology to preserve our river heritage."
+  cards:
+    app_developers:
+      title: "For App Developers"
+      description: "Access our open APIs and SDKs to build spiritual and educational apps centered around Indian rivers."
+    knowledge:
+      title: "Knowledge Consolidation"
+      description: "A central repository of river data, hymns, and cultural history verified by scholars."
+    creators:
+      title: "For Content Creators"
+      description: "High-quality assets, images, and audio for your videos and social media content."
+    artisan:
+      title: "Artisan Empowerment"
+      description: "Supporting local artisans who create river-centric art and handicrafts."
+    conservation:
+      title: "River Conservation"
+      description: "Partnering with NGOs to promote cleanliness and ecological balance of our rivers."
+    community:
+      title: "Community Building"
+      description: "Connecting devotees worldwide to share stories, experiences, and organize events."
+  cta:
+    title: "Join the Movement"
+    description: "Be a part of this digital renaissance of Indian culture."
+    join_button: "Join Community"
+    contribute_button: "Start Contributing"
+services_section:
+  title: "Our Services"
+  description: "Tools and resources for devotees, students, and developers."
+  apps:
+    title: "Mobile Apps"
+    description: "Enhance your spiritual journey with our suite of mobile applications."
+    featured_app_label: "Featured App"
+    featured_app_name: "Ganga Aarti Timer"
+    try_button: "Try Ganga Aarti Timer"
+    download_button: "Download Apps"
+  study_hub:
+    title: "Study Hub"
+    description: "Learn about the geography, history, and mythology of Indian rivers."
+    featured_course_label: "Featured Course"
+    featured_course_name: "Sanskrit River Hymns"
+    start_learning_button: "Start Learning"
+    explore_button: "Explore Study Hub"
+---

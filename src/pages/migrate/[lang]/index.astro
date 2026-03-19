@@ -1,0 +1,843 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import AudioPlayer from "../../../components/AudioPlayer";
+import { getLocalizedPath, type Language } from "../../../i18n";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("homepage");
+    return pages.map((page) => {
+        const [lang] = page.slug.split("/");
+        // If the slug is just 'en' or 'hi', use that.
+        // If it was 'homepage/en', we would need to parse differently.
+        // Based on my creation, the slug is just the filename 'en' or 'hi'.
+        return { params: { lang: page.slug } };
+    });
+}
+
+const { lang } = Astro.params;
+const entry = await getEntry("homepage", lang);
+
+if (!entry || !lang) {
+    return Astro.redirect("/404");
+}
+
+// Type assertion since we've validated lang exists and is a valid homepage entry
+const currentLang = lang as Language;
+const { data } = entry;
+---
+
+<Layout title={data.title} description={data.subtitle} lang={currentLang}>
+    <Header />
+
+    <main class="">
+        <!-- Hero Section -->
+        <section
+            class="relative min-h-screen flex items-center justify-center overflow-hidden selection:bg-amber-700"
+        >
+            <!-- Background Image -->
+            <div class="absolute inset-0 z-0">
+                <img
+                    src={data.hero.image}
+                    alt={data.hero.alt}
+                    class="w-full h-full object-cover"
+                    loading="eager"
+                />
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white"
+            >
+                <h1
+                    class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-multilang"
+                >
+                    <span
+                        class="block text-2xl md:text-3xl font-normal mb-2 text-orange-200 font-sanskrit"
+                        >नदीस्तुति</span
+                    >
+                    {
+                        data.title
+                            .replace("NadiStuti - ", "")
+                            .replace("नदीस्तुति - ", "")
+                    }
+                </h1>
+                <p
+                    class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto text-multilang"
+                >
+                    {data.subtitle}
+                </p>
+
+                <!-- Mission Statement -->
+                <div
+                    class="bg-white/10 backdrop-blur-md rounded-lg p-6 mb-8 max-w-3xl mx-auto"
+                >
+                    <p class="text-lg text-gray-100 text-multilang">
+                        "{data.mission}"
+                    </p>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a
+                        href="#hymn"
+                        class="bg-gradient-to-r from-amber-600 to-amber-800 hover:from-amber-700 hover:to-amber-800 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    >
+                        {data.hero.read_hymn_button}
+                    </a>
+                    <a
+                        href={getLocalizedPath("/rivers", currentLang)}
+                        class="bg-white/20 backdrop-blur-md hover:bg-white/30 text-white px-8 py-3 rounded-lg font-semibold transition-all border border-white/30"
+                    >
+                        {data.hero.explore_rivers_button}
+                    </a>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div
+                class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+            >
+                <svg
+                    class="w-6 h-6 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- Rig Veda Hymn Section -->
+        <section id="hymn" class="py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+                    >
+                        {data.hymn.title}
+                    </h2>
+                    <p
+                        class="text-lg text-gray-600 max-w-2xl mx-auto text-multilang"
+                    >
+                        {data.hymn.description}
+                    </p>
+                </div>
+
+                <!-- Audio Player -->
+                <div class="mb-12">
+                    <AudioPlayer client:load />
+                </div>
+
+                <!-- Sanskrit Text and Translation -->
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Sanskrit Text -->
+                    <div
+                        class="bg-gradient-to-br from-orange-50 to-yellow-50 p-6 rounded-lg"
+                    >
+                        <h3
+                            class="text-xl font-semibold text-gray-900 mb-4 text-center"
+                        >
+                            Sanskrit Text
+                        </h3>
+                        <div
+                            class="space-y-4 text-lg leading-relaxed font-sanskrit text-indic"
+                        >
+                            {
+                                data.hymn.sanskrit_text.map((text) => (
+                                    <p class="text-center text-gray-800">
+                                        {text}
+                                    </p>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Translation -->
+                    <div
+                        class="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-lg"
+                    >
+                        <h3
+                            class="text-xl font-semibold text-gray-900 mb-4 text-center"
+                        >
+                            {data.hymn.translation_title}
+                        </h3>
+                        <div
+                            class="space-y-4 text-gray-700 leading-relaxed text-multilang"
+                        >
+                            {
+                                data.hymn.translation_text.map((text) => (
+                                    <p>{text}</p>
+                                ))
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download PDF Button -->
+                <div class="text-center">
+                    <a
+                        href="/data/stuti/rigved/nadi-stuti-hindi.pdf"
+                        target="_blank"
+                        class="inline-flex items-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105"
+                    >
+                        <svg
+                            class="w-5 h-5 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                            ></path>
+                        </svg>
+                        {data.hymn.download_pdf_button}
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rivers Overview Section -->
+        <section class="py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+                    >
+                        {data.rivers_section.title}
+                    </h2>
+                    <p
+                        class="text-lg text-gray-600 max-w-2xl mx-auto text-multilang"
+                    >
+                        {data.rivers_section.description}
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+                    {
+                        data.rivers_section.rivers_list.map((river) => (
+                            <a
+                                href={getLocalizedPath(
+                                    `/rivers/${river.slug}`,
+                                    currentLang,
+                                )}
+                                class="group bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all transform hover:scale-105"
+                            >
+                                <div class="text-center">
+                                    <div class="text-2xl font-sanskrit text-blue-600 mb-2 text-indic">
+                                        {river.sanskrit}
+                                    </div>
+                                    <div class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                                        {river.name}
+                                    </div>
+                                </div>
+                            </a>
+                        ))
+                    }
+                </div>
+
+                <div class="text-center mt-12">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href={getLocalizedPath("/rivers#map", currentLang)}
+                            class="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                        >
+                            <svg
+                                class="w-5 h-5 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4M9 7l6 3m0 0l6-3"
+                                ></path>
+                            </svg>
+                            {data.rivers_section.view_map_button}
+                        </a>
+                        <a
+                            href={getLocalizedPath(
+                                "/rivers#calendar",
+                                currentLang,
+                            )}
+                            class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-semibold transition-all"
+                        >
+                            <svg
+                                class="w-5 h-5 mr-2"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                                ></path>
+                            </svg>
+                            {data.rivers_section.view_calendar_button}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Mission Section -->
+        <section
+            class="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-multilang"
+                    >
+                        {data.mission_section.title}
+                    </h2>
+                    <p
+                        class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed text-multilang"
+                    >
+                        {data.mission_section.description}
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-12 mb-16">
+                    <!-- Left Column -->
+                    <div class="space-y-8">
+                        <!-- App Developers Platform -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards
+                                                .app_developers.title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards
+                                                .app_developers.description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Knowledge Consolidation -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-emerald-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.knowledge
+                                                .title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.knowledge
+                                                .description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Creators Support -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-red-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-red-500 to-pink-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.creators
+                                                .title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.creators
+                                                .description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="space-y-8">
+                        <!-- Artisan Empowerment -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-amber-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.artisan
+                                                .title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.artisan
+                                                .description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- River Conservation -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards
+                                                .conservation.title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards
+                                                .conservation.description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Building -->
+                        <div
+                            class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-indigo-100"
+                        >
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0">
+                                    <div
+                                        class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center"
+                                    >
+                                        <svg
+                                            class="w-6 h-6 text-white"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                            ></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="flex-1">
+                                    <h3
+                                        class="text-xl font-bold text-gray-900 mb-3 text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.community
+                                                .title
+                                        }
+                                    </h3>
+                                    <p
+                                        class="text-gray-600 leading-relaxed text-multilang"
+                                    >
+                                        {
+                                            data.mission_section.cards.community
+                                                .description
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div
+                    class="text-center bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-12 text-white"
+                >
+                    <h3 class="text-3xl font-bold mb-4 text-multilang">
+                        {data.mission_section.cta.title}
+                    </h3>
+                    <p
+                        class="text-xl text-indigo-100 mb-8 max-w-3xl mx-auto text-multilang"
+                    >
+                        {data.mission_section.cta.description}
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href={getLocalizedPath("/community", currentLang)}
+                            class="bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-all transform hover:scale-105 text-multilang"
+                        >
+                            {data.mission_section.cta.join_button}
+                        </a>
+                        <a
+                            href={getLocalizedPath("/contribute", currentLang)}
+                            class="bg-indigo-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-900 transition-all border border-indigo-400 text-multilang"
+                        >
+                            {data.mission_section.cta.contribute_button}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+                    >
+                        {data.services_section.title}
+                    </h2>
+                    <p
+                        class="text-lg text-gray-600 max-w-3xl mx-auto text-multilang"
+                    >
+                        {data.services_section.description}
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Apps Service -->
+                    <div
+                        class="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                    >
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-purple-600 rounded-full mb-6 mx-auto"
+                        >
+                            <svg
+                                class="w-8 h-8 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-gray-900 mb-4 text-center"
+                        >
+                            {data.services_section.apps.title}
+                        </h3>
+                        <p class="text-gray-600 mb-6 text-center">
+                            {data.services_section.apps.description}
+                        </p>
+                        <div
+                            class="bg-white rounded-lg p-4 mb-6 border-l-4 border-purple-500"
+                        >
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-semibold text-purple-700">
+                                        {
+                                            data.services_section.apps
+                                                .featured_app_label
+                                        }
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        {
+                                            data.services_section.apps
+                                                .featured_app_name
+                                        }
+                                    </p>
+                                </div>
+                                <div class="text-purple-600">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                                        ></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <a
+                                href={getLocalizedPath(
+                                    "/apps#ganga-aarti-timer",
+                                    currentLang,
+                                )}
+                                class="block w-full bg-purple-100 text-purple-700 px-6 py-2 rounded-lg font-medium hover:bg-purple-200 transition-colors text-center"
+                            >
+                                {data.services_section.apps.try_button}
+                            </a>
+                            <a
+                                href={getLocalizedPath("/apps", currentLang)}
+                                class="inline-flex items-center justify-center w-full bg-purple-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                            >
+                                {data.services_section.apps.download_button}
+                                <svg
+                                    class="w-4 h-4 ml-2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                                    ></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Study Hub Service -->
+                    <div
+                        class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-all transform hover:scale-105"
+                    >
+                        <div
+                            class="flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6 mx-auto"
+                        >
+                            <svg
+                                class="w-8 h-8 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                                ></path>
+                            </svg>
+                        </div>
+                        <h3
+                            class="text-xl font-bold text-gray-900 mb-4 text-center"
+                        >
+                            {data.services_section.study_hub.title}
+                        </h3>
+                        <p class="text-gray-600 mb-6 text-center">
+                            {data.services_section.study_hub.description}
+                        </p>
+                        <div
+                            class="bg-white rounded-lg p-4 mb-6 border-l-4 border-green-500"
+                        >
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-semibold text-green-700">
+                                        {
+                                            data.services_section.study_hub
+                                                .featured_course_label
+                                        }
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        {
+                                            data.services_section.study_hub
+                                                .featured_course_name
+                                        }
+                                    </p>
+                                </div>
+                                <div class="text-green-600">
+                                    <svg
+                                        class="w-6 h-6"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                                        ></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <a
+                                href={getLocalizedPath(
+                                    "/study-hub/courses/sanskrit-hymns",
+                                    currentLang,
+                                )}
+                                class="block w-full bg-green-100 text-green-700 px-6 py-2 rounded-lg font-medium hover:bg-green-200 transition-colors text-center"
+                            >
+                                {
+                                    data.services_section.study_hub
+                                        .start_learning_button
+                                }
+                            </a>
+                            <a
+                                href={getLocalizedPath(
+                                    "/study-hub",
+                                    currentLang,
+                                )}
+                                class="inline-flex items-center justify-center w-full bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+                            >
+                                {data.services_section.study_hub.explore_button}
+                                <svg
+                                    class="w-4 h-4 ml-2"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <Footer />
+    </main>
+</Layout>

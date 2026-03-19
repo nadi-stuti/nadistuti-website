@@ -1,0 +1,470 @@
+---
+import { getEntry, getCollection } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import { getLocalizedPath, type Language } from "../../../../i18n";
+
+export async function getStaticPaths() {
+    return [{ params: { lang: "en" } }, { params: { lang: "hi" } }];
+}
+
+const { lang } = Astro.params;
+const currentLang = lang as Language;
+
+const entry = await getEntry("study_hub_indices", `rituals/${currentLang}`);
+
+if (!entry) {
+    return Astro.redirect("/404");
+}
+
+const { data } = entry;
+
+// Fetch documents from the scalable collection
+const allResources = await getCollection("study_resources");
+const documents = allResources
+    .filter((doc) => {
+        return (
+            doc.data.category === "rituals" && doc.data.language === currentLang
+        );
+    })
+    .map((doc) => ({
+        ...doc.data,
+        river: doc.data.rivers?.[0] || "Ganga",
+        river_color: "blue",
+        time_label: currentLang === "hi" ? "समय:" : "Time:",
+        time_value: doc.data.time_range || "Daily",
+        duration_label: currentLang === "hi" ? "अवधि:" : "Duration:",
+        duration_value: doc.data.duration || "45 mins",
+        benefits_label: currentLang === "hi" ? "लाभ:" : "Benefits:",
+        benefits_value: "Spiritual Cleansing",
+        tag: doc.data.tags?.[0] || "Ritual",
+        tag_color: "orange",
+    }));
+
+const getCategoryColorClasses = (color: string) => {
+    switch (color) {
+        case "orange":
+            return {
+                bg: "bg-orange-100",
+                iconText: "text-orange-600",
+                badgeBg: "bg-orange-100",
+                badgeText: "text-orange-800",
+            };
+        case "purple":
+            return {
+                bg: "bg-purple-100",
+                iconText: "text-purple-600",
+                badgeBg: "bg-purple-100",
+                badgeText: "text-purple-800",
+            };
+        case "green":
+            return {
+                bg: "bg-green-100",
+                iconText: "text-green-600",
+                badgeBg: "bg-green-100",
+                badgeText: "text-green-800",
+            };
+        case "yellow":
+            return {
+                bg: "bg-yellow-100",
+                iconText: "text-yellow-600",
+                badgeBg: "bg-yellow-100",
+                badgeText: "text-yellow-800",
+            };
+        default:
+            return {
+                bg: "bg-gray-100",
+                iconText: "text-gray-600",
+                badgeBg: "bg-gray-100",
+                badgeText: "text-gray-800",
+            };
+    }
+};
+
+const getItemColorClasses = (color: string) => {
+    switch (color) {
+        case "orange":
+            return {
+                bg: "bg-orange-100",
+                text: "text-orange-800",
+                iconText: "text-orange-600",
+                textStandard: "text-orange-600",
+                hoverText: "hover:text-orange-700",
+            };
+        case "purple":
+            return {
+                bg: "bg-purple-100",
+                text: "text-purple-800",
+                iconText: "text-purple-600",
+                textStandard: "text-purple-600",
+                hoverText: "hover:text-purple-700",
+            };
+        case "green":
+            return {
+                bg: "bg-green-100",
+                text: "text-green-800",
+                iconText: "text-green-600",
+                textStandard: "text-green-600",
+                hoverText: "hover:text-green-700",
+            };
+        case "yellow":
+            return {
+                bg: "bg-yellow-100",
+                text: "text-yellow-800",
+                iconText: "text-yellow-600",
+                textStandard: "text-yellow-600",
+                hoverText: "hover:text-yellow-700",
+            };
+        case "blue":
+            return {
+                bg: "bg-blue-100",
+                text: "text-blue-800",
+                iconText: "text-blue-600",
+                textStandard: "text-blue-600",
+                hoverText: "hover:text-blue-700",
+            };
+        case "red":
+            return {
+                bg: "bg-red-100",
+                text: "text-red-800",
+                iconText: "text-red-600",
+                textStandard: "text-red-600",
+                hoverText: "hover:text-red-700",
+            };
+        default:
+            return {
+                bg: "bg-gray-100",
+                text: "text-gray-800",
+                iconText: "text-gray-600",
+                textStandard: "text-gray-600",
+                hoverText: "hover:text-gray-700",
+            };
+    }
+};
+---
+
+<Layout title={data.title} description={data.description} lang={currentLang}>
+    <Header />
+
+    <main class="min-h-screen bg-gray-50">
+        <!-- Breadcrumb -->
+        <section class="py-4 bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-4">
+                        <li>
+                            <div>
+                                <a
+                                    href={getLocalizedPath("/", currentLang)}
+                                    class="text-gray-400 hover:text-gray-500"
+                                >
+                                    <svg
+                                        class="flex-shrink-0 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
+                                        ></path>
+                                    </svg>
+                                    <span class="sr-only">Home</span>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <a
+                                    href={getLocalizedPath(
+                                        "/study-hub",
+                                        currentLang,
+                                    )}
+                                    class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+                                >
+                                    {
+                                        currentLang === "hi"
+                                            ? "अध्ययन केंद्र"
+                                            : "Study Hub"
+                                    }
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <svg
+                                    class="flex-shrink-0 h-5 w-5 text-gray-300"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20"
+                                >
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span
+                                    class="ml-4 text-sm font-medium text-gray-900"
+                                    >{data.hero.title}</span
+                                >
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Page Header -->
+        <section
+            class="py-12 bg-gradient-to-r from-orange-500 to-red-600 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div
+                        class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center"
+                    >
+                        <svg
+                            class="w-8 h-8 text-white"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+                            ></path>
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-4xl font-bold">{data.hero.title}</h1>
+                        <p class="text-xl text-orange-100 mt-2">
+                            {data.hero.description}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    {
+                        data.stats?.map((stat) => (
+                            <div class="bg-white/10 rounded-lg p-4">
+                                <div class="text-2xl font-bold">
+                                    {stat.value}
+                                </div>
+                                <div class="text-orange-100">{stat.label}</div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="py-8 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col gap-4">
+                    <!-- Search Bar -->
+                    <div class="w-full">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                placeholder={data.filter_options
+                                    ?.search_placeholder}
+                                class="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
+                            />
+                            <svg
+                                class="absolute left-3 top-3.5 h-5 w-5 text-gray-400"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Filter Dropdowns -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.rivers?.map((option) => (
+                                    <option>{option}</option>
+                                ))
+                            }
+                        </select>
+
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.categories?.map(
+                                    (option) => <option>{option}</option>,
+                                )
+                            }
+                        </select>
+
+                        <select
+                            class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-base"
+                        >
+                            {
+                                data.filter_options?.periods?.map((option) => (
+                                    <option>{option}</option>
+                                ))
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documents Grid -->
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {
+                        documents.map((doc) => {
+                            const riverColors = getItemColorClasses(
+                                doc.river_color,
+                            );
+                            const tagColors = getItemColorClasses(
+                                doc.tag_color,
+                            );
+                            return (
+                                <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow p-6">
+                                    <div class="flex items-start justify-between mb-4">
+                                        <div
+                                            class={`w-12 h-12 ${riverColors.bg} rounded-lg flex items-center justify-center`}
+                                        >
+                                            <svg
+                                                class={`w-6 h-6 ${riverColors.iconText}`}
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <span
+                                            class={`text-xs ${riverColors.bg} ${riverColors.text} px-2 py-1 rounded-full`}
+                                        >
+                                            {doc.river}
+                                        </span>
+                                    </div>
+
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-2">
+                                        {doc.title}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 mb-4">
+                                        {doc.description}
+                                    </p>
+
+                                    <div class="space-y-2 mb-4">
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                            <span class="font-medium mr-1">
+                                                {doc.time_label}
+                                            </span>{" "}
+                                            {doc.time_value}
+                                        </div>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                                                />
+                                            </svg>
+                                            <span class="font-medium mr-1">
+                                                {doc.duration_label}
+                                            </span>{" "}
+                                            {doc.duration_value}
+                                        </div>
+                                        <div class="flex items-center text-xs text-gray-500">
+                                            <svg
+                                                class="w-4 h-4 mr-2"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                />
+                                            </svg>
+                                            <span class="font-medium mr-1">
+                                                {doc.benefits_label}
+                                            </span>{" "}
+                                            {doc.benefits_value}
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center justify-between">
+                                        <span
+                                            class={`text-xs ${tagColors.textStandard} font-medium`}
+                                        >
+                                            {doc.tag}
+                                        </span>
+                                        <button class="text-orange-600 hover:text-orange-700 font-medium text-sm">
+                                            {currentLang === "hi"
+                                                ? "विवरण देखें"
+                                                : "View Details"}
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>

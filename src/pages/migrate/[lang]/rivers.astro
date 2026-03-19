@@ -1,0 +1,274 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import InteractiveMap from "../../../components/InteractiveMap";
+import { getLocalizedPath, type Language } from "../../../i18n";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("rivers_page");
+    return pages.map((page) => {
+        return { params: { lang: page.slug } };
+    });
+}
+
+const { lang } = Astro.params;
+const entry = await getEntry("rivers_page", lang);
+
+if (!entry || !lang) {
+    return Astro.redirect("/404");
+}
+
+const currentLang = lang as Language;
+const { data } = entry;
+
+const riverColors: Record<string, string> = {
+    ganga: "from-blue-400 to-blue-600",
+    yamuna: "from-indigo-400 to-indigo-600",
+    saraswati: "from-purple-400 to-purple-600",
+    krishna: "from-green-400 to-green-600",
+    kaveri: "from-orange-400 to-orange-600",
+    godavari: "from-teal-400 to-teal-600",
+    brahmaputra: "from-red-400 to-red-600",
+    narmada: "from-yellow-400 to-yellow-600",
+    indus: "from-gray-400 to-gray-600",
+    mahanadi: "from-pink-400 to-pink-600",
+};
+
+function getRiverColor(slug: string) {
+    return riverColors[slug] || "from-blue-400 to-blue-600";
+}
+---
+
+<Layout title={data.title} description={data.description} lang={currentLang}>
+    <Header />
+
+    <main class="min-h-screen bg-gray-50">
+        <!-- Hero Section -->
+        <section
+            class="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center"
+                        >
+                            <svg
+                                class="w-10 h-10 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4M9 7l6 3m0 0l6-3"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        {data.hero.title}
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl mb-8 text-blue-100 max-w-4xl mx-auto"
+                    >
+                        {data.hero.description}
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="#map"
+                            class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-all transform hover:scale-105"
+                        >
+                            {data.hero.explore_map_button}
+                        </a>
+                        <a
+                            href="#rivers"
+                            class="bg-blue-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-all border border-blue-500"
+                        >
+                            {data.hero.view_rivers_button}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Rivers Section -->
+        <section id="rivers" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.rivers_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        {data.rivers_section.description}
+                    </p>
+                </div>
+
+                <!-- Rivers Grid -->
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6"
+                >
+                    {
+                        data.rivers_section.rivers.map((river) => (
+                            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                                <div
+                                    class={`h-48 bg-gradient-to-br ${getRiverColor(river.slug)} flex items-center justify-center`}
+                                >
+                                    <div class="text-center text-white">
+                                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                                            <svg
+                                                class="w-8 h-8"
+                                                fill="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                                            </svg>
+                                        </div>
+                                        <h3 class="text-xl font-bold">
+                                            {river.name}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                        {river.description}
+                                    </p>
+                                    <a
+                                        href={getLocalizedPath(
+                                            `/rivers/${river.slug}`,
+                                            currentLang,
+                                        )}
+                                        class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium text-sm"
+                                    >
+                                        Learn More
+                                        <svg
+                                            class="w-4 h-4 ml-1"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 5l7 7-7 7"
+                                            />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section id="map" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.map_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        {data.map_section.description}
+                    </p>
+                </div>
+
+                <!-- Map Container -->
+                <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+                    <InteractiveMap client:load />
+                </div>
+
+                <!-- Instructions -->
+                <div class="mt-8 bg-white/80 backdrop-blur-md rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                        {data.map_section.instructions.title}
+                    </h3>
+                    <div
+                        class="grid md:grid-cols-3 gap-4 text-sm text-gray-600"
+                    >
+                        {
+                            data.map_section.instructions.steps.map(
+                                (step, index) => (
+                                    <div class="flex items-start space-x-2">
+                                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                            <span class="text-white text-xs font-bold">
+                                                {index + 1}
+                                            </span>
+                                        </div>
+                                        <p>{step}</p>
+                                    </div>
+                                ),
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Sacred River Calendar Section -->
+        <section
+            id="calendar"
+            class="py-16 bg-gradient-to-br from-emerald-50 to-teal-100"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 text-multilang"
+                    >
+                        {data.calendar_section.title}
+                    </h2>
+                    <p
+                        class="text-lg text-gray-600 max-w-3xl mx-auto text-multilang"
+                    >
+                        {data.calendar_section.description}
+                    </p>
+                </div>
+
+                <!-- Simplified Calendar Placeholder (Rest can be componentized if needed) -->
+                <div class="text-center pt-4">
+                    <a
+                        href={getLocalizedPath(
+                            "/study-hub/holy-calendar",
+                            currentLang,
+                        )}
+                        class="inline-flex items-center bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
+                    >
+                        <svg
+                            class="w-5 h-5 mr-2"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0V7a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1h-1"
+                            ></path>
+                        </svg>
+                        {data.calendar_section.view_full_button}
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<style>
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>

@@ -1,0 +1,523 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import { getLocalizedPath, type Language } from "../../../i18n";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("watch_page");
+    return pages.map((page) => {
+        return { params: { lang: page.slug } };
+    });
+}
+
+const { lang } = Astro.params;
+const entry = await getEntry("watch_page", lang);
+
+if (!entry || !lang) {
+    return Astro.redirect("/404");
+}
+
+const currentLang = lang as Language;
+const { data } = entry;
+---
+
+<Layout title={data.title} description={data.description} lang={currentLang}>
+    <Header />
+
+    <main class="min-h-screen bg-gray-50">
+        <!-- Page Header -->
+        <section
+            class="py-16 bg-gradient-to-r from-red-600 to-pink-700 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <div
+                            class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center"
+                        >
+                            <svg
+                                class="w-10 h-10 text-white"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        {data.hero.title}
+                    </h1>
+                    <p
+                        class="text-xl md:text-2xl mb-8 text-red-100 max-w-4xl mx-auto"
+                    >
+                        {data.hero.description}
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="#featured"
+                            class="bg-white text-red-600 px-8 py-3 rounded-lg font-semibold hover:bg-red-50 transition-all transform hover:scale-105"
+                        >
+                            {data.hero.featured_videos_button}
+                        </a>
+                        <a
+                            href="#channels"
+                            class="bg-red-800 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-900 transition-all border border-red-500"
+                        >
+                            {data.hero.browse_channels_button}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filter Section -->
+        <section class="py-8 bg-white border-b">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div
+                    class="flex flex-col md:flex-row gap-4 items-center justify-between"
+                >
+                    <div class="flex-1 max-w-2xl">
+                        <div class="relative">
+                            <input
+                                type="text"
+                                id="videoSearch"
+                                placeholder={data.search_section
+                                    .search_placeholder}
+                                class="w-full px-6 py-4 pr-12 text-lg rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-500 focus:border-transparent shadow-sm"
+                            />
+                            <button
+                                class="absolute right-3 top-3 text-gray-400 hover:text-red-500"
+                            >
+                                <svg
+                                    class="w-6 h-6"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                    ></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <select
+                            id="contentFilter"
+                            class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                        >
+                            <option value="all"
+                                >{data.search_section.filter_all}</option
+                            >
+                            <option value="featured"
+                                >{data.search_section.filter_featured}</option
+                            >
+                            <option value="live"
+                                >{data.search_section.filter_live}</option
+                            >
+                            <option value="playlists"
+                                >{data.search_section.filter_playlists}</option
+                            >
+                            <option value="channels"
+                                >{data.search_section.filter_channels}</option
+                            >
+                        </select>
+
+                        <select
+                            id="sortFilter"
+                            class="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                        >
+                            <option value="recent"
+                                >{data.search_section.sort_recent}</option
+                            >
+                            <option value="popular"
+                                >{data.search_section.sort_popular}</option
+                            >
+                            <option value="duration"
+                                >{data.search_section.sort_duration}</option
+                            >
+                            <option value="alphabetical"
+                                >{data.search_section.sort_alphabetical}</option
+                            >
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Videos Section -->
+        <section id="featured" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.featured_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        {data.featured_section.description}
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {
+                        data.featured_section.videos.map((video) => (
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow group">
+                                <div class="relative">
+                                    <div
+                                        class={`aspect-video bg-gradient-to-br ${video.gradient} flex items-center justify-center`}
+                                    >
+                                        <img
+                                            src={video.thumbnail}
+                                            alt={video.title}
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
+                                                <svg
+                                                    class="w-8 h-8 text-white ml-1"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="absolute top-4 right-4 bg-red-600 text-white px-2 py-1 rounded text-sm font-medium">
+                                        {data.ui_labels.featured_badge}
+                                    </div>
+                                    <div class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-sm">
+                                        {video.duration}
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-red-600 transition-colors">
+                                        {video.title}
+                                    </h3>
+                                    <p class="text-gray-600 mb-4 text-sm">
+                                        {video.description}
+                                    </p>
+                                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                        <div class="flex items-center space-x-4">
+                                            <span class="flex items-center">
+                                                <svg
+                                                    class="w-4 h-4 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                                                    />
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                                                    />
+                                                </svg>
+                                                {video.views}
+                                            </span>
+                                            <span class="flex items-center">
+                                                <svg
+                                                    class="w-4 h-4 mr-1"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                                                    />
+                                                </svg>
+                                                {video.likes}
+                                            </span>
+                                        </div>
+                                        <span>{video.uploaded}</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center">
+                                            <div
+                                                class={`w-8 h-8 bg-${video.channel_color}-100 rounded-full flex items-center justify-center mr-3`}
+                                            >
+                                                <svg
+                                                    class={`w-4 h-4 text-${video.channel_color}-600`}
+                                                    fill="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                                </svg>
+                                            </div>
+                                            <span class="text-sm font-medium text-gray-700">
+                                                {video.channel_name}
+                                            </span>
+                                        </div>
+                                        <button class="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-700 transition-colors">
+                                            {data.ui_labels.watch_now}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- All Videos Section -->
+        <section id="all-videos" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.all_videos_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        {data.all_videos_section.description}
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {
+                        data.all_videos_section.videos.map((video) => (
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow group">
+                                <div class="relative">
+                                    <div
+                                        class={`aspect-video bg-gradient-to-br ${video.gradient}`}
+                                    >
+                                        <img
+                                            src={video.thumbnail}
+                                            alt={video.title}
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
+                                                <svg
+                                                    class="w-6 h-6 text-white ml-0.5"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path d="M8 5v14l11-7z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white px-1.5 py-0.5 rounded text-xs">
+                                        {video.duration}
+                                    </div>
+                                </div>
+                                <div class="p-4">
+                                    <h3 class="font-semibold text-gray-900 mb-1 text-sm line-clamp-2">
+                                        {video.title}
+                                    </h3>
+                                    <p class="text-xs text-gray-600 mb-2">
+                                        {video.channel}
+                                    </p>
+                                    <div class="flex items-center justify-between text-xs text-gray-500">
+                                        <span>{video.views}</span>
+                                        <span>{video.uploaded}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+
+                <!-- Load More Button -->
+                <div class="text-center mt-12">
+                    <button
+                        class="bg-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors"
+                    >
+                        {data.all_videos_section.load_more_button}
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Playlists Section -->
+        <section id="playlists" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.playlists_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        {data.playlists_section.description}
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {
+                        data.playlists_section.playlists.map((playlist) => (
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                                <div class="relative">
+                                    <div
+                                        class={`aspect-video bg-gradient-to-br ${playlist.gradient}`}
+                                    >
+                                        <img
+                                            src={playlist.thumbnail}
+                                            alt={playlist.title}
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                                            <div class="text-center text-white">
+                                                <svg
+                                                    class="w-16 h-16 mx-auto mb-2"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                                                    />
+                                                </svg>
+                                                <p class="text-lg font-semibold">
+                                                    {playlist.video_count}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-6">
+                                    <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                                        {playlist.title}
+                                    </h3>
+                                    <p class="text-gray-600 mb-4">
+                                        {playlist.description}
+                                    </p>
+                                    <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                        <span>
+                                            {playlist.video_count} •{" "}
+                                            {playlist.duration}
+                                        </span>
+                                        <span>{playlist.updated}</span>
+                                    </div>
+                                    <button class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                                        {data.ui_labels.watch_playlist}
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Channels Section -->
+        <section id="channels" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                    >
+                        {data.channels_section.title}
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        {data.channels_section.description}
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {
+                        data.channels_section.channels.map((channel) => (
+                            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow p-6">
+                                <div
+                                    class={`w-20 h-20 bg-gradient-to-br ${channel.gradient} rounded-full flex items-center justify-center mx-auto mb-4`}
+                                >
+                                    <svg
+                                        class="w-10 h-10 text-white"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">
+                                    {channel.name}
+                                </h3>
+                                <p class="text-gray-600 mb-4 text-sm text-center">
+                                    {channel.description}
+                                </p>
+                                <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
+                                    <span>{channel.subscribers}</span>
+                                    <span>{channel.videos}</span>
+                                </div>
+                                <button class="w-full bg-red-600 text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors">
+                                    {data.ui_labels.subscribe}
+                                </button>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+        </section>
+
+        <!-- Contribute Section -->
+        <section
+            class="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">
+                        {data.contribute_section.title}
+                    </h2>
+                    <p class="text-blue-100 max-w-3xl mx-auto text-lg">
+                        {data.contribute_section.description}
+                    </p>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <h3 class="text-2xl font-bold mb-6">
+                        {data.contribute_section.other_ways_title}
+                    </h3>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a
+                            href="mailto:videos@nadistuti.com"
+                            class="bg-white/20 text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors"
+                        >
+                            {data.contribute_section.email_button}
+                        </a>
+                        <a
+                            href={getLocalizedPath("/community", currentLang)}
+                            class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+                        >
+                            {data.contribute_section.join_community_button}
+                        </a>
+                        <a
+                            href={getLocalizedPath("/contribute", currentLang)}
+                            class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-900 transition-colors border border-blue-500"
+                        >
+                            {data.contribute_section.more_ways_button}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
