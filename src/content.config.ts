@@ -298,188 +298,6 @@ const studyHubPageCollection = defineCollection({
   }),
 });
 
-const studyHubHistoricalCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/historical' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    stats: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })),
-    filter_options: z.object({
-      rivers: z.array(z.string()),
-      periods: z.array(z.string()),
-      sort: z.array(z.string()),
-      search_placeholder: z.string(),
-    }),
-    documents: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      period: z.string(),
-      period_color: z.enum(['amber', 'blue', 'green', 'purple']),
-      pages: z.string(),
-      time_range: z.string(),
-      views: z.string(),
-      likes: z.string(),
-      pdf_url: z.string(),
-    })),
-  }),
-});
-
-const studyHubScripturesCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/scriptures' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    stats: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })),
-    filter_options: z.object({
-      search_placeholder: z.string(),
-      scripture_types: z.array(z.string()),
-      rivers: z.array(z.string()),
-      languages: z.array(z.string()),
-    }),
-    documents: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      type: z.string(),
-      type_color: z.enum(['orange', 'blue', 'green', 'red', 'teal', 'purple', 'pink']),
-      pages: z.string(),
-      language: z.string(),
-      views: z.string(),
-      likes: z.string(),
-      pdf_url: z.string().optional(),
-    })),
-  }),
-});
-
-const studyHubResearchCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/research' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    stats: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })),
-    filter_options: z.object({
-      search_placeholder: z.string(),
-      fields: z.array(z.string()),
-      years: z.array(z.string()),
-      sort: z.array(z.string()),
-    }),
-    documents: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      field: z.string(),
-      field_color: z.enum(['blue', 'purple', 'green', 'orange', 'teal', 'red']),
-      author: z.string(),
-      journal: z.string(),
-      year: z.string(),
-      pages: z.string(),
-      citations: z.string(),
-      views: z.string(),
-      likes: z.string(),
-      pdf_url: z.string().optional(),
-    })),
-  }),
-});
-
-const studyHubGeographyCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/geography' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    stats: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })),
-    filter_options: z.object({
-      search_placeholder: z.string(),
-      types: z.array(z.string()),
-      periods: z.array(z.string()),
-      sort: z.array(z.string()),
-    }),
-    documents: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      period: z.string(),
-      period_color: z.enum(['orange', 'green', 'purple', 'blue', 'red', 'teal']),
-      scale: z.string().optional(),
-      resolution: z.string().optional(),
-      year: z.string(),
-      views: z.string(),
-      downloads: z.string(),
-      image_text: z.string(),
-      image_label: z.string(),
-      image_url: z.string(),
-      bg_gradient: z.string(),
-      type: z.enum(['map', 'satellite', 'survey']),
-    })),
-  }),
-});
-
-const studyHubRitualsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/rituals' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    hero: z.object({
-      title: z.string(),
-      description: z.string(),
-    }),
-    stats: z.array(z.object({
-      value: z.string(),
-      label: z.string(),
-    })),
-    filter_options: z.object({
-      search_placeholder: z.string(),
-      rivers: z.array(z.string()),
-      purposes: z.array(z.string()),
-      seasons: z.array(z.string()),
-    }),
-    categories: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      count: z.string(),
-      color: z.enum(['orange', 'purple', 'green', 'yellow']),
-    })),
-    documents: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      river: z.string(), // e.g., "Ganga"
-      river_color: z.enum(['blue', 'yellow', 'green', 'purple', 'red', 'orange']),
-      time_label: z.string(),
-      time_value: z.string(),
-      duration_label: z.string(),
-      duration_value: z.string(),
-      benefits_label: z.string(),
-      benefits_value: z.string(),
-      tag: z.string(), // "Daily Ritual", "Annual Festival", etc.
-      tag_color: z.enum(['green', 'purple', 'blue', 'yellow', 'orange', 'red']),
-    })),
-  }),
-});
-
 const studyHubHandbooksCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/handbooks' }),
   schema: z.object({
@@ -633,7 +451,6 @@ const studyHubSlideshowsCollection = defineCollection({
   }),
 });
 
-// New Scalable Schemas
 const studyHubIndicesCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/study_hub/indices' }),
   schema: z.object({
@@ -649,10 +466,9 @@ const studyHubIndicesCollection = defineCollection({
     })).optional(),
     filter_options: z.object({
       search_placeholder: z.string(),
-      // Abstracting filters to be generic lists or specific fields
       rivers: z.array(z.string()).optional(),
-      categories: z.array(z.string()).optional(), // for general filters
-      periods: z.array(z.string()).optional(), // for historical
+      categories: z.array(z.string()).optional(),
+      periods: z.array(z.string()).optional(),
       sort: z.array(z.string()).optional(),
     }).optional(),
   })
@@ -663,47 +479,130 @@ const studyResourcesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    file_path: z.string().optional(), // PDF/Media path
+    file_path: z.string().optional(),
     language: z.enum(['en', 'hi']),
-
-    // Main Category
     category: z.enum([
       'historical',
       'scriptures',
       'research',
       'slideshows',
-      'geography', // maps
+      'geography',
       'multimedia',
       'handbooks',
       'rituals',
       'holy-calendar'
     ]),
-
-    // Tagging
     rivers: z.array(z.string()).optional(),
     tags: z.array(z.string()).optional(),
-
-    // Type-specific metadata
-    period: z.string().optional(),       // Historical
-    period_color: z.string().optional(), // Historical
-    time_range: z.string().optional(),   // Historical
-
+    period: z.string().optional(),
+    period_color: z.string().optional(),
+    time_range: z.string().optional(),
     author: z.string().optional(),
     publisher: z.string().optional(),
-
-    // Display stats
-    pages: z.string().optional(), // e.g. "45 pages"
-    duration: z.string().optional(), // Multimedia
-    slide_count: z.string().optional(), // Slideshows
-
-    views: z.string().optional(), // Keeping as string to match existing "1,234 views" format for now, or could parse
+    pages: z.string().optional(),
+    duration: z.string().optional(),
+    slide_count: z.string().optional(),
+    views: z.string().optional(),
     likes: z.string().optional(),
-
-    thumbnail: z.string().optional(), // For slideshows/videos
+    thumbnail: z.string().optional(),
   })
 });
 
+
+const booksPageCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/books_page' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    hero: z.object({
+      title: z.string(),
+      description: z.string(),
+      browse_button: z.string(),
+      suggest_button: z.string(),
+    }),
+    stats: z.array(z.object({
+      value: z.string(),
+      label: z.string(),
+      color: z.enum(['blue', 'green', 'orange', 'purple', 'red', 'amber']),
+    })),
+    categories: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      icon: z.string(),
+      color: z.string(),
+      count: z.string(),
+    })),
+    featured_books: z.object({
+      title: z.string(),
+      description: z.string(),
+      books: z.array(z.object({
+        id: z.string(),
+        title: z.string(),
+        author: z.string(),
+        description: z.string(),
+        category: z.string(),
+        category_label: z.string(),
+        category_color: z.string(),
+        language: z.string(),
+        pages: z.string(),
+        year: z.string(),
+        badge: z.string().optional(),
+        badge_color: z.string().optional(),
+        buy_links: z.array(z.object({
+          label: z.string(),
+          url: z.string(),
+        })),
+      })),
+    }),
+    books_by_category: z.object({
+      title: z.string(),
+      description: z.string(),
+      religious: z.array(z.object({
+        title: z.string(),
+        author: z.string(),
+        description: z.string(),
+        language: z.string(),
+        pages: z.string(),
+        year: z.string(),
+        free_pdf: z.string().optional(),
+        buy_url: z.string().optional(),
+      })).optional(),
+      competitive: z.array(z.object({
+        title: z.string(),
+        author: z.string(),
+        description: z.string(),
+        language: z.string(),
+        pages: z.string(),
+        year: z.string(),
+        free_pdf: z.string().optional(),
+        buy_url: z.string().optional(),
+      })).optional(),
+    }),
+    contribute_section: z.object({
+      title: z.string(),
+      description: z.string(),
+      suggest_button: z.string(),
+      fields: z.object({
+        title: z.string(),
+        author: z.string(),
+        category: z.string(),
+        language: z.string(),
+        reason: z.string(),
+        submit: z.string(),
+      }),
+    }),
+    search_section: z.object({
+      placeholder: z.string(),
+      filter_category: z.string(),
+      filter_language: z.string(),
+      sort_options: z.array(z.string()),
+    }),
+  }),
+});
+
 const appsPageCollection = defineCollection({
+
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/apps_page' }),
   schema: z.object({
     title: z.string(),
@@ -902,6 +801,173 @@ const communityPageCollection = defineCollection({
   }),
 });
 
+const eventsPageCollection = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/events_page' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    hero: z.object({
+      title: z.string(),
+      description: z.string(),
+      view_upcoming_button: z.string(),
+      book_activities_button: z.string(),
+    }),
+    categories: z.array(z.object({
+      id: z.string(),
+      name: z.string(),
+      description: z.string(),
+      color: z.enum(['green', 'blue', 'orange', 'purple', 'pink', 'yellow']),
+      icon: z.enum(['heart', 'book', 'flame', 'navigation', 'users', 'star']),
+    })),
+    upcoming_events: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      category: z.string(),
+      date: z.string(),
+      end_date: z.string().optional(),
+      time: z.string().optional(),
+      location: z.string(),
+      price: z.number(),
+      currency: z.string().default('INR'),
+      capacity: z.number(),
+      registered: z.number(),
+      organizer: z.string(),
+      contact_email: z.string().optional(),
+      contact_phone: z.string().optional(),
+      contact_whatsapp: z.string().optional(),
+      tags: z.array(z.string()),
+      image: z.string().optional(),
+      featured: z.boolean().default(false),
+    })),
+    recent_events: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      category: z.string(),
+      date: z.string(),
+      end_date: z.string().optional(),
+      location: z.string(),
+      participants: z.number(),
+      organizer: z.string(),
+      tags: z.array(z.string()),
+      image: z.string().optional(),
+      gallery: z.array(z.string()).optional(),
+      impact_items: z.array(z.object({
+        label: z.string(),
+        value: z.string(),
+      })).optional(),
+    })),
+    featured_events: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      category: z.string(),
+      type: z.enum(['recurring', 'pilgrimage', 'festival']),
+      schedule: z.string().optional(),
+      duration: z.string().optional(),
+      frequency: z.string().optional(),
+      locations: z.array(z.string()).optional(),
+      organizer: z.string(),
+      tags: z.array(z.string()),
+      image: z.string().optional(),
+    })),
+    community_events: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+      description: z.string(),
+      organizer_name: z.string(),
+      organizer_location: z.string(),
+      organizer_avatar: z.string(),
+      date: z.string(),
+      participants: z.number(),
+      category: z.string(),
+      status: z.enum(['completed', 'featured', 'trending']),
+      tags: z.array(z.string()),
+      image: z.string().optional(),
+      impact_items: z.array(z.object({
+        label: z.string(),
+        value: z.string(),
+      })).optional(),
+    })),
+    booking_section: z.object({
+      title: z.string(),
+      description: z.string(),
+      includes_note: z.string(),
+      contact_custom_button: z.string(),
+      activities: z.array(z.object({
+        id: z.string(),
+        title: z.string(),
+        description: z.string(),
+        price_range: z.string(),
+        icon: z.enum(['navigation', 'flame', 'camera', 'music']),
+      })),
+    }),
+    contact_section: z.object({
+      title: z.string(),
+      description: z.string(),
+      options: z.array(z.object({
+        id: z.string(),
+        title: z.string(),
+        description: z.string(),
+        contact: z.string(),
+        icon: z.enum(['mail', 'message-circle', 'users', 'dollar-sign']),
+        color: z.enum(['blue', 'green', 'purple', 'orange']),
+        url: z.string().optional(),
+      })),
+    }),
+    community_section: z.object({
+      title: z.string(),
+      description: z.string(),
+      featured_title: z.string(),
+      organize_title: z.string(),
+      organize_description: z.string(),
+      step_document: z.string(),
+      step_document_desc: z.string(),
+      step_share: z.string(),
+      step_share_desc: z.string(),
+      step_featured: z.string(),
+      step_featured_desc: z.string(),
+      submit_event_button: z.string(),
+      guidelines_button: z.string(),
+    }),
+    ui_labels: z.object({
+      categories_title: z.string(),
+      categories_description: z.string(),
+      upcoming_title: z.string(),
+      upcoming_description: z.string(),
+      past_events_title: z.string(),
+      past_events_description: z.string(),
+      featured_spiritual_title: z.string(),
+      featured_spiritual_description: z.string(),
+      learn_more: z.string(),
+      view_all_events: z.string(),
+      book_now: z.string(),
+      register_free: z.string(),
+      view_photos: z.string(),
+      view_story: z.string(),
+      view_video: z.string(),
+      view_details: z.string(),
+      share_event: z.string(),
+      back_to_events: z.string(),
+      about_event: z.string(),
+      event_impact: z.string(),
+      event_details: z.string(),
+      free: z.string(),
+      spots_available: z.string(),
+      sold_out: z.string(),
+      participants: z.string(),
+      date_label: z.string(),
+      time_label: z.string(),
+      location_label: z.string(),
+      organizer_label: z.string(),
+      price_label: z.string(),
+      contact_label: z.string(),
+      no_events: z.string(),
+      no_events_description: z.string(),
+    }),
+  }),
+});
 
 export const collections = {
   'homepage': homepageCollection,
@@ -910,18 +976,13 @@ export const collections = {
   'apps_page': appsPageCollection,
   'watch_page': watchPageCollection,
   'community_page': communityPageCollection,
+  'books_page': booksPageCollection,
   'study_hub_page': studyHubPageCollection,
-  'study_hub_historical': studyHubHistoricalCollection,
-  'study_hub_scriptures': studyHubScripturesCollection,
-  'study_hub_research': studyHubResearchCollection,
-  'study_hub_geography': studyHubGeographyCollection,
-  'study_hub_rituals': studyHubRitualsCollection,
-  'study_hub_handbooks': studyHubHandbooksCollection,
-  'study_hub_holy_calendar': studyHubHolyCalendarCollection,
-  'study_hub_multimedia': studyHubMultimediaCollection,
-  'study_hub_slideshows': studyHubSlideshowsCollection,
-
-  // New Scalable Collections
   'study_hub_indices': studyHubIndicesCollection,
+  'study_hub_slideshows': studyHubSlideshowsCollection,
+  'study_hub_multimedia': studyHubMultimediaCollection,
+  'study_hub_holy_calendar': studyHubHolyCalendarCollection,
+  'study_hub_handbooks': studyHubHandbooksCollection,
   'study_resources': studyResourcesCollection,
+  'events_page': eventsPageCollection,
 };

@@ -33,7 +33,9 @@ export default defineConfig({
   },
 
   integrations: [react(), sitemap()],
-
+  optimizeDeps: {
+    include: ['lucide-react']
+  },
   vite: {
     plugins: [tailwindcss()],
   },
