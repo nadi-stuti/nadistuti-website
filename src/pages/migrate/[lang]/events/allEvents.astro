@@ -1,0 +1,374 @@
+---
+import { getCollection, getEntry } from "astro:content";
+import Layout from "../../../../layouts/Layout.astro";
+import Header from "../../../../components/Header.astro";
+import Footer from "../../../../components/Footer.astro";
+import { type Language } from "../../../../i18n";
+
+export async function getStaticPaths() {
+    const pages = await getCollection("events_page");
+    return pages.map((page) => {
+        const [lang] = page.id.split("/");
+        return { params: { lang } };
+    });
+}
+
+const { lang } = Astro.params;
+const entry = await getEntry("events_page", lang);
+
+if (!entry || !lang) {
+    return Astro.redirect("/404");
+}
+
+const currentLang = lang as Language;
+const { data } = entry;
+
+// Merge upcoming + recent events into one flat list with a "past" flag
+const allEvents = [
+    ...data.upcoming_events.map((e) => ({ ...e, isPast: false })),
+    ...data.recent_events.map((e) => ({
+        ...e,
+        isPast: true,
+        price: undefined,
+        capacity: undefined,
+        registered: undefined,
+        featured: false,
+    })),
+];
+
+// Collect unique category ids from actual events data
+const usedCategoryIds = [...new Set(allEvents.map((e) => e.category))];
+const activeCategories = data.categories.filter((c) => usedCategoryIds.includes(c.id));
+
+const formatDate = (dateString: string) => {
+    const langLocales: Record<string, string> = { en: "en-US", hi: "hi-IN" };
+    return new Date(dateString).toLocaleDateString(langLocales[lang] || "en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    });
+};
+
+const getCategoryGradient = (category: string) => {
+    const map: Record<string, string> = {
+        conservation: "from-green-500 to-teal-500",
+        spiritual: "from-orange-500 to-red-500",
+        education: "from-blue-500 to-purple-500",
+        tourism: "from-purple-500 to-pink-500",
+        community: "from-pink-500 to-rose-500",
+        featured: "from-yellow-500 to-amber-500",
+    };
+    return map[category] || "from-gray-500 to-gray-600";
+};
+
+const getCategoryBadge = (category: string) => {
+    const map: Record<string, string> = {
+        conservation: "bg-green-100 text-green-800",
+        spiritual: "bg-orange-100 text-orange-800",
+        education: "bg-blue-100 text-blue-800",
+        tourism: "bg-purple-100 text-purple-800",
+        community: "bg-pink-100 text-pink-800",
+        featured: "bg-yellow-100 text-yellow-800",
+    };
+    return map[category] || "bg-gray-100 text-gray-800";
+};
+
+const getCategoryBtn = (category: string) => {
+    const map: Record<string, string> = {
+        conservation: "bg-green-600 hover:bg-green-700",
+        spiritual: "bg-orange-600 hover:bg-orange-700",
+        education: "bg-blue-600 hover:bg-blue-700",
+        tourism: "bg-purple-600 hover:bg-purple-700",
+        community: "bg-pink-600 hover:bg-pink-700",
+        featured: "bg-yellow-600 hover:bg-yellow-700",
+    };
+    return map[category] || "bg-gray-600 hover:bg-gray-700";
+};
+
+const getCategoryColor = (color: string) => {
+    const map: Record<string, string> = {
+        green: "bg-green-100 text-green-700 border-green-200",
+        blue: "bg-blue-100 text-blue-700 border-blue-200",
+        orange: "bg-orange-100 text-orange-700 border-orange-200",
+        purple: "bg-purple-100 text-purple-700 border-purple-200",
+        pink: "bg-pink-100 text-pink-700 border-pink-200",
+        yellow: "bg-yellow-100 text-yellow-700 border-yellow-200",
+    };
+    return map[color] || "bg-gray-100 text-gray-700 border-gray-200";
+};
+
+const getCategoryActiveColor = (color: string) => {
+    const map: Record<string, string> = {
+        green: "bg-green-600 text-white border-green-600",
+        blue: "bg-blue-600 text-white border-blue-600",
+        orange: "bg-orange-600 text-white border-orange-600",
+        purple: "bg-purple-600 text-white border-purple-600",
+        pink: "bg-pink-600 text-white border-pink-600",
+        yellow: "bg-yellow-500 text-white border-yellow-500",
+    };
+    return map[color] || "bg-gray-700 text-white border-gray-700";
+};
+
+// allEvents and activeCategories are passed to the client via define:vars below
+---
+
+<Layout
+    title={`${data.ui_labels.view_all_events} — ${data.title}`}
+    description={data.description}
+    lang={currentLang}
+>
+    <Header />
+
+    <main>
+        <!-- Page Header -->
+        <section class="relative py-20 md:py-24 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent"></div>
+            <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+                <!-- Breadcrumb -->
+                <nav class="mb-6 flex items-center justify-center gap-2 text-sm text-blue-200">
+                    <a href={`/${lang}/events`} class="hover:text-white transition-colors">{data.hero.title}</a>
+                    <span>/</span>
+                    <span class="text-white">{data.ui_labels.view_all_events}</span>
+                </nav>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-multilang">
+                    {data.ui_labels.view_all_events}
+                </h1>
+                <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto text-multilang">
+                    {data.ui_labels.categories_description}
+                </p>
+                <!-- Live count badge -->
+                <div class="mt-6 inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-2 text-sm">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span id="event-count" class="font-medium">{allEvents.length} events</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sticky Filter Bar -->
+        <div class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+                <div class="flex items-center gap-3 overflow-x-auto scrollbar-hide pb-1">
+                    <!-- All button -->
+                    <button
+                        class="filter-btn flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all"
+                        data-category="all"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                        </svg>
+                        All Events
+                    </button>
+
+                    <!-- Category buttons -->
+                    {activeCategories.map((cat) => (
+                        <button
+                            class={`filter-btn flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all ${getCategoryColor(cat.color)}`}
+                            data-category={cat.id}
+                            data-color={cat.color}
+                            data-active-class={getCategoryActiveColor(cat.color)}
+                            data-inactive-class={getCategoryColor(cat.color)}
+                        >
+                            {cat.icon === 'heart' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>}
+                            {cat.icon === 'book' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>}
+                            {cat.icon === 'flame' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path></svg>}
+                            {cat.icon === 'navigation' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21l1.9-5.7a8.5 8.5 0 1113.8 0z"></path></svg>}
+                            {cat.icon === 'users' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>}
+                            {cat.icon === 'star' && <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>}
+                            <span class="text-multilang">{cat.name}</span>
+                            <span class="cat-count ml-1 bg-black/10 rounded-full px-1.5 py-0.5 text-xs font-medium"></span>
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <section class="py-12 bg-gray-50 min-h-[60vh]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Empty state -->
+                <div id="empty-state" class="hidden flex-col items-center justify-center py-24 text-center">
+                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-700 mb-2 text-multilang">{data.ui_labels.no_events}</h3>
+                    <p class="text-gray-500 text-multilang">{data.ui_labels.no_events_description}</p>
+                </div>
+
+                <!-- Cards grid — rendered by JS -->
+                <div id="events-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </div>
+        </section>
+    </main>
+
+    <Footer />
+</Layout>
+
+<!-- All data is passed via define:vars (the correct Astro pattern) -->
+<script define:vars={{ allEvents, activeCategories, lang, uiLabels: data.ui_labels }}>
+    const categories = activeCategories;
+    const ui = uiLabels;
+
+    // Helper maps (mirrors the Astro helper functions)
+    const gradients = {
+        conservation: 'from-green-500 to-teal-500',
+        spiritual: 'from-orange-500 to-red-500',
+        education: 'from-blue-500 to-purple-500',
+        tourism: 'from-purple-500 to-pink-500',
+        community: 'from-pink-500 to-rose-500',
+        featured: 'from-yellow-500 to-amber-500',
+    };
+    const badges = {
+        conservation: 'bg-green-100 text-green-800',
+        spiritual: 'bg-orange-100 text-orange-800',
+        education: 'bg-blue-100 text-blue-800',
+        tourism: 'bg-purple-100 text-purple-800',
+        community: 'bg-pink-100 text-pink-800',
+        featured: 'bg-yellow-100 text-yellow-800',
+    };
+    const btns = {
+        conservation: 'bg-green-600 hover:bg-green-700',
+        spiritual: 'bg-orange-600 hover:bg-orange-700',
+        education: 'bg-blue-600 hover:bg-blue-700',
+        tourism: 'bg-purple-600 hover:bg-purple-700',
+        community: 'bg-pink-600 hover:bg-pink-700',
+        featured: 'bg-yellow-600 hover:bg-yellow-700',
+    };
+
+    const formatDate = (d) =>
+        new Date(d).toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-US', {
+            month: 'short', day: 'numeric', year: 'numeric',
+        });
+
+    const gradient = (cat) => gradients[cat] || 'from-gray-500 to-gray-600';
+    const badge = (cat) => badges[cat] || 'bg-gray-100 text-gray-800';
+    const btn = (cat) => btns[cat] || 'bg-gray-600 hover:bg-gray-700';
+
+    function renderCard(event) {
+        const spots = event.capacity !== undefined ? event.capacity - (event.registered || 0) : null;
+        const price = event.price !== undefined;
+        const isFree = event.price === 0;
+        const soldOut = spots === 0;
+
+        const priceStr = !price ? '' : isFree ? ui.free : `₹${event.price}`;
+        const ctaStr = soldOut ? ui.sold_out : isFree ? ui.register_free : `${ui.book_now}${price ? ' ₹' + event.price : ''}`;
+        const isPastBadge = event.isPast ? `<span class="bg-gray-100 text-gray-600 text-xs font-medium px-2.5 py-0.5 rounded ml-2">Past</span>` : '';
+        const featuredBadge = event.featured ? `<span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">★ Featured</span>` : '';
+        const href = event.isPast ? `/${lang}/events/${event.id}` : `/${lang}/events/${event.id}`;
+
+        return `
+        <a href="${href}" class="event-card bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 block group" data-category="${event.category}">
+            <!-- Colour band -->
+            <div class="h-44 bg-gradient-to-r ${gradient(event.category)} relative flex items-end p-4">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
+                <div class="relative z-10 text-white">
+                    <div class="text-xs font-semibold uppercase tracking-widest mb-1 opacity-80">${event.category}</div>
+                    <div class="text-xs opacity-70">${formatDate(event.date)}</div>
+                </div>
+                ${event.featured ? `<div class="absolute top-3 right-3 z-10"><span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-0.5 rounded-full">★ Featured</span></div>` : ''}
+                ${event.isPast ? `<div class="absolute top-3 left-3 z-10"><span class="bg-black/40 text-white text-xs font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">Past Event</span></div>` : ''}
+            </div>
+
+            <!-- Card body -->
+            <div class="p-5">
+                <!-- Category + status badges -->
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="${badge(event.category)} text-xs font-medium px-2.5 py-0.5 rounded-full">
+                        ${event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                    </span>
+                </div>
+
+                <h3 class="text-base font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-700 transition-colors text-multilang">${event.title}</h3>
+                <p class="text-gray-600 text-sm mb-4 line-clamp-3 text-multilang">${event.description}</p>
+
+                <!-- Meta row -->
+                <div class="flex flex-col gap-1.5 text-xs text-gray-500 mb-4">
+                    <div class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="text-multilang">${event.location}</span>
+                    </div>
+                    ${spots !== null ? `<div class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span>${spots} ${ui.spots_available}</span>
+                    </div>` : event.participants !== undefined ? `<div class="flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span>${event.participants} ${ui.participants}</span>
+                    </div>` : ''}
+                </div>
+
+                <!-- Footer row -->
+                <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+                    <span class="text-lg font-bold text-gray-900">${priceStr}</span>
+                    ${!event.isPast ? `<span class="${btn(event.category)} text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors" ${soldOut ? 'disabled' : ''}>${ctaStr}</span>` : `<span class="text-blue-600 text-xs font-semibold group-hover:underline">${ui.view_details} →</span>`}
+                </div>
+            </div>
+        </a>`;
+    }
+
+    // ---- Filter logic ----
+    let activeFilter = 'all';
+
+    function applyFilter(cat) {
+        activeFilter = cat;
+        const filtered = cat === 'all' ? allEvents : allEvents.filter(e => e.category === cat);
+
+        // Render cards
+        const grid = document.getElementById('events-grid');
+        const empty = document.getElementById('empty-state');
+        const countEl = document.getElementById('event-count');
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            empty.classList.remove('hidden');
+            empty.classList.add('flex');
+        } else {
+            empty.classList.add('hidden');
+            empty.classList.remove('flex');
+            grid.innerHTML = filtered.map(renderCard).join('');
+        }
+
+        if (countEl) countEl.textContent = `${filtered.length} events`;
+
+        // Update category count badges on filter buttons
+        categories.forEach((c) => {
+            const n = allEvents.filter(e => e.category === c.id).length;
+            const btn = document.querySelector(`.filter-btn[data-category="${c.id}"] .cat-count`);
+            if (btn) btn.textContent = n;
+        });
+
+        // Style active/inactive buttons
+        document.querySelectorAll('.filter-btn').forEach((el) => {
+            const btnCat = el.dataset.category;
+            const isActive = btnCat === cat;
+
+            if (btnCat === 'all') {
+                el.className = `filter-btn flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all ${isActive ? 'bg-gray-900 text-white border-gray-900' : 'bg-white text-gray-700 border-gray-300 hover:border-gray-500'}`;
+            } else {
+                el.className = `filter-btn flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full border text-sm font-semibold transition-all ${isActive ? el.dataset.activeClass : el.dataset.inactiveClass}`;
+            }
+        });
+    }
+
+    // Read ?category= from URL on load
+    const urlCat = new URLSearchParams(window.location.search).get('category') || 'all';
+    applyFilter(urlCat);
+
+    // Bind click handlers
+    document.querySelectorAll('.filter-btn').forEach((el) => {
+        el.addEventListener('click', () => {
+            const cat = el.dataset.category;
+            // Update URL without reload
+            const url = new URL(window.location.href);
+            if (cat === 'all') url.searchParams.delete('category');
+            else url.searchParams.set('category', cat);
+            window.history.replaceState({}, '', url.toString());
+            applyFilter(cat);
+        });
+    });
+</script>
+
+<style>
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+</style>
