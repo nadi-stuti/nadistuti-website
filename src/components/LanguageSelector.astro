@@ -1,8 +1,8 @@
 ---
-import { languages } from '../i18n/index';
+import { languages } from "../i18n/index";
 ---
 
-<div id="language-selector-overlay" class="language-selector-overlay hidden">
+<div id="language-selector-overlay" class="language-selector-overlay">
   <div class="language-selector-modal">
     <div class="language-selector-header">
       <h2>Choose Your Language</h2>
@@ -13,16 +13,18 @@ import { languages } from '../i18n/index';
       </div>
     </div>
     <div class="language-selector-grid">
-      {Object.entries(languages).map(([code, lang]) => (
-        <button 
-          class="language-option" 
-          data-lang={code}
-          data-native-name={lang.nativeName}
-        >
-          <span class="language-native">{lang.nativeName}</span>
-          <span class="language-english">{lang.name}</span>
-        </button>
-      ))}
+      {
+        Object.entries(languages).map(([code, lang]) => (
+          <button
+            class="language-option"
+            data-lang={code}
+            data-native-name={lang.nativeName}
+          >
+            <span class="language-native">{lang.nativeName}</span>
+            <span class="language-english">{lang.name}</span>
+          </button>
+        ))
+      }
     </div>
   </div>
 </div>
@@ -140,83 +142,88 @@ import { languages } from '../i18n/index';
 <script>
   // Language selector functionality
   function initLanguageSelector() {
-    const overlay = document.getElementById('language-selector-overlay');
-    const languageOptions = document.querySelectorAll('.language-option');
-    const browserSuggestion = document.getElementById('browser-suggestion');
-    const suggestedLanguageSpan = document.getElementById('suggested-language');
+    const overlay = document.getElementById("language-selector-overlay");
+    const languageOptions = document.querySelectorAll(".language-option");
+    const browserSuggestion = document.getElementById("browser-suggestion");
+    const suggestedLanguageSpan = document.getElementById("suggested-language");
 
     // Available languages
     const languages: Record<string, string> = {
-      en: 'English',
-      hi: 'हिन्दी',
-      ta: 'தமிழ்',
-      te: 'తెలుగు',
-      kn: 'ಕನ್ನಡ',
-      ml: 'മലയാളം',
-      bn: 'বাংলা',
-      gu: 'ગુજરાતી',
-      mr: 'मराठी',
-      pa: 'ਪੰਜਾਬੀ',
-      or: 'ଓଡ଼ିଆ',
-      as: 'অসমীয়া',
-      sa: 'संस्कृतम्'
+      en: "English",
+      hi: "हिन्दी",
+      ta: "தமிழ்",
+      te: "తెలుగు",
+      kn: "ಕನ್ನಡ",
+      ml: "മലയാളം",
+      bn: "বাংলা",
+      gu: "ગુજરાતી",
+      mr: "मराठी",
+      pa: "ਪੰਜਾਬੀ",
+      or: "ଓଡ଼ିଆ",
+      as: "অসমীয়া",
+      sa: "संस्कृतम्",
     };
 
     // Get browser language preference
     function getBrowserLanguagePreference() {
       const browserLangs = navigator.languages || [navigator.language];
-      
+
       for (const browserLang of browserLangs) {
-        const langCode = browserLang.split('-')[0].toLowerCase();
+        const langCode = browserLang.split("-")[0].toLowerCase();
         if (langCode in languages) {
           return langCode;
         }
       }
-      return 'en';
+      return "en";
     }
 
     // Check if user has already selected a language
-    const savedLanguage = localStorage.getItem('preferred-language');
-    
+    const savedLanguage = localStorage.getItem("preferred-language");
+
     if (!savedLanguage) {
       // Show the language selector for first-time visitors
-      overlay?.classList.remove('hidden');
-      
+      overlay?.classList.remove("hidden");
+
       // Show browser language suggestion
       const suggestedLang = getBrowserLanguagePreference();
-      if (suggestedLang !== 'en' && suggestedLanguageSpan) {
+      if (suggestedLang !== "en" && suggestedLanguageSpan) {
         suggestedLanguageSpan.textContent = languages[suggestedLang];
-        browserSuggestion?.classList.remove('hidden');
-        
+        browserSuggestion?.classList.remove("hidden");
+
         // Highlight the suggested language option
-        const suggestedOption = document.querySelector(`[data-lang="${suggestedLang}"]`) as HTMLElement;
+        const suggestedOption = document.querySelector(
+          `[data-lang="${suggestedLang}"]`,
+        ) as HTMLElement;
         if (suggestedOption) {
-          suggestedOption.style.border = '2px solid #007acc';
-          suggestedOption.style.background = '#f8f9ff';
+          suggestedOption.style.border = "2px solid #007acc";
+          suggestedOption.style.background = "#f8f9ff";
         }
       }
     } else {
       // Redirect to saved language if we're on the root page
-      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+      if (
+        window.location.pathname === "/" ||
+        window.location.pathname === "/index.html"
+      ) {
         window.location.href = `/${savedLanguage}/`;
       }
     }
 
     // Handle language selection
-    languageOptions.forEach(option => {
-      option.addEventListener('click', (e) => {
+    languageOptions.forEach((option) => {
+      option.addEventListener("click", (e) => {
         const selectedLang = (e.currentTarget as HTMLElement).dataset.lang;
         if (selectedLang) {
           // Save the selected language
-          localStorage.setItem('preferred-language', selectedLang);
-          
+          localStorage.setItem("preferred-language", selectedLang);
+
           // Show loading state
           if (overlay) {
-            overlay.style.opacity = '0.7';
+            overlay.style.opacity = "0.7";
           }
-          (e.currentTarget as HTMLElement).style.background = '#007acc';
-          (e.currentTarget as HTMLElement).style.color = 'white';
-          
+          (e.currentTarget as HTMLElement).style.background = "#007acc";
+          (e.currentTarget as HTMLElement).style.color = "white";
+
           // Redirect to the selected language home page
           setTimeout(() => {
             window.location.href = `/${selectedLang}/`;
@@ -226,19 +233,19 @@ import { languages } from '../i18n/index';
     });
 
     // Prevent closing the modal - force user to select a language
-    overlay?.addEventListener('click', (e) => {
+    overlay?.addEventListener("click", (e) => {
       if (e.target === overlay) {
         // Shake animation to indicate they need to select
-        overlay.style.animation = 'shake 0.5s ease-in-out';
+        overlay.style.animation = "shake 0.5s ease-in-out";
         setTimeout(() => {
-          overlay.style.animation = '';
+          overlay.style.animation = "";
         }, 500);
       }
     });
   }
 
   // Add shake animation
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.textContent = `
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
@@ -249,8 +256,8 @@ import { languages } from '../i18n/index';
   document.head.appendChild(style);
 
   // Initialize when DOM is loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initLanguageSelector);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLanguageSelector);
   } else {
     initLanguageSelector();
   }

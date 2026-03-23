@@ -44,43 +44,50 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
             <a
               href={getLocalizedPath("/", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.home", currentLang)}</a>
+              >{t("nav.home", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.rivers", currentLang)}</a>
+              >{t("nav.rivers", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/events", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.events", currentLang)}</a>
+              >{t("nav.events", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/apps", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.apps", currentLang)}</a>
+              >{t("nav.apps", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/community", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.community", currentLang)}</a>
+              >{t("nav.community", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/watch", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.watch", currentLang)}</a>
+              >{t("nav.watch", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/donate", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("nav.donate", currentLang)}</a>
+              >{t("nav.donate", currentLang)}</a
+            >
           </li>
         </ul>
       </div>
@@ -97,31 +104,36 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
             <a
               href={getLocalizedPath("/rivers/ganga", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.ganga", currentLang)}</a>
+              >{t("river.ganga", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/yamuna", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.yamuna", currentLang)}</a>
+              >{t("river.yamuna", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/saraswati", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.saraswati", currentLang)}</a>
+              >{t("river.saraswati", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/krishna", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.krishna", currentLang)}</a>
+              >{t("river.krishna", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/kaveri", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.kaveri", currentLang)}</a>
+              >{t("river.kaveri", currentLang)}</a
+            >
           </li>
         </ul>
       </div>
@@ -138,31 +150,36 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
             <a
               href={getLocalizedPath("/rivers/godavari", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.godavari", currentLang)}</a>
+              >{t("river.godavari", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/brahmaputra", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.brahmaputra", currentLang)}</a>
+              >{t("river.brahmaputra", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/narmada", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.narmada", currentLang)}</a>
+              >{t("river.narmada", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/indus", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.indus", currentLang)}</a>
+              >{t("river.indus", currentLang)}</a
+            >
           </li>
           <li>
             <a
               href={getLocalizedPath("/rivers/mahanadi", currentLang)}
               class="text-gray-300 hover:text-white transition-colors"
-              >{t("river.mahanadi", currentLang)}</a>
+              >{t("river.mahanadi", currentLang)}</a
+            >
           </li>
         </ul>
       </div>
@@ -174,64 +191,6 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
           © 2025 Nadi Stuti. Open source project dedicated to preserving the
           cultural heritage of India's sacred rivers.
         </p>
-
-        <!-- Company Information Section - Enhanced -->
-        <div
-          class="bg-gray-800 rounded-lg p-6 mx-auto max-w-4xl border border-gray-600"
-        >
-          <div class="space-y-4">
-            <p class="text-white text-base font-semibold">
-              {t("footer.company", currentLang)}
-            </p>
-            <div class="space-y-3">
-              <p class="text-gray-300 text-sm font-medium">
-                {t("footer.contact", currentLang)}
-              </p>
-              <div
-                class="flex flex-col lg:flex-row lg:justify-center lg:space-x-8 space-y-3 lg:space-y-0"
-              >
-                <div
-                  class="flex items-center justify-center space-x-2 bg-gray-700 rounded-md px-4 py-2 hover:bg-gray-600 transition-colors"
-                >
-                  <span class="text-lg">📧</span>
-                  <a
-                    href="mailto:nadi.stuti@nulligma.com"
-                    class="text-blue-400 hover:text-blue-300 transition-colors font-medium"
-                    >nadi.stuti@nulligma.com</a
-                  >
-                </div>
-                <div
-                  class="flex items-center justify-center space-x-2 bg-gray-700 rounded-md px-4 py-2 hover:bg-gray-600 transition-colors"
-                >
-                  <span class="text-lg">📞</span>
-                  <span class="text-gray-300"
-                    >{t("footer.phone", currentLang)}:</span
-                  >
-                  <a
-                    href="tel:+919340708756"
-                    class="text-blue-400 hover:text-blue-300 transition-colors font-medium"
-                    >+91-9340708756</a
-                  >
-                </div>
-                <div
-                  class="flex items-center justify-center space-x-2 bg-gray-700 rounded-md px-4 py-2 hover:bg-gray-600 transition-colors"
-                >
-                  <span class="text-lg">🌐</span>
-                  <span class="text-gray-300"
-                    >{t("footer.website", currentLang)}:</span
-                  >
-                  <a
-                    href="https://nulligma.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-blue-400 hover:text-blue-300 transition-colors font-medium"
-                    >nulligma.com</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
