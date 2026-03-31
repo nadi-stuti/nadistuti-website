@@ -354,7 +354,7 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
 
         <!-- Map Container -->
         <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
-          <InteractiveMap client:load />
+          <InteractiveMap client:only="react" lang={currentLang} />
         </div>
 
         <!-- Instructions -->
