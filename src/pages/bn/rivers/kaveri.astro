@@ -4,6 +4,7 @@ import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import { getLanguageFromURL, getLocalizedPath } from '../../../i18n';
 import { t } from '../../../i18n/translations';
+import RiverShareCard from '../../../components/RiverShareCard.astro';
 const currentLang = 'bn';
 ---
 
@@ -225,24 +226,13 @@ const currentLang = 'bn';
         </div>
       </section>
 
-      <!-- Download PDF -->
-      <section class="text-center">
-        <div class="bg-gradient-to-r from-emerald-600 to-green-600 text-white p-8 rounded-lg">
-          <h3 class="text-2xl font-bold mb-4">Complete Kaveri Information</h3>
-          <p class="text-emerald-100 mb-6">
-            Download a comprehensive PDF with detailed information about Kaveri, including temples, cultural significance, and water disputes.
-          </p>
-          <a 
-            href="/data/river report/Kaveri-report.pdf" target="_blank"
-            class="inline-flex items-center bg-white text-emerald-600 px-8 py-3 rounded-lg font-semibold hover:bg-emerald-50 transition-all transform hover:scale-105"
-          >
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-            Download Kaveri PDF
-          </a>
-        </div>
-      </section>
+      <!-- Share River -->
+      <RiverShareCard
+        riverName="Kaveri"
+        riverSlug="kaveri"
+        snippet="Kaveri is the "Ganges of the South" for Tamil Nadu and Karnataka — a river of eternal grace whose waters have sustained millions and inspired Carnatic music and temple art for millennia."
+        currentLang={currentLang}
+      />
     </div>
     <!-- Back to Rivers Button -->
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-200 mt-16">
