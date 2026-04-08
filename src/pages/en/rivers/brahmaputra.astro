@@ -4,6 +4,7 @@ import Header from "../../../components/Header.astro";
 import Footer from "../../../components/Footer.astro";
 import { getLanguageFromURL, getLocalizedPath } from "../../../i18n";
 import { t } from "../../../i18n/translations";
+import RiverShareCard from '../../../components/RiverShareCard.astro';
 
 const currentLang = getLanguageFromURL(Astro.url.pathname);
 ---
@@ -213,7 +214,7 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
               Son of Brahma
             </h3>
             <p class="text-gray-700 leading-relaxed">
-              Brahmaputra literally means "Son of Brahma" in Sanskrit. According
+              Brahmaputra literally means 'Son of Brahma' in Sanskrit. According
               to Hindu mythology, the river was born from the kamandalu (water
               pot) of Lord Brahma. The river is considered masculine, unlike
               most other rivers in India which are considered feminine. In
@@ -316,7 +317,7 @@ const currentLang = getLanguageFromURL(Astro.url.pathname);
       <RiverShareCard
         riverName="Brahmaputra"
         riverSlug="brahmaputra"
-        snippet="Brahmaputra — "Son of Brahma" — is one of the few masculine rivers in Hindu tradition. Mighty and dynamic, he is the lifeblood of Assam and a sacred force of nature."
+        snippet="Brahmaputra — 'Son of Brahma' — is one of the few masculine rivers in Hindu tradition. Mighty and dynamic, he is the lifeblood of Assam and a sacred force of nature."
         currentLang={currentLang}
       />
     </div>
